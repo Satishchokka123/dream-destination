@@ -11,19 +11,17 @@ app.use(express.json());
 
 
 // HTML files folder
-app.use(express.static(path.join(__dirname,"views")));
-
-
-
-const db = mysql.createConnection({
-
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"dream destination"
-
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "Dream.html"));
 });
 
+const db = mysql.createConnection({
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT
+});
 
 db.connect((err)=>{
 
@@ -173,8 +171,8 @@ app.post("/login", (req, res) => {
 
 
 
-app.listen(3000,"0.0.0.0",()=>{
+const PORT = process.env.PORT || 3000;
 
-    console.log("Server running on port 3000");
-
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
