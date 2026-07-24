@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Destination | Tourism Management</title>
+
+<style>
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== Navbar ===== */
+nav {
+    background: #0b5ed7;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+    align-items: center;
+    color: white;
+}
+
+nav h2 {
+    font-size: 26px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("../public/logo/logo.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.hero button {
+    padding: 14px 30px;
+    font-size: 16px;
+    background: #ffc107;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* ===== Packages ===== */
+.packages {
+    padding: 60px;
+    background: #f4f6f8;
+}
+
+.packages h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.package-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.card-content button {
+    background: #0b5ed7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ===== Footer ===== */
+footer {
+    background: #0b5ed7;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ===== Responsive ===== */
+@media(max-width:768px) {
+    .hero {
+        padding-left: 30px;
+        text-align: center;
+    }
+    nav {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav>
+    <h2>Dream Destination</h2>
+    <ul>
+        <li><a href="home1.html">Home</a></li>
+        <li><a href="l1.html">Login</a></li>
+        <li><a href="regis.html">Register</a></li>
+        <li><a href="pack.html">Packages</a></li>
+        <li><a href="#">Bookings</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Explore The World With Us</h1>
+        <p>Plan your perfect trip with our customized tourism packages and unforgettable experiences.</p>
+        <button onclick="explore()">Explore Packages</button>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section class="packages">
+    <h2>Popular Tour Packages</h2>
+
+    <div class="package-cards">
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da">
+            <div class="card-content">
+                <h3>Taj Mahal</h3>
+                <p>Delhi • Agra • Jaipur – 5 Days</p>
+                 <a href="b1.html">
+                <button onclick="book('Taj Mahal')">Book Now</button>
+                 </a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+            <div class="card-content">
+                <h3>Kerala Backwaters</h3>
+                <p>Houseboat & Nature – 4 Days</p>
+                <button onclick="book('Kerala Backwaters')">Book Now</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff">
+            <div class="card-content">
+                <h3>Goa Beach Holiday</h3>
+                <p>Beaches & Nightlife – 3 Days</p>
+                <button onclick="book('Goa Beach Holiday')">Book Now</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 Dream Destination Tourism | All Rights Reserved</p>
+</footer>
+
+<script>
+function explore() {
+    window.scrollTo({
+        top: document.querySelector('.packages').offsetTop,
+        behavior: 'smooth'
+    });
+}
+
+function book(packageName) {
+    alert("You selected the " + packageName + " package.\nBooking module coming soon!");
+}
+</script>
+
+</body>
+</html>
