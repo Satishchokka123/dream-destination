@@ -14,7 +14,16 @@
   "dependencies": {
     "body-parser": "^2.3.0",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mysql2": "^3.23.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Satishchokka123/dream-destination.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Satishchokka123/dream-destination/issues"
+  },
+  "homepage": "https://github.com/Satishchokka123/dream-destination#readme"
 }
