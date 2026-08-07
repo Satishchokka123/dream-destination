@@ -1,0 +1,1091 @@
+/* =====================================
+   PREMIUM WHITE + ORANGE THEME
+===================================== */
+
+body{
+
+    background:#f5f6fa;
+
+    overflow-x:hidden;
+
+}
+
+.admin-container{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
+
+.sidebar{
+
+    width:260px;
+
+    height:100vh;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    background:#ffffff;
+
+    border-right:1px solid #ececec;
+
+    box-shadow:5px 0 25px rgba(0,0,0,.08);
+
+    overflow-y:auto;
+
+    z-index:999;
+
+}
+
+.logo{
+
+    text-align:center;
+
+    padding:30px 20px;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+.logo h2{
+
+    color:#ff7a00;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding:20px 0;
+
+}
+
+.sidebar ul li{
+
+    margin:8px 15px;
+
+}
+
+.sidebar ul li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:#555;
+
+    font-weight:500;
+
+    transition:.35s;
+
+}
+
+.sidebar ul li a i{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:18px;
+
+}
+
+.sidebar ul li a:hover{
+
+    background:#ff7a00;
+
+    color:#ffffff;
+
+    transform:translateX(6px);
+
+}
+
+.sidebar ul li.Active a,
+
+.sidebar ul li.active a{
+
+    background:#ff7a00;
+
+    color:#ffffff;
+
+    box-shadow:0 8px 20px rgba(255,122,0,.28);
+
+}
+
+/* =====================================
+   CONTENT
+===================================== */
+
+.content{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
+
+    padding:35px;
+
+}
+
+/* =====================================
+   TOPBAR
+===================================== */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#ffffff;
+
+    padding:22px 25px;
+
+    border-radius:18px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.topbar h1{
+
+    color:#222;
+
+    font-size:32px;
+
+    font-weight:700;
+
+}
+
+/* =====================================
+   ADD BUTTON
+===================================== */
+
+#addPackageBtn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:14px 22px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+#addPackageBtn:hover{
+
+    background:#e56600;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(255,122,0,.25);
+
+}
+
+#addPackageBtn h6{
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/* =====================================
+   SEARCH
+===================================== */
+
+.search-box{
+
+    margin-bottom:25px;
+
+}
+
+.search-box input{
+
+    width:380px;
+
+    max-width:100%;
+
+    padding:14px 18px;
+
+    border-radius:30px;
+
+    border:1px solid #dddddd;
+
+    background:#ffffff;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.35s;
+
+}
+
+.search-box input:focus{
+
+    border-color:#ff7a00;
+
+    box-shadow:0 0 12px rgba(255,122,0,.18);
+
+}
+
+/* =====================================
+   TABLE
+===================================== */
+
+.table-container{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#ff7a00;
+
+}
+
+thead th{
+
+    color:#ffffff;
+
+    padding:18px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+tbody td{
+
+    padding:18px;
+
+    color:#555;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+tbody tr{
+
+    transition:.3s;
+
+}
+
+tbody tr:nth-child(even){
+
+    background:#fcfcfc;
+
+}
+
+tbody tr:hover{
+
+    background:#fff7f2;
+
+    transform:scale(1.005);
+
+}
+
+td img{
+
+    width:90px;
+
+    height:65px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:3px solid #ffffff;
+
+    box-shadow:0 5px 12px rgba(0,0,0,.12);
+
+}
+
+/* =====================================
+   PREMIUM ACTION BUTTONS
+===================================== */
+
+.edit-btn,
+.delete-btn{
+
+    border:none;
+
+    outline:none;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.edit-btn{
+
+    background:#2ecc71;
+
+    color:#fff;
+
+    margin-right:8px;
+
+}
+
+.edit-btn:hover{
+
+    background:#27ae60;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 20px rgba(46,204,113,.30);
+
+}
+
+.delete-btn{
+
+    background:#e74c3c;
+
+    color:#fff;
+
+}
+
+.delete-btn:hover{
+
+    background:#c0392b;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 20px rgba(231,76,60,.30);
+
+}
+
+/* =====================================
+   MODAL
+===================================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.55);
+
+    backdrop-filter:blur(5px);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal-content{
+
+    width:620px;
+
+    max-width:95%;
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    animation:popup .35s ease;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
+
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.85);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* =====================================
+   MODAL HEADER
+===================================== */
+
+.modal-header{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    padding:22px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.modal-header h2{
+
+    font-size:24px;
+
+}
+
+.close{
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.close:hover{
+
+    transform:rotate(90deg);
+
+}
+
+/* =====================================
+   MODAL BODY
+===================================== */
+
+.modal-body{
+
+    padding:30px;
+
+}
+
+/* =====================================
+   FORM
+===================================== */
+
+.form-group{
+
+    margin-bottom:22px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#333;
+
+    font-weight:600;
+
+    font-size:15px;
+
+}
+
+/* =====================================
+   INPUTS
+===================================== */
+
+.form-group input,
+
+.form-group select,
+
+.form-group textarea{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:1px solid #dddddd;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:15px;
+
+    background:#fafafa;
+
+    transition:.35s;
+
+}
+
+.form-group input:focus,
+
+.form-group select:focus,
+
+.form-group textarea:focus{
+
+    border-color:#ff7a00;
+
+    background:#ffffff;
+
+    box-shadow:0 0 12px rgba(255,122,0,.18);
+
+}
+
+.form-group textarea{
+
+    resize:vertical;
+
+    min-height:130px;
+
+}
+
+/* =====================================
+   FILE INPUT
+===================================== */
+
+.form-group input[type=file]{
+
+    background:#ffffff;
+
+    padding:10px;
+
+    cursor:pointer;
+
+}
+
+/* =====================================
+   IMAGE PREVIEW
+===================================== */
+
+.image-preview{
+
+    margin-top:20px;
+
+    text-align:center;
+
+}
+
+.image-preview img{
+
+    width:220px;
+
+    height:150px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    border:4px solid #ffffff;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    transition:.35s;
+
+}
+
+.image-preview img:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* =====================================
+   SAVE BUTTON
+===================================== */
+
+#savePackage{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#ff7a00;
+
+    color:#ffffff;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+#savePackage:hover{
+
+    background:#e56600;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(255,122,0,.28);
+
+}
+
+/* =====================================
+   PREMIUM ANIMATIONS
+===================================== */
+
+.table-container,
+.modal-content,
+.topbar{
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =====================================
+   GLASS EFFECT
+===================================== */
+
+.topbar{
+
+    backdrop-filter:blur(10px);
+
+}
+
+.table-container{
+
+    backdrop-filter:blur(8px);
+
+}
+
+.modal-content{
+
+    backdrop-filter:blur(12px);
+
+}
+
+/* =====================================
+   PREMIUM TABLE EFFECTS
+===================================== */
+
+table{
+
+    overflow:hidden;
+
+}
+
+thead th{
+
+    letter-spacing:.5px;
+
+}
+
+tbody tr{
+
+    transition:.35s;
+
+}
+
+tbody tr:hover{
+
+    transform:scale(1.01);
+
+}
+
+td{
+
+    vertical-align:middle;
+
+}
+
+/* =====================================
+   BUTTON RIPPLE EFFECT
+===================================== */
+
+.edit-btn,
+.delete-btn,
+#savePackage,
+#addPackageBtn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.edit-btn::after,
+.delete-btn::after,
+#savePackage::after,
+#addPackageBtn::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.25);
+
+    transform:skewX(-30deg);
+
+    transition:.5s;
+
+}
+
+.edit-btn:hover::after,
+.delete-btn:hover::after,
+#savePackage:hover::after,
+#addPackageBtn:hover::after{
+
+    left:120%;
+
+}
+
+/* =====================================
+   INPUT HOVER
+===================================== */
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover{
+
+    border-color:#ff7a00;
+
+}
+
+/* =====================================
+   IMAGE EFFECT
+===================================== */
+
+.image-preview img{
+
+    transition:.35s;
+
+}
+
+.image-preview img:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 15px 30px rgba(255,122,0,.25);
+
+}
+
+/* =====================================
+   PREMIUM SCROLLBAR
+===================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f5f6fa;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ff7a00;
+
+    border-radius:30px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#e56700;
+
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    width:80px;
+
+}
+
+.logo h2{
+
+    display:none;
+
+}
+
+.sidebar ul li a{
+
+    justify-content:center;
+
+    padding:16px;
+
+}
+
+.sidebar ul li a span{
+
+    display:none;
+
+}
+
+.content{
+
+    margin-left:80px;
+
+    width:calc(100% - 80px);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.topbar{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+}
+
+.table-container{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    min-width:900px;
+
+}
+
+.modal-content{
+
+    width:95%;
+
+}
+
+.image-preview img{
+
+    width:180px;
+
+    height:120px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.content{
+
+    padding:18px;
+
+}
+
+.topbar{
+
+    padding:18px;
+
+}
+
+.modal-body{
+
+    padding:20px;
+
+}
+
+#savePackage{
+
+    font-size:15px;
+
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+    font-size:14px;
+
+}
+
+}
+
+/* =====================================
+   PREMIUM FINISH
+===================================== */
+
+.search-box input{
+
+    transition:.35s;
+
+}
+
+.search-box input:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.table-container:hover{
+
+    box-shadow:0 18px 40px rgba(255,122,0,.12);
+
+}
+
+.modal-content{
+
+    border:1px solid rgba(255,122,0,.12);
+
+}
+
+.sidebar ul li a{
+
+    position:relative;
+
+}
+
+.sidebar ul li a::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:0;
+
+    height:100%;
+
+    background:rgba(255,122,0,.08);
+
+    border-radius:12px;
+
+    transition:.35s;
+
+    z-index:-1;
+
+}
+
+.sidebar ul li a:hover::before{
+
+    width:100%;
+
+}

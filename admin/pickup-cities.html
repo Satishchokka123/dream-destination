@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pickup Cities | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/pickup-cities.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<!-- ===========================
+Sidebar
+=========================== -->
+
+<div class="sidebar">
+
+<h2>
+
+Dream Admin
+
+</h2>
+
+<ul>
+
+<li><a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+
+<li><a href="packages.html"><i class="fa-solid fa-box"></i> Packages</a></li>
+
+<li><a href="bookings.html"><i class="fa-solid fa-calendar-check"></i> Bookings</a></li>
+
+<li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+
+<li class="active">
+
+<a href="pickup-cities.html">
+
+<i class="fa-solid fa-location-dot"></i>
+
+Pickup Cities
+
+</a>
+
+</li>
+
+<li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+
+<li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+
+</ul>
+
+</div>
+
+<!-- ===========================
+Main Content
+=========================== -->
+
+<div class="main-content">
+
+<div class="page-header">
+
+<h1>
+
+Pickup Cities
+
+</h1>
+
+<button id="addCityBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+Add City
+
+</button>
+
+</div>
+
+<!-- ===========================
+Search
+=========================== -->
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchCity"
+placeholder="Search City...">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</div>
+
+<!-- ===========================
+Cities Table
+=========================== -->
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>City Name</th>
+
+<th>Charge</th>
+
+<th>Status</th>
+
+<th>Created</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="citiesTable">
+
+<!-- Dynamic -->
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ===========================
+Add / Edit Modal
+=========================== -->
+
+<div class="modal" id="cityModal">
+
+    <div class="modal-content">
+
+        <h2 id="modalTitle">
+
+            Add Pickup City
+
+        </h2>
+
+        <form id="cityForm">
+
+            <input
+            type="hidden"
+            id="cityId">
+
+            <div class="form-group">
+
+                <label>
+
+                    City Name
+
+                </label>
+
+                <input
+                type="text"
+                id="cityName"
+                required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Pickup Charge (₹)
+
+                </label>
+
+                <input
+                type="number"
+                id="cityCharge"
+                required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <select id="cityStatus">
+
+                    <option value="Active">
+
+                        Active
+
+                    </option>
+
+                    <option value="Inactive">
+
+                        Inactive
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="modal-buttons">
+
+                <button
+                type="submit"
+                class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save
+
+                </button>
+
+                <button
+                type="button"
+                id="closeModal"
+                class="cancel-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="../js/pickup-cities.js"></script>
+
+</body>
+
+</html>

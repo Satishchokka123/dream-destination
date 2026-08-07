@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Book Package | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/booking.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ===========================
+HEADER
+=========================== -->
+
+<header class="header">
+
+<div class="logo">
+
+Dream Destinations
+
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="package.html">Packages</a>
+
+<a href="contact.html">Contact</a>
+
+</nav>
+
+</header>
+
+<!-- ===========================
+BOOKING CONTAINER
+=========================== -->
+
+<section class="booking-section">
+
+<div class="booking-container">
+
+<!-- ===========================
+PACKAGE SUMMARY
+=========================== -->
+
+<div class="package-summary">
+
+<img
+id="packageImage"
+src=""
+alt="Package">
+
+<div class="package-details">
+
+<span
+class="category"
+id="packageCategory">
+
+Category
+
+</span>
+
+<h2 id="packageName">
+
+Package Name
+
+</h2>
+
+<p>
+
+<i class="fa-solid fa-location-dot"></i>
+
+<span id="packageDestination"></span>
+
+</p>
+
+<p>
+
+<i class="fa-solid fa-clock"></i>
+
+<span id="packageDuration"></span>
+
+</p>
+
+<h3>
+
+₹ <span id="packagePrice"></span>
+
+</h3>
+
+</div>
+
+</div>
+
+<!-- ===========================
+BOOKING FORM
+=========================== -->
+
+<form id="bookingForm">
+
+<h2>
+
+Traveler Details
+
+</h2>
+
+<div class="row">
+
+<div class="form-group">
+
+<label>
+
+Full Name
+
+</label>
+
+<input
+type="text"
+id="full_name"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Email
+
+</label>
+
+<input
+type="email"
+id="email"
+required>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="form-group">
+
+<label>
+
+Mobile
+
+</label>
+
+<input
+type="text"
+id="mobile"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Gender
+
+</label>
+
+<select id="gender">
+
+<option>Male</option>
+
+<option>Female</option>
+
+<option>Other</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Address
+
+</label>
+
+<textarea
+id="address"
+rows="3"></textarea>
+
+</div>
+
+<h2>
+
+Journey Details
+
+</h2>
+
+<div class="row">
+
+<div class="form-group">
+
+<label>
+
+From City
+
+</label>
+
+<select id="from_city" required>
+
+    <option value="">
+
+        Select Pickup City
+
+    </option>
+
+</select>
+</div>
+
+<div class="form-group">
+
+<label>
+
+Destination
+
+</label>
+
+<input
+type="text"
+id="destination">
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="form-group">
+
+<label>
+
+Travel Date
+
+</label>
+
+<input
+type="date"
+id="travel_date">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Return Date
+
+</label>
+
+<input
+type="date"
+id="return_date">
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="form-group">
+
+<label>
+
+Adults
+
+</label>
+
+<input
+type="number"
+id="adults"
+value="1"
+min="1">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Children
+
+</label>
+
+<input
+type="number"
+id="children"
+value="0"
+min="0">
+
+</div>
+
+</div>
+
+<!-- ===========================
+Transport & Hotel
+=========================== -->
+
+<h2>
+
+Travel Preferences
+
+</h2>
+
+<div class="row">
+
+    <div class="form-group">
+
+        <label>
+
+            Transport
+
+        </label>
+
+        <select id="transport" >
+
+    <option value="">
+
+        Select Transport
+
+    </option>
+
+</select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>
+
+            Hotel
+
+        </label>
+
+        <select id="hotel" >
+
+    <option value="">
+
+        Select Hotel
+
+    </option>
+
+</select>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+Extra Services
+=========================== -->
+
+<h2>
+
+Extra Services
+
+</h2>
+
+<div class="checkbox-group">
+
+    <label>
+
+        <input
+        type="checkbox"
+        id="breakfast">
+
+        Breakfast
+
+    </label>
+
+    <label>
+
+        <input
+        type="checkbox"
+        id="pickup">
+
+        Airport Pickup
+
+    </label>
+
+    <label>
+
+        <input
+        type="checkbox"
+        id="sightseeing">
+
+        Sightseeing
+
+    </label>
+
+    <label>
+
+        <input
+        type="checkbox"
+        id="insurance">
+
+        Travel Insurance
+
+    </label>
+
+</div>
+
+<!-- ===========================
+Booking Summary
+=========================== -->
+
+<div class="summary-card">
+
+    <h2>
+
+        Booking Summary
+
+    </h2>
+
+    <div class="summary-row">
+
+        <span>
+
+            Package Price
+
+        </span>
+
+        <span>
+
+            ₹ <span id="summaryPackagePrice">0</span>
+
+        </span>
+
+    </div>
+
+    <div class="summary-row">
+
+        <span>
+
+            Adults
+
+        </span>
+
+        <span id="summaryAdults">
+
+            1
+
+        </span>
+
+    </div>
+
+    <div class="summary-row">
+
+        <span>
+
+            Children
+
+        </span>
+
+        <span id="summaryChildren">
+
+            0
+
+        </span>
+
+    </div>
+
+    <hr>
+
+    <div class="summary-total">
+
+        <span>
+
+            Total
+
+        </span>
+
+        <span>
+
+            ₹ <span id="totalPrice">
+
+                0
+
+            </span>
+
+        </span>
+
+    </div>
+
+</div>
+
+<div class="summary-row">
+
+    <span>
+
+        Pickup Charge
+
+    </span>
+
+    <span>
+
+        ₹<span id="pickupCharge">0</span>
+
+    </span>
+
+</div>
+
+<div class="summary-row">
+
+    <span>
+
+        Transport Charge
+
+    </span>
+
+    <span>
+
+        ₹<span id="transportCharge">0</span>
+
+    </span>
+
+</div>
+
+<div class="summary-row">
+
+    <span>
+
+        Hotel Charge
+
+    </span>
+
+    <span>
+
+        ₹<span id="hotelCharge">0</span>
+
+    </span>
+
+</div>
+
+<div class="summary-row">
+
+    <span>
+
+        Extra Services
+
+    </span>
+
+    <span>
+
+        ₹<span id="serviceCharge">0</span>
+
+    </span>
+
+</div>
+
+<!-- ===========================
+Buttons
+=========================== -->
+
+<div class="button-group">
+
+    <button
+    type="submit"
+    class="confirm-btn">
+
+        Confirm Booking
+
+    </button>
+
+    <a
+    href="package.html"
+    class="cancel-btn">
+
+        Cancel
+
+    </a>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+<script src="../js/booking.js"></script>
+
+</body>
+
+</html>

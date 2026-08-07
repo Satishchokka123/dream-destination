@@ -1,0 +1,1091 @@
+/* =====================================
+   Dream Destinations
+   Manage Users
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#f5f6fa;
+
+    overflow-x:hidden;
+
+}
+
+.admin-container{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
+
+.sidebar{
+
+    width:260px;
+
+    height:100vh;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    background:#ffffff;
+
+    border-right:1px solid #ececec;
+
+    box-shadow:5px 0 25px rgba(0,0,0,.08);
+
+    overflow-y:auto;
+
+}
+
+.logo{
+
+    padding:30px;
+
+    text-align:center;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+.logo h2{
+
+    color:#ff7a00;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding:20px 0;
+
+}
+
+.sidebar ul li{
+
+    margin:8px 15px;
+
+}
+
+.sidebar ul li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:#555;
+
+    font-weight:500;
+
+    transition:.35s;
+
+}
+
+.sidebar ul li a i{
+
+    width:22px;
+
+    text-align:center;
+
+}
+
+.sidebar ul li a:hover{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    transform:translateX(6px);
+
+}
+
+.sidebar ul li.Active a,
+.sidebar ul li.active a{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    box-shadow:0 8px 20px rgba(255,122,0,.30);
+
+}
+
+/* =====================================
+   CONTENT
+===================================== */
+
+.content{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
+
+    padding:35px;
+
+}
+
+/* =====================================
+   TOPBAR
+===================================== */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#ffffff;
+
+    padding:22px 25px;
+
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.topbar h1{
+
+    color:#222;
+
+    font-size:32px;
+
+}
+
+/* =====================================
+   SEARCH
+===================================== */
+
+.search-box{
+
+    margin-bottom:25px;
+
+}
+
+.search-box input{
+
+    width:380px;
+
+    max-width:100%;
+
+    padding:14px 18px;
+
+    border-radius:30px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:15px;
+
+    background:#fff;
+
+    transition:.35s;
+
+}
+
+.search-box input:focus{
+
+    border-color:#ff7a00;
+
+    box-shadow:0 0 12px rgba(255,122,0,.18);
+
+}
+
+/* =====================================
+   CARDS
+===================================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin-bottom:30px;
+
+}
+
+.card{
+
+    background:#fff;
+
+    padding:28px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:6px;
+
+    height:100%;
+
+    background:#ff7a00;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 35px rgba(255,122,0,.15);
+
+}
+
+.card i{
+
+    font-size:40px;
+
+    color:#ff7a00;
+
+    margin-bottom:15px;
+
+}
+
+.card h2{
+
+    font-size:30px;
+
+    color:#222;
+
+    margin-bottom:8px;
+
+}
+
+.card p{
+
+    color:#777;
+
+}
+
+/* =====================================
+   USERS TABLE
+===================================== */
+
+.table-container{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#ff7a00;
+
+}
+
+thead th{
+
+    color:#ffffff;
+
+    padding:18px;
+
+    text-align:center;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+tbody td{
+
+    padding:18px;
+
+    text-align:center;
+
+    color:#555;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+tbody tr{
+
+    transition:.3s;
+
+}
+
+tbody tr:nth-child(even){
+
+    background:#fcfcfc;
+
+}
+
+tbody tr:hover{
+
+    background:#fff7f2;
+
+    transform:scale(1.005);
+
+}
+
+/* =====================================
+   STATUS BADGES
+===================================== */
+
+.status{
+
+    display:inline-block;
+
+    padding:7px 16px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:#fff;
+
+}
+
+.status.active{
+
+    background:#2ecc71;
+
+}
+
+.status.blocked{
+
+    background:#e74c3c;
+
+}
+
+/* =====================================
+   ACTION BUTTONS
+===================================== */
+
+.view-btn,
+.block-btn,
+.delete-btn{
+
+    border:none;
+
+    outline:none;
+
+    padding:9px 14px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin:2px;
+
+    transition:.35s;
+
+}
+
+.view-btn{
+
+    background:#3498db;
+
+    color:#fff;
+
+}
+
+.view-btn:hover{
+
+    background:#2980b9;
+
+    transform:translateY(-3px);
+
+}
+
+.block-btn{
+
+    background:#f39c12;
+
+    color:#fff;
+
+}
+
+.block-btn:hover{
+
+    background:#d68910;
+
+    transform:translateY(-3px);
+
+}
+
+.delete-btn{
+
+    background:#e74c3c;
+
+    color:#fff;
+
+}
+
+.delete-btn:hover{
+
+    background:#c0392b;
+
+    transform:translateY(-3px);
+
+}
+
+/* =====================================
+   USER DETAILS MODAL
+===================================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.55);
+
+    backdrop-filter:blur(5px);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal-content{
+
+    width:600px;
+
+    max-width:95%;
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
+
+    animation:popup .35s ease;
+
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.85);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.modal-header{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    padding:22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.modal-header h2{
+
+    font-size:24px;
+
+}
+
+.close{
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.close:hover{
+
+    transform:rotate(90deg);
+
+}
+
+.modal-body{
+
+    padding:30px;
+
+}
+
+/* =====================================
+   USER PROFILE
+===================================== */
+
+.user-profile{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.user-profile i{
+
+    font-size:85px;
+
+    color:#ff7a00;
+
+    margin-bottom:15px;
+
+}
+
+.user-profile h3{
+
+    color:#222;
+
+    margin-bottom:6px;
+
+    font-size:26px;
+
+}
+
+.user-profile p{
+
+    color:#777;
+
+}
+
+/* =====================================
+   DETAILS
+===================================== */
+
+.details{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.detail-item{
+
+    background:#fafafa;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    border-left:5px solid #ff7a00;
+
+}
+
+.detail-item label{
+
+    display:block;
+
+    color:#777;
+
+    font-size:13px;
+
+    margin-bottom:6px;
+
+    font-weight:600;
+
+}
+
+.detail-item p{
+
+    color:#222;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
+/* =====================================
+   PREMIUM ANIMATIONS
+===================================== */
+
+.topbar,
+.cards,
+.table-container,
+.modal-content{
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =====================================
+   GLASS EFFECT
+===================================== */
+
+.topbar{
+
+    backdrop-filter:blur(10px);
+
+}
+
+.card{
+
+    backdrop-filter:blur(8px);
+
+}
+
+.table-container{
+
+    backdrop-filter:blur(8px);
+
+}
+
+.modal-content{
+
+    backdrop-filter:blur(10px);
+
+}
+
+/* =====================================
+   BUTTON SHINE EFFECT
+===================================== */
+
+.view-btn,
+.block-btn,
+.delete-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.view-btn::after,
+.block-btn::after,
+.delete-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.25);
+
+    transform:skewX(-30deg);
+
+    transition:.5s;
+
+}
+
+.view-btn:hover::after,
+.block-btn:hover::after,
+.delete-btn:hover::after{
+
+    left:120%;
+
+}
+
+/* =====================================
+   CARD EFFECT
+===================================== */
+
+.card{
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.card:hover i{
+
+    transform:scale(1.15);
+
+}
+
+.card i{
+
+    transition:.35s;
+
+}
+
+/* =====================================
+   TABLE EFFECT
+===================================== */
+
+tbody tr{
+
+    transition:.35s;
+
+}
+
+tbody tr:hover{
+
+    box-shadow:0 5px 15px rgba(255,122,0,.12);
+
+}
+
+/* =====================================
+   USER PROFILE EFFECT
+===================================== */
+
+.user-profile i{
+
+    transition:.35s;
+
+}
+
+.user-profile:hover i{
+
+    transform:scale(1.08) rotate(5deg);
+
+}
+
+/* =====================================
+   DETAIL CARDS
+===================================== */
+
+.detail-item{
+
+    transition:.35s;
+
+}
+
+.detail-item:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 20px rgba(255,122,0,.12);
+
+}
+
+/* =====================================
+   PREMIUM SCROLLBAR
+===================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f5f6fa;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ff7a00;
+
+    border-radius:30px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#e56700;
+
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    width:80px;
+
+}
+
+.logo h2{
+
+    display:none;
+
+}
+
+.sidebar ul li a{
+
+    justify-content:center;
+
+    padding:16px;
+
+}
+
+.sidebar ul li a{
+
+    font-size:0;
+
+}
+
+.sidebar ul li a i{
+
+    font-size:20px;
+
+}
+
+.content{
+
+    margin-left:80px;
+
+    width:calc(100% - 80px);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.topbar{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+}
+
+.table-container{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    min-width:850px;
+
+}
+
+.details{
+
+    grid-template-columns:1fr;
+
+}
+
+.modal-content{
+
+    width:95%;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.content{
+
+    padding:18px;
+
+}
+
+.modal-body{
+
+    padding:20px;
+
+}
+
+.user-profile i{
+
+    font-size:70px;
+
+}
+
+.user-profile h3{
+
+    font-size:22px;
+
+}
+
+}
+
+/* =====================================
+   PREMIUM FINISH
+===================================== */
+
+.search-box input:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.table-container:hover{
+
+    box-shadow:0 18px 35px rgba(255,122,0,.12);
+
+}
+
+.modal-content{
+
+    border:1px solid rgba(255,122,0,.15);
+
+}
+
+.sidebar ul li a{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.sidebar ul li a::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-100%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,122,0,.08);
+
+    transition:.35s;
+
+}
+
+.sidebar ul li a:hover::before{
+
+    left:100%;
+
+}

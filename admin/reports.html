@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/reports.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<!-- ================= Sidebar ================= -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h2>Dream Destinations</h2>
+
+</div>
+
+<ul>
+
+<li>
+<a href="dashboard.html">
+<i class="fa-solid fa-gauge"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="manage-packages.html">
+<i class="fa-solid fa-box-open"></i>
+Manage Packages
+</a>
+</li>
+
+<li>
+<a href="manage-bookings.html">
+<i class="fa-solid fa-calendar-check"></i>
+Manage Bookings
+</a>
+</li>
+
+<li>
+<a href="manage-users.html">
+<i class="fa-solid fa-users"></i>
+Manage Users
+</a>
+</li>
+
+<li class="Active">
+<a href="reports.html">
+<i class="fa-solid fa-chart-line"></i>
+Reports
+</a>
+</li>
+
+<li>
+<a href="settings.html">
+<i class="fa-solid fa-gear"></i>
+Settings
+</a>
+</li>
+
+<li>
+<a href="admin-login.html">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</a>
+</li>
+
+</ul>
+
+</aside>
+
+<!-- ================= Main ================= -->
+
+<main class="content">
+
+<div class="topbar">
+
+<h1>Reports Dashboard</h1>
+
+</div>
+
+<!-- Summary Cards -->
+
+<div class="cards">
+
+<div class="card">
+
+<i class="fa-solid fa-indian-rupee-sign"></i>
+
+<h2 id="totalRevenue">₹0</h2>
+
+<p>Total Revenue</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<h2 id="totalBookings">0</h2>
+
+<p>Total Bookings</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-users"></i>
+
+<h2 id="totalUsers">0</h2>
+
+<p>Total Users</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-box-open"></i>
+
+<h2 id="totalPackages">0</h2>
+
+<p>Total Packages</p>
+
+</div>
+
+</div>
+<!-- ================= Charts ================= -->
+
+<div class="charts-container">
+
+    <!-- Revenue Chart -->
+
+    <div class="chart-card">
+
+        <h2>
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Monthly Revenue
+
+        </h2>
+
+        <canvas id="revenueChart"></canvas>
+
+    </div>
+
+    <!-- Booking Chart -->
+
+    <div class="chart-card">
+
+        <h2>
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            Monthly Bookings
+
+        </h2>
+
+        <canvas id="bookingChart"></canvas>
+
+    </div>
+
+    <!-- Status Chart -->
+
+    <div class="chart-card">
+
+        <h2>
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            Booking Status
+
+        </h2>
+
+        <canvas id="statusChart"></canvas>
+
+    </div>
+
+</div>
+
+<!-- ================= Export Buttons ================= -->
+
+<div class="report-actions">
+
+    <button id="exportPDF">
+
+        <i class="fa-solid fa-file-pdf"></i>
+
+        Export PDF
+
+    </button>
+
+    <button id="exportExcel">
+
+        <i class="fa-solid fa-file-excel"></i>
+
+        Export Excel
+
+    </button>
+
+</div>
+
+<!-- ================= Recent Bookings ================= -->
+
+<div class="table-container">
+
+    <div class="table-header">
+
+        <h2>
+
+            <i class="fa-solid fa-clock-rotate-left"></i>
+
+            Recent Bookings
+
+        </h2>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Customer</th>
+
+                <th>Destination</th>
+
+                <th>Travel Date</th>
+
+                <th>Amount</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="recentBookings">
+
+            <!-- Dynamic Data -->
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="../js/reports.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Packages | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/manage-packages.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- Sidebar -->
+
+    <!-- ================= Sidebar ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h2>Dream Destinations</h2>
+
+        
+
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="../admin/dashboard.html">
+                <i class="fa-solid fa-gauge"></i>
+                Dashboard
+            </a>
+        </li>
+
+        <li class="Active">
+            <a href="../admin/manage-packages.html">
+                <i class="fa-solid fa-box-open"></i>
+                Manage Packages
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/manage-bookings.html">
+                <i class="fa-solid fa-calendar-check"></i>
+                Manage Bookings
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/manage-users.html">
+                <i class="fa-solid fa-users"></i>
+                Manage Users
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/reports.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Reports
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/settings.html">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/admin-login.html" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <div class="topbar">
+
+            <h1>Manage Packages</h1>
+
+            <button id="addPackageBtn">
+
+                <i class="fa-solid fa-plus"></i>
+
+               <h6 id="modalTitle">Add New Package</h6>
+
+            </button>
+
+        </div>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search Package...">
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Image</th>
+
+                        <th>Package</th>
+
+                        <th>Destination</th>
+
+                        <th>Base Price</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="packageTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+<!-- ================= Add Package Modal ================= -->
+
+<div class="modal" id="packageModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Add New Package</h2>
+
+            <span class="close" id="closeModal">&times;</span>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-group">
+
+                <label>Package Name</label>
+
+                <input
+                    type="text"
+                    id="packageName"
+                    placeholder="Enter package name">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Destination</label>
+
+                <input
+                    type="text"
+                    id="destination"
+                    placeholder="Enter destination">
+
+            </div>
+<div class="form-group">
+
+    <label>Category</label>
+
+    <select id="category">
+
+        <option value="">-- Select Category --</option>
+
+        <option value="Beach">Beach</option>
+
+        <option value="Hill Station">Hill Station</option>
+
+        <option value="Adventure">Adventure</option>
+
+        <option value="temple">Temple</option>
+
+        <option value="nature">Nature</option>
+
+        <option value="Wildlife">Wildlife</option>
+
+        <option value="Honeymoon">Honeymoon</option>
+
+    </select>
+
+</div>
+
+            <div class="form-group">
+
+                <label>Base Price</label>
+
+                <input
+                    type="number"
+                    id="basePrice"
+                    placeholder="Enter base price">
+
+            </div>
+<div class="form-group">
+
+    <label>Duration</label>
+
+    <input
+        type="text"
+        id="duration"
+        placeholder="Example: 5 Days / 4 Nights">
+
+</div>
+
+<div class="form-group">
+
+    <label>Description</label>
+
+    <textarea
+        id="description"
+        rows="5"
+        placeholder="Enter package description"></textarea>
+
+</div>
+
+
+            <div class="form-group">
+
+                <label>Package Image</label>
+
+                <input
+                    type="file"
+                    id="packageImage">
+<div class="image-preview">
+
+    <img
+        id="previewImage"
+        src="/images/no-image.png"
+        alt="Preview">
+
+</div>
+            </div>
+
+            <button id="savePackage">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Package
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    </main>
+
+</div>
+
+<script src="../js/manage-packages.js"></script>
+
+</body>
+
+</html>

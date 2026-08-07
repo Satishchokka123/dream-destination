@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Payment | Dream Destinations</title>
+
+<link rel="stylesheet"
+href="../css/payment.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="payment-container">
+
+    <div class="payment-card">
+
+        <h1>
+
+            <i class="fa-solid fa-credit-card"></i>
+
+            Secure Payment
+
+        </h1>
+
+        <div class="booking-summary">
+
+            <h2>Booking Summary</h2>
+
+            <p>
+
+                Package
+
+                <span id="packageName"></span>
+
+            </p>
+
+            <p>
+
+                Destination
+
+                <span id="destination"></span>
+
+            </p>
+
+            <p>
+
+                Travelers
+
+                <span id="travellers"></span>
+
+            </p>
+
+            <p>
+
+                Total Amount
+
+                <span id="totalAmount"></span>
+
+            </p>
+
+        </div>
+
+        <div class="payment-method">
+
+            <h2>Choose Payment Method</h2>
+
+            <label>
+
+                <input type="radio"
+                name="payment"
+                value="razorpay"
+                checked>
+
+                Razorpay
+
+            </label>
+
+            <label>
+
+                <input type="radio"
+                name="payment"
+                value="upi">
+
+                UPI
+
+            </label>
+
+            <label>
+
+                <input type="radio"
+                name="payment"
+                value="card">
+
+                Credit / Debit Card
+
+            </label>
+
+        </div>
+
+        <button id="payNow">
+
+            Pay Now
+
+        </button>
+
+    </div>
+
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="../js/payment.js"></script>
+
+</body>
+
+</html>

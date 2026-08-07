@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<!-- ================= Sidebar ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h2>Dream Destinations</h2>
+
+    </div>
+
+    <ul>
+
+        <li class=""Active>
+            <a href="../admin/dashboard.html">
+                <i class="fa-solid fa-gauge"></i>
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/manage-packages.html">
+                <i class="fa-solid fa-box-open"></i>
+                Manage Packages
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/manage-bookings.html">
+                <i class="fa-solid fa-calendar-check"></i>
+                Manage Bookings
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/manage-users.html">
+                <i class="fa-solid fa-users"></i>
+                Manage Users
+            </a>
+        </li>
+
+        <li>
+
+<a href="../admin/pickup-cities.html">
+
+<i class="fa-solid fa-location-dot"></i>
+
+Pickup Cities
+
+</a>
+
+</li>
+
+<li>
+
+<a href="../admin/transport-charges.html">
+
+<i class="fa-solid fa-bus"></i>
+
+Transport Charges
+
+</a>
+
+</li>
+
+<li>
+
+<a href="../admin/hotel-charges.html">
+
+<i class="fa-solid fa-hotel"></i>
+
+Hotel Charges
+
+</a>
+
+</li>
+        <li>
+            <a href="../admin/reports.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Reports
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/settings.html">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+        </li>
+
+        <li>
+            <a href="../admin/admin-login.html" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+<!-- Main -->
+
+<div class="main">
+
+    <div class="topbar">
+
+    <div class="top-left">
+
+        <h1>Dashboard</h1>
+
+        <p id="currentDate"></p>
+
+    </div>
+
+    <div class="top-right">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search...">
+
+        </div>
+
+        <div class="notification">
+
+            <i class="fa-solid fa-bell"></i>
+
+            <span class="badge">3</span>
+
+        </div>
+
+        <div class="admin-profile">
+
+            <img
+            src="../images/admin.avif"
+            alt="Admin">
+
+            <div>
+
+                <h4>Administrator</h4>
+
+                <small>Super Admin</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- Cards -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h2 id="totalUsers">0</h2>
+
+            <p>Total Users</p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-box"></i>
+
+            <h2 id="totalPackages">0</h2>
+
+            <p>Total Packages</p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            <h2 id="totalBookings">0</h2>
+
+            <p>Total Bookings</p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+
+            <h2 id="totalRevenue">₹0</h2>
+
+            <p>Total Revenue</p>
+
+        </div>
+
+    </div>
+
+<!-- ================= Charts ================= -->
+
+<div class="chart-container">
+
+    <div class="chart-card">
+
+        <h2>Monthly Revenue</h2>
+
+        <canvas id="revenueChart"></canvas>
+
+    </div>
+
+    <div class="chart-card">
+
+        <h2>Booking Status</h2>
+
+        <canvas id="bookingChart"></canvas>
+
+    </div>
+
+</div>
+
+
+    <!-- Recent Bookings -->
+
+    <div class="recent">
+
+        <h2>
+
+            Recent Bookings
+
+        </h2>
+
+        <table>
+
+            <thead>
+
+<tr>
+
+    <th>ID</th>
+
+    <th>Customer</th>
+
+    <th>Package</th>
+
+    <th>Destination</th>
+
+    <th>Total Price</th>
+
+</tr>
+
+</thead>
+
+            <tbody id="bookingTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,493 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f8fc;
+    color:#333;
+}
+
+/* =========================
+        NAVBAR
+========================= */
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 8%;
+    background:linear-gradient(90deg,#0077b6,#00b4d8);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+    color:white;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+}
+
+nav ul li{
+    margin-left:25px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:17px;
+    transition:.3s;
+}
+
+nav ul li a:hover{
+    color:#ffe600;
+}
+
+/* =========================
+        HERO
+========================= */
+
+.hero{
+    height:60vh;
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url("../images/logo.png") center/cover;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:22px;
+    margin-bottom:25px;
+}
+
+.hero input{
+    width:380px;
+    max-width:90%;
+    padding:15px;
+    border:none;
+    border-radius:50px;
+    outline:none;
+    font-size:17px;
+}
+
+/* =========================
+        PACKAGES
+========================= */
+
+/* ===========================
+Packages Page
+=========================== */
+
+.packages-section{
+
+    padding:40px 5%;
+
+    background:#f5fff7;
+
+}
+
+.section-header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.section-header h1{
+
+    color:#1b5e20;
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+}
+
+.section-header p{
+
+    color:#555;
+
+}
+
+.top-bar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:35px;
+
+    flex-wrap:wrap;
+
+}
+
+.top-bar input,
+.top-bar select{
+
+    padding:12px 15px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+}
+
+.top-bar input{
+
+    flex:1;
+
+}
+
+.packages-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
+
+}
+
+.package-card{
+
+    background:#fff;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+    transition:.3s;
+
+}
+
+.package-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.package-card img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+}
+
+.package-content{
+
+    padding:20px;
+
+}
+
+.package-content h3{
+
+    color:#1b5e20;
+
+    margin-bottom:10px;
+
+}
+
+.package-content p{
+
+    color:#666;
+
+    margin-bottom:15px;
+
+}
+
+.package-content h2{
+
+    color:#ff9800;
+
+    margin-bottom:20px;
+
+}
+
+.btn-group{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.details-btn,
+.book-btn{
+
+    flex:1;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    color:#fff;
+
+    transition:.3s;
+
+}
+
+.details-btn{
+
+    background:#2e7d32;
+
+}
+
+.book-btn{
+
+    background:#ff9800;
+
+}
+
+.details-btn:hover{
+
+    background:#1b5e20;
+
+}
+
+.book-btn:hover{
+
+    background:#ef6c00;
+
+}
+/* =========================
+        FOOTER
+========================= */
+
+footer{
+    background:#023e8a;
+    color:white;
+    text-align:center;
+    padding:35px;
+    margin-top:50px;
+}
+
+footer h3{
+    margin-bottom:10px;
+}
+
+/* =========================
+        SCROLL BAR
+========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#ddd;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#0077b6;
+    border-radius:10px;
+}
+
+/* =========================
+        ANIMATION
+========================= */
+
+.card{
+    animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+nav{
+    flex-direction:column;
+}
+
+nav ul{
+    margin-top:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.hero h1{
+    font-size:42px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+}
+
+@media(max-width:768px){
+
+.packages{
+    grid-template-columns:1fr;
+}
+
+.hero{
+    height:50vh;
+}
+
+.hero h1{
+    font-size:34px;
+}
+
+.logo{
+    font-size:22px;
+}
+
+nav ul li{
+    margin:10px;
+}
+
+.buttons{
+    justify-content:center;
+}
+
+}
+
+@media(max-width:480px){
+
+.hero h1{
+    font-size:28px;
+}
+
+.hero p{
+    font-size:16px;
+}
+
+.hero input{
+    width:90%;
+}
+
+.details h3{
+    font-size:24px;
+}
+
+}
+/* Filter Section */
+
+.filter-section{
+    display: flex;
+    justify-content: flex-end;   /* Moves filter to the right */
+    align-items: center;
+    padding: 20px 8%;
+    gap: 10px;
+}
+
+.filter-section label{
+    font-size:18px;
+    font-weight:600;
+    color:#0077b6;
+}
+
+.filter-section select{
+    width:220px;
+    padding:10px 15px;
+    border:2px solid #0077b6;
+    border-radius:8px;
+    font-size:16px;
+    background:#fff;
+    cursor:pointer;
+    outline:none;
+    transition:0.3s;
+}
+
+.filter-section select:hover{
+    border-color:#00b4d8;
+    box-shadow:0 0 8px rgba(0,119,182,0.3);
+}
+/* Tablet */
+@media (max-width: 992px){
+    .packages{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px){
+    .packages{
+        grid-template-columns: 1fr;
+    }
+}
+.package-price h3{
+    color:#0d6efd;
+    font-size:22px;
+    font-weight:700;
+    margin:10px 0 5px;
+}
+
+.price-note{
+    font-size:13px;
+    color:#666;
+    margin:0;
+    line-height:1.4;
+    font-style:italic;
+}
+
+.category-badge{
+
+    display:inline-block;
+
+    background:#2e7d32;
+
+    color:#fff;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+}

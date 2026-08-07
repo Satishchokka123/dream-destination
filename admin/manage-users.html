@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Users | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/manage-users.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<!-- ================= Sidebar ================= -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h2>Dream Destinations</h2>
+
+</div>
+
+<ul>
+
+<li>
+<a href="../admin/dashboard.html">
+
+<i class="fa-solid fa-gauge"></i>
+
+Dashboard
+
+</a>
+</li>
+
+<li>
+<a href="../admin/manage-packages.html">
+
+<i class="fa-solid fa-box-open"></i>
+
+Manage Packages
+
+</a>
+</li>
+
+<li>
+<a href="../admin/manage-bookings.html">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+Manage Bookings
+
+</a>
+</li>
+
+<li class="Active">
+<a href="../admin/manage-users.html">
+
+<i class="fa-solid fa-users"></i>
+
+Manage Users
+
+</a>
+</li>
+
+<li>
+<a href="../admin/reports.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Reports
+
+</a>
+</li>
+
+<li>
+<a href="../admin/settings.html">
+
+<i class="fa-solid fa-gear"></i>
+
+Settings
+
+</a>
+</li>
+
+<li>
+<a href="../admin/admin-login.html">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
+</li>
+
+</ul>
+
+</aside>
+
+<!-- ================= Main Content ================= -->
+
+<main class="content">
+
+<div class="topbar">
+
+<h1>Manage Users</h1>
+
+</div>
+
+<!-- Search -->
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search users...">
+
+</div>
+
+<!-- Statistics -->
+
+<div class="cards">
+
+<div class="card">
+
+<i class="fa-solid fa-users"></i>
+
+<h2 id="totalUsers">0</h2>
+
+<p>Total Users</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-user-check"></i>
+
+<h2 id="activeUsers">0</h2>
+
+<p>Active Users</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-user-lock"></i>
+
+<h2 id="blockedUsers">0</h2>
+
+<p>Blocked Users</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<h2 id="todayUsers">0</h2>
+
+<p>New Users</p>
+
+</div>
+
+</div>
+<!-- ================= Users Table ================= -->
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Mobile</th>
+
+<th>Status</th>
+
+<th>Registered</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="usersTable">
+
+<!-- Users will load here -->
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ================= View User Modal ================= -->
+
+<div class="modal" id="userModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>User Details</h2>
+
+<span class="close" id="closeModal">&times;</span>
+
+</div>
+
+<div class="modal-body">
+
+<div class="user-profile">
+
+<i class="fa-solid fa-circle-user"></i>
+
+<h3 id="viewName">User Name</h3>
+
+<p id="viewEmail">example@gmail.com</p>
+
+</div>
+
+<div class="details">
+
+<div class="detail-item">
+
+<label>Mobile</label>
+
+<p id="viewMobile">----------</p>
+
+</div>
+
+<div class="detail-item">
+
+<label>Address</label>
+
+<p id="viewAddress">----------</p>
+
+</div>
+
+<div class="detail-item">
+
+<label>Joined Date</label>
+
+<p id="viewDate">----------</p>
+
+</div>
+
+<div class="detail-item">
+
+<label>Total Bookings</label>
+
+<p id="viewBookings">0</p>
+
+</div>
+
+<div class="detail-item">
+
+<label>Status</label>
+
+<p id="viewStatus">Active</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="../js/manage-users.js"></script>
+
+</body>
+
+</html>

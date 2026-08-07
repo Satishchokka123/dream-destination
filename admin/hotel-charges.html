@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel Charges | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/hotel-charges.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<!-- ===========================
+Sidebar
+=========================== -->
+
+<div class="sidebar">
+
+<h2>Dream Admin</h2>
+
+<ul>
+
+<li><a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+
+<li><a href="packages.html"><i class="fa-solid fa-box"></i> Packages</a></li>
+
+<li><a href="bookings.html"><i class="fa-solid fa-calendar-check"></i> Bookings</a></li>
+
+<li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+
+<li><a href="pickup-cities.html"><i class="fa-solid fa-location-dot"></i> Pickup Cities</a></li>
+
+<li><a href="transport-charges.html"><i class="fa-solid fa-bus"></i> Transport Charges</a></li>
+
+<li class="active">
+
+<a href="hotel-charges.html">
+
+<i class="fa-solid fa-hotel"></i>
+
+Hotel Charges
+
+</a>
+
+</li>
+
+<li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+
+<li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+
+</ul>
+
+</div>
+
+<!-- ===========================
+Main Content
+=========================== -->
+
+<div class="main-content">
+
+<div class="page-header">
+
+<h1>
+
+Hotel Charges
+
+</h1>
+
+<button id="addHotelBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Hotel
+
+</button>
+
+</div>
+
+<div class="search-box">
+
+<input
+
+type="text"
+
+id="searchHotel"
+
+placeholder="Search Hotel Type">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Hotel Type</th>
+
+<th>Charge</th>
+
+<th>Status</th>
+
+<th>Created</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="hotelTable">
+
+<!-- Dynamic Data -->
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ===========================
+Add / Edit Hotel Modal
+=========================== -->
+
+<div class="modal" id="hotelModal">
+
+    <div class="modal-content">
+
+        <h2 id="modalTitle">
+
+            Add Hotel
+
+        </h2>
+
+        <form id="hotelForm">
+
+            <input
+            type="hidden"
+            id="hotelId">
+
+            <div class="form-group">
+
+                <label>
+
+                    Hotel Type
+
+                </label>
+
+                <input
+                type="text"
+                id="hotelType"
+                placeholder="3 Star / 4 Star / 5 Star"
+                required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Charge (₹)
+
+                </label>
+
+                <input
+                type="number"
+                id="hotelCharge"
+                required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <select id="hotelStatus">
+
+                    <option value="Active">
+
+                        Active
+
+                    </option>
+
+                    <option value="Inactive">
+
+                        Inactive
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="modal-buttons">
+
+                <button
+                type="submit"
+                class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save
+
+                </button>
+
+                <button
+                type="button"
+                id="closeModal"
+                class="cancel-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="../js/hotel-charges.js"></script>
+
+</body>
+
+</html>

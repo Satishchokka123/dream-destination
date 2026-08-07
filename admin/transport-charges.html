@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transport Charges | Dream Destinations</title>
+
+<link rel="stylesheet" href="../css/transport-charges.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<h2>Dream Admin</h2>
+
+<ul>
+
+<li><a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+
+<li><a href="packages.html"><i class="fa-solid fa-box"></i> Packages</a></li>
+
+<li><a href="bookings.html"><i class="fa-solid fa-calendar-check"></i> Bookings</a></li>
+
+<li><a href="users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+
+<li><a href="pickup-cities.html"><i class="fa-solid fa-location-dot"></i> Pickup Cities</a></li>
+
+<li class="active">
+
+<a href="transport-charges.html">
+
+<i class="fa-solid fa-bus"></i>
+
+Transport Charges
+
+</a>
+
+</li>
+
+<li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+
+</ul>
+
+</div>
+
+<!-- Main -->
+
+<div class="main-content">
+
+<div class="page-header">
+
+<h1>
+
+Transport Charges
+
+</h1>
+
+<button id="addTransportBtn">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Transport
+
+</button>
+
+</div>
+
+<div class="search-box">
+
+<input
+
+type="text"
+
+id="searchTransport"
+
+placeholder="Search Transport">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Transport</th>
+
+<th>Charge</th>
+
+<th>Status</th>
+
+<th>Created</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="transportTable">
+
+</tbody>
+
+</table>
+
+</div>
+<!-- ===========================
+Add / Edit Modal
+=========================== -->
+
+<div class="modal" id="transportModal">
+
+    <div class="modal-content">
+
+        <h2 id="modalTitle">
+
+            Add Transport
+
+        </h2>
+
+        <form id="transportForm">
+
+            <input
+            type="hidden"
+            id="transportId">
+
+            <div class="form-group">
+
+                <label>
+
+                    Transport Name
+
+                </label>
+
+                <input
+                type="text"
+                id="transportName"
+                placeholder="Bus / Train / Flight"
+                required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Charge (₹)
+
+                </label>
+
+                <input
+                type="number"
+                id="transportCharge"
+                required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <select id="transportStatus">
+
+                    <option value="Active">
+
+                        Active
+
+                    </option>
+
+                    <option value="Inactive">
+
+                        Inactive
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="modal-buttons">
+
+                <button
+                type="submit"
+                class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save
+
+                </button>
+
+                <button
+                type="button"
+                id="closeModal"
+                class="cancel-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="../js/transport-charges.js"></script>
+
+</body>
+
+</html>

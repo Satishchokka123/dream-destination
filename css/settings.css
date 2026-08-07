@@ -1,0 +1,772 @@
+/* =====================================
+   Dream Destinations
+   Settings
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#f5f6fa;
+
+    overflow-x:hidden;
+
+}
+
+.admin-container{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
+
+.sidebar{
+
+    width:260px;
+
+    height:100vh;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    background:#ffffff;
+
+    border-right:1px solid #ececec;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.logo{
+
+    text-align:center;
+
+    padding:30px;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+.logo h2{
+
+    color:#ff7a00;
+
+    font-size:28px;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding:20px 0;
+
+}
+
+.sidebar ul li{
+
+    margin:8px 15px;
+
+}
+
+.sidebar ul li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    text-decoration:none;
+
+    color:#555;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    transition:.35s;
+
+}
+
+.sidebar ul li a:hover{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    transform:translateX(6px);
+
+}
+
+.sidebar ul li.Active a,
+.sidebar ul li.active a{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    box-shadow:0 8px 20px rgba(255,122,0,.30);
+
+}
+
+/* =====================================
+   MAIN CONTENT
+===================================== */
+
+.content{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
+
+    padding:35px;
+
+}
+
+/* =====================================
+   TOPBAR
+===================================== */
+
+.topbar{
+
+    background:#ffffff;
+
+    padding:22px 25px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    margin-bottom:30px;
+
+}
+
+.topbar h1{
+
+    color:#222;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.topbar i{
+
+    color:#ff7a00;
+
+}
+
+/* =====================================
+   SETTINGS CARD
+===================================== */
+
+.settings-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+}
+
+.settings-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:5px;
+
+    height:100%;
+
+    background:#ff7a00;
+
+}
+
+.settings-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(255,122,0,.12);
+
+}
+
+.settings-card h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#222;
+
+    margin-bottom:25px;
+
+}
+
+.settings-card h2 i{
+
+    color:#ff7a00;
+
+}
+
+/* =====================================
+   FORM GRID
+===================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:22px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group.full-width{
+
+    grid-column:1 / -1;
+
+}
+
+/* =====================================
+   LABELS
+===================================== */
+
+.form-group label{
+
+    margin-bottom:8px;
+
+    color:#444;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/* =====================================
+   INPUTS
+===================================== */
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border:2px solid #ececec;
+
+    border-radius:12px;
+
+    background:#ffffff;
+
+    font-size:15px;
+
+    color:#333;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+
+    color:#999;
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+
+    border-color:#ff7a00;
+
+    box-shadow:0 0 0 4px rgba(255,122,0,.12);
+
+}
+
+/* =====================================
+   TEXTAREA
+===================================== */
+
+.form-group textarea{
+
+    resize:vertical;
+
+    min-height:130px;
+
+}
+
+/* =====================================
+   FILE INPUT
+===================================== */
+
+.form-group input[type="file"]{
+
+    padding:10px;
+
+    cursor:pointer;
+
+    background:#fafafa;
+
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button{
+
+    border:none;
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    margin-right:12px;
+
+    transition:.3s;
+
+}
+
+.form-group input[type="file"]::-webkit-file-upload-button:hover{
+
+    background:#e66c00;
+
+}
+
+/* =====================================
+   SAVE BUTTON
+===================================== */
+
+.save-section{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:10px;
+
+}
+
+#saveSettings{
+
+    border:none;
+
+    outline:none;
+
+    background:#ff7a00;
+
+    color:#ffffff;
+
+    padding:15px 32px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    box-shadow:0 10px 20px rgba(255,122,0,.25);
+
+}
+
+#saveSettings:hover{
+
+    background:#e56c00;
+
+    transform:translateY(-4px);
+
+    box-shadow:0 16px 30px rgba(255,122,0,.35);
+
+}
+
+#saveSettings i{
+
+    font-size:18px;
+
+}
+
+/* =====================================
+   PREMIUM ANIMATIONS
+===================================== */
+
+.topbar,
+.settings-card{
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =====================================
+   GLASS EFFECT
+===================================== */
+
+.topbar{
+
+    backdrop-filter:blur(10px);
+
+}
+
+.settings-card{
+
+    backdrop-filter:blur(10px);
+
+}
+
+/* =====================================
+   INPUT HOVER
+===================================== */
+
+.form-group input:hover,
+.form-group textarea:hover,
+.form-group select:hover{
+
+    border-color:#ffb067;
+
+}
+
+/* =====================================
+   SAVE BUTTON SHINE
+===================================== */
+
+#saveSettings{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+#saveSettings::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.25);
+
+    transform:skewX(-30deg);
+
+    transition:.55s;
+
+}
+
+#saveSettings:hover::after{
+
+    left:120%;
+
+}
+
+/* =====================================
+   CARD HOVER
+===================================== */
+
+.settings-card:hover h2{
+
+    color:#ff7a00;
+
+}
+
+.settings-card h2{
+
+    transition:.35s;
+
+}
+
+/* =====================================
+   FILE INPUT ICON EFFECT
+===================================== */
+
+.form-group input[type=file]{
+
+    transition:.35s;
+
+}
+
+.form-group input[type=file]:hover{
+
+    background:#fff7f2;
+
+}
+
+/* =====================================
+   PREMIUM SCROLLBAR
+===================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f4f4f4;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ff7a00;
+
+    border-radius:25px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#e46a00;
+
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    width:80px;
+
+}
+
+.logo h2{
+
+    display:none;
+
+}
+
+.sidebar ul li a{
+
+    justify-content:center;
+
+    font-size:0;
+
+}
+
+.sidebar ul li a i{
+
+    font-size:20px;
+
+}
+
+.content{
+
+    margin-left:80px;
+
+    width:calc(100% - 80px);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.content{
+
+    padding:20px;
+
+}
+
+.form-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.save-section{
+
+    justify-content:center;
+
+}
+
+#saveSettings{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.topbar h1{
+
+    font-size:24px;
+
+}
+
+.settings-card{
+
+    padding:22px;
+
+}
+
+.settings-card h2{
+
+    font-size:20px;
+
+}
+
+}
+
+/* =====================================
+   FINAL PREMIUM POLISH
+===================================== */
+
+.settings-card{
+
+    border:1px solid rgba(255,122,0,.08);
+
+}
+
+.settings-card:hover{
+
+    box-shadow:0 20px 40px rgba(255,122,0,.12);
+
+}
+
+.form-group input,
+.form-group textarea{
+
+    transition:all .3s ease;
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+
+    transform:translateY(-2px);
+
+}
+
+.logo h2{
+
+    letter-spacing:.5px;
+
+}
+
+.sidebar ul li a{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.sidebar ul li a::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.15);
+
+    transition:.35s;
+
+}
+
+.sidebar ul li a:hover::before{
+
+    left:100%;
+
+}

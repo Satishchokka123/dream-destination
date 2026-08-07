@@ -1,0 +1,867 @@
+/* =====================================
+   Dream Destinations
+   Reports
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#f5f6fa;
+
+    overflow-x:hidden;
+
+}
+
+.admin-container{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
+
+.sidebar{
+
+    width:260px;
+
+    height:100vh;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    background:#ffffff;
+
+    border-right:1px solid #ececec;
+
+    box-shadow:5px 0 25px rgba(0,0,0,.08);
+
+    overflow-y:auto;
+
+}
+
+.logo{
+
+    padding:30px;
+
+    text-align:center;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+.logo h2{
+
+    color:#ff7a00;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding:20px 0;
+
+}
+
+.sidebar ul li{
+
+    margin:8px 15px;
+
+}
+
+.sidebar ul li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:#555;
+
+    font-weight:500;
+
+    transition:.35s;
+
+}
+
+.sidebar ul li a i{
+
+    width:22px;
+
+    text-align:center;
+
+}
+
+.sidebar ul li a:hover{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    transform:translateX(6px);
+
+}
+
+.sidebar ul li.Active a,
+.sidebar ul li.active a{
+
+    background:#ff7a00;
+
+    color:#fff;
+
+    box-shadow:0 8px 20px rgba(255,122,0,.30);
+
+}
+
+/* =====================================
+   MAIN CONTENT
+===================================== */
+
+.content{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
+
+    padding:35px;
+
+}
+
+/* =====================================
+   TOPBAR
+===================================== */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#ffffff;
+
+    padding:22px 25px;
+
+    border-radius:18px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.topbar h1{
+
+    color:#222;
+
+    font-size:32px;
+
+}
+
+/* =====================================
+   SUMMARY CARDS
+===================================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin-bottom:30px;
+
+}
+
+.card{
+
+    background:#ffffff;
+
+    padding:28px;
+
+    border-radius:20px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:6px;
+
+    height:100%;
+
+    background:#ff7a00;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 35px rgba(255,122,0,.15);
+
+}
+
+.card i{
+
+    font-size:42px;
+
+    color:#ff7a00;
+
+    margin-bottom:15px;
+
+    transition:.35s;
+
+}
+
+.card:hover i{
+
+    transform:scale(1.15);
+
+}
+
+.card h2{
+
+    color:#222;
+
+    font-size:30px;
+
+    margin-bottom:8px;
+
+}
+
+.card p{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+
+/* =====================================
+   CHARTS SECTION
+===================================== */
+
+.charts-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+}
+
+.chart-card{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.chart-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:#ff7a00;
+
+}
+
+.chart-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 35px rgba(255,122,0,.15);
+
+}
+
+.chart-card h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#222;
+
+    margin-bottom:20px;
+
+    font-size:22px;
+
+}
+
+.chart-card h2 i{
+
+    color:#ff7a00;
+
+}
+
+.chart-card canvas{
+
+    width:100% !important;
+
+    height:320px !important;
+
+}
+
+/* =====================================
+   REPORT ACTIONS
+===================================== */
+
+.report-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:18px;
+
+    margin-bottom:30px;
+
+    flex-wrap:wrap;
+
+}
+
+.report-actions button{
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    padding:14px 26px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.35s;
+
+}
+
+#exportPDF{
+
+    background:#dc3545;
+
+    color:#ffffff;
+
+}
+
+#exportPDF:hover{
+
+    background:#bb2d3b;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(220,53,69,.30);
+
+}
+
+#exportExcel{
+
+    background:#198754;
+
+    color:#ffffff;
+
+}
+
+#exportExcel:hover{
+
+    background:#157347;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(25,135,84,.30);
+
+}
+
+.report-actions button i{
+
+    font-size:18px;
+
+}
+
+/* =====================================
+   RECENT BOOKINGS TABLE
+===================================== */
+
+.table-container{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    margin-bottom:30px;
+
+}
+
+.table-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 25px;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+.table-header h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#222;
+
+    font-size:24px;
+
+}
+
+.table-header h2 i{
+
+    color:#ff7a00;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#ff7a00;
+
+}
+
+thead th{
+
+    color:#ffffff;
+
+    padding:18px;
+
+    text-align:center;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+tbody td{
+
+    padding:18px;
+
+    text-align:center;
+
+    color:#555;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+tbody tr{
+
+    transition:.35s;
+
+}
+
+tbody tr:nth-child(even){
+
+    background:#fafafa;
+
+}
+
+tbody tr:hover{
+
+    background:#fff7f2;
+
+}
+
+/* =====================================
+   STATUS BADGES
+===================================== */
+
+.status{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.status.pending{
+
+    background:#f39c12;
+
+}
+
+.status.confirmed{
+
+    background:#2ecc71;
+
+}
+
+.status.cancelled{
+
+    background:#e74c3c;
+
+}
+
+/* =====================================
+   ANIMATIONS
+===================================== */
+
+.topbar,
+.card,
+.chart-card,
+.table-container{
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =====================================
+   PREMIUM SCROLLBAR
+===================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f5f6fa;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#ff7a00;
+
+    border-radius:30px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#e56700;
+
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    width:80px;
+
+}
+
+.logo h2{
+
+    display:none;
+
+}
+
+.sidebar ul li a{
+
+    justify-content:center;
+
+    font-size:0;
+
+}
+
+.sidebar ul li a i{
+
+    font-size:20px;
+
+}
+
+.content{
+
+    margin-left:80px;
+
+    width:calc(100% - 80px);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.content{
+
+    padding:20px;
+
+}
+
+.topbar{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+.charts-container{
+
+    grid-template-columns:1fr;
+
+}
+
+.chart-card canvas{
+
+    height:260px !important;
+
+}
+
+.report-actions{
+
+    justify-content:center;
+
+}
+
+.report-actions button{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+.table-container{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    min-width:850px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.topbar h1{
+
+    font-size:26px;
+
+}
+
+.card h2{
+
+    font-size:24px;
+
+}
+
+.chart-card h2{
+
+    font-size:18px;
+
+}
+
+.table-header h2{
+
+    font-size:20px;
+
+}
+
+}
+
+/* =====================================
+   FINAL PREMIUM EFFECTS
+===================================== */
+
+.card,
+.chart-card{
+
+    backdrop-filter:blur(8px);
+
+}
+
+.chart-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.table-container:hover{
+
+    box-shadow:0 20px 40px rgba(255,122,0,.12);
+
+}
+
+.report-actions button{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.report-actions button::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.25);
+
+    transform:skewX(-25deg);
+
+    transition:.5s;
+
+}
+
+.report-actions button:hover::after{
+
+    left:120%;
+
+}
