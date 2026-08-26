@@ -1,0 +1,1252 @@
+/* ==========================================
+   DREAM DESTINATIONS
+   USER ACCOUNT
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f4fbff;
+    color: #164e63;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.account-header {
+    height: 72px;
+    padding: 0 5%;
+    background: #ffffff;
+    border-bottom: 1px solid #d8eef8;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+.account-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #0369a1;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.account-logo i {
+    font-size: 23px;
+}
+
+
+.account-header nav {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+.account-header nav a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 9px 13px;
+
+    color: #5b7c89;
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    border-radius: 8px;
+
+    transition: 0.25s ease;
+}
+
+
+.account-header nav a:hover,
+.account-header nav a.active {
+    color: #0369a1;
+    background: #e8f7ff;
+}
+
+
+.logout-top {
+    border: 1px solid #c8e8f5;
+    background: #f2fbff;
+    color: #0369a1;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.logout-top:hover {
+    background: #0369a1;
+    color: #ffffff;
+}
+
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.account-container {
+    width: 92%;
+    max-width: 1380px;
+
+    margin: 0 auto;
+
+    padding: 35px 0 60px;
+}
+
+
+/* ==========================================
+   PROFILE HERO
+========================================== */
+
+.profile-hero {
+    min-height: 220px;
+
+    padding: 30px 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dff5ff,
+            #edfaff
+        );
+
+    border: 1px solid #c9eaf7;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 35px rgba(14, 116, 144, 0.07);
+}
+
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+
+.profile-photo-wrapper {
+    position: relative;
+
+    width: 125px;
+    height: 125px;
+
+    flex-shrink: 0;
+}
+
+
+.profile-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 5px solid #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(3, 105, 161, 0.15);
+}
+
+
+.photo-edit-btn {
+    position: absolute;
+
+    right: 2px;
+    bottom: 4px;
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+
+    background: #0284c7;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.photo-edit-btn:hover {
+    background: #0369a1;
+    transform: scale(1.05);
+}
+
+
+.profile-label {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    color: #0284c7;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.profile-details h1 {
+    color: #164e63;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    margin-bottom: 5px;
+}
+
+
+.profile-details > p {
+    color: #638391;
+
+    font-size: 12px;
+
+    margin: 5px 0;
+}
+
+
+.profile-details > p i {
+    color: #0284c7;
+
+    margin-right: 5px;
+}
+
+
+.member-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-top: 9px;
+
+    padding: 6px 11px;
+
+    color: #0369a1;
+
+    background: #ffffff;
+
+    border: 1px solid #c8e8f5;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.member-badge i {
+    color: #f59e0b;
+}
+
+
+.edit-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 11px 17px;
+
+    border: 1px solid #a9dcef;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #0369a1;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.edit-profile-btn:hover {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+}
+
+
+/* ==========================================
+   STATISTICS
+========================================== */
+
+.account-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-top: 22px;
+}
+
+
+.stat-card {
+    min-height: 105px;
+
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #d8eef8;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 7px 25px rgba(14, 116, 144, 0.05);
+
+    transition: 0.25s ease;
+}
+
+
+.stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(14, 116, 144, 0.10);
+}
+
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+}
+
+
+.stat-icon.blue {
+    color: #0284c7;
+    background: #e5f7ff;
+}
+
+
+.stat-icon.pink {
+    color: #db2777;
+    background: #fdf0f7;
+}
+
+
+.stat-icon.green {
+    color: #059669;
+    background: #eafaf5;
+}
+
+
+.stat-icon.orange {
+    color: #ea580c;
+    background: #fff4eb;
+}
+
+
+.stat-card span {
+    display: block;
+
+    color: #78909c;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+
+.stat-card strong {
+    display: block;
+
+    color: #164e63;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   ACCOUNT GRID
+========================================== */
+
+.account-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        310px;
+
+    gap: 22px;
+
+    margin-top: 22px;
+}
+
+
+.account-main {
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+.account-section {
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #d8eef8;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 7px 25px rgba(14, 116, 144, 0.045);
+}
+
+
+/* ==========================================
+   SECTION TITLE
+========================================== */
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+
+.section-title span {
+    color: #38a5cf;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.section-title h2 {
+    margin-top: 3px;
+
+    color: #164e63;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.section-title a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #0284c7;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.section-title a:hover {
+    color: #0369a1;
+}
+
+
+/* ==========================================
+   UPCOMING TRIP
+========================================== */
+
+.upcoming-trip {
+    min-height: 125px;
+
+    padding: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf8ff,
+            #f8fdff
+        );
+
+    border: 1px solid #cfeaf6;
+
+    border-radius: 12px;
+}
+
+
+.account-loading {
+    min-height: 85px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: #7b9aa7;
+
+    font-size: 11px;
+}
+
+
+.account-loading i {
+    color: #0284c7;
+}
+
+
+/* ==========================================
+   BOOKING HISTORY
+========================================== */
+
+.booking-history {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.booking-item {
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #f8fcfe;
+
+    border: 1px solid #e0f0f6;
+
+    border-radius: 10px;
+}
+
+
+.booking-item-left {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.booking-package-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #0284c7;
+
+    background: #e3f6ff;
+
+    border-radius: 9px;
+}
+
+
+.booking-item h4 {
+    color: #164e63;
+
+    font-size: 12px;
+
+    margin-bottom: 4px;
+}
+
+
+.booking-item p {
+    color: #78909c;
+
+    font-size: 9px;
+}
+
+
+.booking-price {
+    color: #0369a1;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+.booking-status {
+    display: inline-block;
+
+    margin-top: 4px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   WISHLIST
+========================================== */
+
+.wishlist-container {
+    min-height: 150px;
+}
+
+
+.wishlist-empty {
+    min-height: 150px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.wishlist-empty > i {
+    color: #8bcce5;
+
+    font-size: 35px;
+
+    margin-bottom: 10px;
+}
+
+
+.wishlist-empty h3 {
+    color: #315f70;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+
+.wishlist-empty p {
+    color: #8aa1ab;
+
+    font-size: 10px;
+
+    margin-bottom: 12px;
+}
+
+
+.wishlist-empty a {
+    padding: 8px 13px;
+
+    color: #ffffff;
+
+    background: #0284c7;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.account-sidebar {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.sidebar-card {
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #d8eef8;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 7px 25px rgba(14, 116, 144, 0.045);
+}
+
+
+.sidebar-card h3 {
+    color: #164e63;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    margin-bottom: 15px;
+}
+
+
+.sidebar-card > a,
+.sidebar-card > button {
+    width: 100%;
+
+    padding: 12px 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #5e7c87;
+
+    text-decoration: none;
+
+    background: transparent;
+
+    border: none;
+    border-bottom: 1px solid #edf5f8;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition: 0.2s ease;
+}
+
+
+.sidebar-card > a:last-child,
+.sidebar-card > button:last-child {
+    border-bottom: none;
+}
+
+
+.sidebar-card > a:hover,
+.sidebar-card > button:hover {
+    color: #0284c7;
+
+    padding-left: 4px;
+}
+
+
+.sidebar-card > a span,
+.sidebar-card > button span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.sidebar-card > a span i,
+.sidebar-card > button span i {
+    width: 25px;
+    color: #42a7ce;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   SECURITY
+========================================== */
+
+.security-card {
+    background:
+        linear-gradient(
+            145deg,
+            #e9f8ff,
+            #f8fdff
+        );
+}
+
+
+.security-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 12px;
+
+    color: #0284c7;
+
+    background: #ffffff;
+
+    border-radius: 11px;
+
+    font-size: 18px;
+}
+
+
+.security-card h3 {
+    margin-bottom: 6px;
+}
+
+
+.security-card p {
+    color: #718c98;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    margin-bottom: 12px;
+}
+
+
+.secure-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    color: #059669;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   LOGOUT CARD
+========================================== */
+
+.logout-card {
+    width: 100%;
+
+    padding: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: #dc2626;
+
+    background: #ffffff;
+
+    border: 1px solid #fee2e2;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.logout-card:hover {
+    color: #ffffff;
+
+    background: #dc2626;
+
+    border-color: #dc2626;
+}
+
+
+/* ==========================================
+   MODAL
+========================================== */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(7, 44, 59, 0.45);
+
+    z-index: 500;
+}
+
+
+.modal-overlay.show {
+    display: flex;
+}
+
+
+.modal-card {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 30px;
+
+    position: relative;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(7, 44, 59, 0.20);
+
+    animation:
+        modalIn 0.25s ease;
+}
+
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+.modal-close {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    background: #edf9fe;
+
+    color: #5f8795;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+
+.modal-header {
+    text-align: center;
+
+    margin-bottom: 22px;
+}
+
+
+.modal-icon {
+    width: 48px;
+    height: 48px;
+
+    margin: 0 auto 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #0284c7;
+
+    background: #e5f7ff;
+
+    border-radius: 12px;
+}
+
+
+.modal-header h2 {
+    color: #164e63;
+
+    font-size: 21px;
+
+    margin-bottom: 4px;
+}
+
+
+.modal-header p {
+    color: #819aa5;
+
+    font-size: 10px;
+}
+
+
+.modal-form-group {
+    margin-bottom: 15px;
+}
+
+
+.modal-form-group label {
+    display: block;
+
+    color: #416b79;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+
+.modal-form-group input {
+    width: 100%;
+
+    height: 43px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cfe7f1;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    color: #164e63;
+
+    background: #f8fdff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+}
+
+
+.modal-form-group input:focus {
+    border-color: #38bdf8;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(56, 189, 248, 0.10);
+}
+
+
+.modal-save-btn {
+    width: 100%;
+
+    height: 45px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0284c7,
+            #0369a1
+        );
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+
+    .account-header nav {
+        gap: 2px;
+    }
+
+    .account-header nav a {
+        padding: 8px;
+    }
+
+    .account-header nav a i {
+        display: none;
+    }
+
+    .account-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-sidebar {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .account-header {
+        height: auto;
+
+        padding: 15px 4%;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+    .account-header nav {
+        width: 100%;
+
+        order: 3;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+    }
+
+    .logout-top {
+        margin-left: auto;
+    }
+
+    .profile-hero {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+        padding: 25px;
+    }
+
+    .profile-details h1 {
+        font-size: 28px;
+    }
+
+    .account-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .account-container {
+        width: 94%;
+
+        padding-top: 20px;
+    }
+
+    .profile-info {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .profile-photo-wrapper {
+        width: 105px;
+        height: 105px;
+    }
+
+    .account-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .account-section {
+        padding: 18px;
+    }
+
+    .section-title {
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+    .section-title a {
+        font-size: 9px;
+    }
+
+    .booking-item {
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+}

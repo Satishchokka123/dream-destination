@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings - Dream Destinations</title>
+
+    <link rel="stylesheet"
+          href="../css/bookings.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Dream Destinations
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="package.html">
+            Packages
+        </a>
+
+        <a href="dashboard1.html">
+            Dashboard
+        </a>
+
+        <a href="bookings.html"
+           class="active">
+            My Bookings
+        </a>
+
+        <a href="profile.html">
+            Profile
+        </a>
+
+    </nav>
+
+
+    <div class="user-menu">
+
+        <i class="fa-solid fa-circle-user"></i>
+
+        <span id="userName">
+            User
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main class="bookings-container">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div>
+
+            <h1>
+                My Bookings
+            </h1>
+
+            <p>
+                View and manage all your travel bookings.
+            </p>
+
+        </div>
+
+
+        <a href="package.html"
+           class="book-btn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Book New Trip
+
+        </a>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         BOOKING FILTERS
+    =========================================== -->
+
+    <section class="booking-filters">
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="bookingSearch"
+                placeholder="Search bookings...">
+
+        </div>
+
+
+
+        <!-- STATUS -->
+
+        <select id="statusFilter">
+
+            <option value="all">
+                All Bookings
+            </option>
+
+            <option value="Confirmed">
+                Confirmed
+            </option>
+
+            <option value="Pending">
+                Pending
+            </option>
+
+            <option value="Completed">
+                Completed
+            </option>
+
+            <option value="Cancelled">
+                Cancelled
+            </option>
+
+        </select>
+
+
+
+        <!-- SORT -->
+
+        <select id="sortBookings">
+
+            <option value="latest">
+                Latest First
+            </option>
+
+            <option value="oldest">
+                Oldest First
+            </option>
+
+            <option value="price-high">
+                Price: High to Low
+            </option>
+
+            <option value="price-low">
+                Price: Low to High
+            </option>
+
+        </select>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         BOOKING COUNT
+    =========================================== -->
+
+    <div class="booking-count">
+
+        <span>
+            Showing
+        </span>
+
+        <strong id="bookingCount">
+            0
+        </strong>
+
+        <span>
+            bookings
+        </span>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         BOOKINGS LIST
+    =========================================== -->
+
+    <section
+        id="bookingsList"
+        class="bookings-list">
+
+
+        <!-- Loading -->
+
+        <div class="loading-state"
+             id="loadingState">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <p>
+                Loading your bookings...
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==========================================
+         EMPTY STATE
+    =========================================== -->
+
+    <div
+        id="emptyState"
+        class="empty-state"
+        style="display:none;">
+
+        <i class="fa-solid fa-calendar-xmark"></i>
+
+        <h2>
+            No Bookings Found
+        </h2>
+
+        <p>
+            You haven't made any bookings yet.
+        </p>
+
+        <a href="package.html">
+
+            Explore Packages
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/bookings.js"></script>
+
+</body>
+
+</html>

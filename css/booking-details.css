@@ -1,0 +1,794 @@
+/* ==========================================
+   DREAM DESTINATIONS
+   BOOKING DETAILS
+   PREMIUM BLUE / WHITE THEME
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f3f8fc;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar {
+    width: 100%;
+    min-height: 72px;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    border-bottom: 1px solid #e0eaf2;
+
+    box-shadow:
+        0 4px 20px rgba(15, 74, 115, 0.06);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: #075985;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.navbar nav a {
+    position: relative;
+
+    color: #526579;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.3s ease;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: #0284c7;
+}
+
+.navbar nav a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 100%;
+    height: 2px;
+
+    background: #0284c7;
+
+    border-radius: 5px;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 13px;
+
+    background: #eff8ff;
+
+    border: 1px solid #d6edf9;
+
+    border-radius: 30px;
+
+    color: #075985;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.user-menu i {
+    color: #0284c7;
+    font-size: 19px;
+}
+
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.details-container {
+    width: 90%;
+    max-width: 1150px;
+
+    margin: 32px auto 70px;
+}
+
+
+/* ==========================================
+   BACK BUTTON
+========================================== */
+
+.back-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #0369a1;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 18px;
+
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    color: #075985;
+
+    transform: translateX(-3px);
+}
+
+
+/* ==========================================
+   DETAILS HEADER
+========================================== */
+
+.details-header {
+    background:
+        linear-gradient(
+            135deg,
+            #075985,
+            #0284c7
+        );
+
+    color: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 30px 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 12px 30px rgba(2, 132, 199, 0.17);
+}
+
+.small-title {
+    color: #bde9fb;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 5px;
+}
+
+.details-header h1 {
+    font-size: 27px;
+
+    margin-bottom: 5px;
+}
+
+.details-header > div:first-child > p:last-child {
+    color: #e0f5ff;
+
+    font-size: 13px;
+}
+
+.header-status {
+    text-align: right;
+}
+
+.header-status p {
+    margin-top: 8px;
+
+    color: #d7f2ff;
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.booking-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px 13px;
+
+    border-radius: 30px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.booking-status.pending {
+    background: #fff4ce;
+
+    color: #946200;
+}
+
+.booking-status.confirmed {
+    background: #dcfce9;
+
+    color: #167447;
+}
+
+.booking-status.completed {
+    background: #dff1ff;
+
+    color: #1769aa;
+}
+
+.booking-status.cancelled {
+    background: #ffe5e5;
+
+    color: #bd3e3e;
+}
+
+
+/* ==========================================
+   DETAILS GRID
+========================================== */
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+
+    margin-bottom: 16px;
+}
+
+
+/* ==========================================
+   COMMON CARD
+========================================== */
+
+.details-card {
+    background: #ffffff;
+
+    border: 1px solid #e0eaf2;
+
+    border-radius: 14px;
+
+    padding: 21px;
+
+    box-shadow:
+        0 5px 18px rgba(15, 74, 115, 0.045);
+
+    transition: 0.25s ease;
+}
+
+.details-card:hover {
+    border-color: #c3deea;
+
+    box-shadow:
+        0 8px 24px rgba(2, 132, 199, 0.07);
+}
+
+
+/* ==========================================
+   PACKAGE CARD
+========================================== */
+
+.package-card {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: center;
+}
+
+.package-image {
+    width: 210px;
+    height: 145px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    background: #e9f6fc;
+}
+
+.package-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.package-content {
+    flex: 1;
+}
+
+.package-content h2 {
+    color: #164e70;
+
+    font-size: 20px;
+
+    margin-bottom: 7px;
+}
+
+.package-content > p {
+    color: #788b98;
+
+    font-size: 12px;
+
+    max-width: 650px;
+
+    margin-bottom: 17px;
+}
+
+
+/* ==========================================
+   PACKAGE META
+========================================== */
+
+.package-meta {
+    display: flex;
+
+    gap: 28px;
+}
+
+.package-meta > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1px;
+}
+
+.package-meta i {
+    color: #0284c7;
+
+    font-size: 14px;
+
+    margin-bottom: 2px;
+}
+
+.package-meta span {
+    color: #8a9aa4;
+
+    font-size: 10px;
+}
+
+.package-meta strong {
+    color: #526b78;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   CARD TITLE
+========================================== */
+
+.card-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 11px;
+
+    border-bottom: 1px solid #edf2f5;
+}
+
+.card-title i {
+    color: #0284c7;
+
+    font-size: 16px;
+}
+
+.card-title h2 {
+    color: #28566f;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================
+   INFORMATION GRID
+========================================== */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 17px 22px;
+}
+
+.info-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.info-item label {
+    color: #93a1aa;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+}
+
+.info-item strong {
+    color: #526b78;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   PAYMENT SUMMARY
+========================================== */
+
+.price-card {
+    margin-top: 4px;
+}
+
+.price-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 9px 0;
+
+    color: #738691;
+
+    font-size: 12px;
+}
+
+.price-row strong {
+    color: #526b78;
+
+    font-weight: 600;
+}
+
+.price-card hr {
+    border: none;
+
+    border-top: 1px dashed #dce7ed;
+
+    margin: 8px 0;
+}
+
+.total-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 8px;
+}
+
+.total-row span {
+    color: #164e70;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.total-row strong {
+    color: #0284c7;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.details-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.primary-btn,
+.danger-btn {
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 10px 17px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    transition: 0.25s ease;
+}
+
+.primary-btn {
+    background: #0284c7;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 14px rgba(2, 132, 199, 0.16);
+}
+
+.primary-btn:hover {
+    background: #075985;
+
+    transform: translateY(-2px);
+}
+
+.danger-btn {
+    background: #fff1f1;
+
+    color: #c24141;
+
+    border: 1px solid #ffd8d8;
+}
+
+.danger-btn:hover {
+    background: #ffe3e3;
+
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading {
+    min-height: 300px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    color: #7b919e;
+}
+
+.loading i {
+    color: #0284c7;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ==========================================
+   RESPONSIVE — TABLET
+========================================== */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 4%;
+    }
+
+    .navbar nav {
+        gap: 17px;
+    }
+
+    .details-container {
+        width: 94%;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .package-card {
+        grid-column: auto;
+    }
+
+}
+
+
+/* ==========================================
+   RESPONSIVE — MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        min-height: auto;
+
+        padding: 14px 5%;
+
+        flex-wrap: wrap;
+
+        gap: 12px;
+    }
+
+    .navbar nav {
+        order: 3;
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-bottom: 3px;
+    }
+
+    .navbar nav a {
+        white-space: nowrap;
+
+        font-size: 12px;
+    }
+
+    .details-container {
+        width: 92%;
+
+        margin-top: 23px;
+    }
+
+    .details-header {
+        padding: 23px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .details-header h1 {
+        font-size: 23px;
+    }
+
+    .header-status {
+        text-align: left;
+    }
+
+    .package-card {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .package-image {
+        width: 100%;
+
+        height: 190px;
+    }
+
+    .package-meta {
+        gap: 20px;
+
+        flex-wrap: wrap;
+    }
+
+    .info-grid {
+        gap: 14px;
+    }
+
+    .details-actions {
+        flex-direction: column;
+    }
+
+    .primary-btn,
+    .danger-btn {
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 450px) {
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .user-menu {
+        font-size: 11px;
+
+        padding: 6px 9px;
+    }
+
+    .details-header h1 {
+        font-size: 20px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .total-row strong {
+        font-size: 18px;
+    }
+
+}

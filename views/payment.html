@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Payment | Dream Destinations</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/payment.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
+<header class="payment-header">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-route"></i>
+
+        <span>Dream Destinations</span>
+
+    </div>
+
+
+    <div class="secure-header">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <span>100% Secure Payment</span>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==========================================
+     PAGE
+========================================== -->
+
+<main class="payment-container">
+
+
+    <!-- ======================================
+         LEFT COLUMN
+    ======================================= -->
+
+    <section class="payment-left">
+
+
+        <div class="page-title">
+
+            <h1>Complete Your Payment</h1>
+
+            <p>
+                You're one step away from your journey.
+            </p>
+
+        </div>
+
+
+
+        <!-- PAYMENT CARD -->
+
+        <div class="payment-card">
+
+
+            <div class="card-title">
+
+                <div class="title-icon">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>Payment Details</h2>
+
+                    <p>
+                        Your payment is protected by secure encryption.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BOOKING ID -->
+
+            <div class="payment-row">
+
+                <div class="row-label">
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                    <span>Booking ID</span>
+
+                </div>
+
+                <strong id="bookingId">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- PACKAGE -->
+
+            <div class="payment-row">
+
+                <div class="row-label">
+
+                    <i class="fa-solid fa-suitcase-rolling"></i>
+
+                    <span>Package</span>
+
+                </div>
+
+                <strong id="packageName">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- PAYMENT METHOD -->
+
+            <div class="payment-method">
+
+                <h3>Payment Method</h3>
+
+
+                <div class="razorpay-option">
+
+                    <div class="radio">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <div class="razorpay-logo">
+
+                        <span>Razorpay</span>
+
+                        <small>
+                            UPI • Cards • Net Banking
+                        </small>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECURE INFO -->
+
+            <div class="secure-info">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <div>
+
+                    <strong>Safe & Secure Payments</strong>
+
+                    <p>
+                        Your payment information is securely processed by Razorpay.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <p
+                id="paymentMessage"
+                class="payment-message">
+            </p>
+
+
+
+            <!-- PAY BUTTON -->
+
+            
+<button
+    type="button"
+    id="paySecureBtn"
+    class="pay-button"
+>
+    <i class="fa-solid fa-lock"></i>
+    Pay Securely
+</button>
+
+
+            <p class="terms">
+
+                By continuing, you agree to our
+                <span>Terms & Conditions</span>
+                and
+                <span>Privacy Policy</span>.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         RIGHT COLUMN
+    ======================================= -->
+
+    <aside class="summary-card">
+
+
+        <div class="summary-header">
+
+            <h2>Booking Summary</h2>
+
+            <i class="fa-solid fa-ticket"></i>
+
+        </div>
+
+
+
+        <!-- PACKAGE -->
+
+        <div class="package-summary">
+
+
+            <div class="package-image">
+
+                <i class="fa-solid fa-image"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3 id="summaryPackage">
+                    Travel Package
+                </h3>
+
+                <p id="summaryDestination">
+                    Destination
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DETAILS -->
+
+        <div class="summary-details">
+
+
+            <div class="summary-row">
+
+                <span>
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    Travel Date
+
+                </span>
+
+                <strong id="travelDate">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <div class="summary-row">
+
+                <span>
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                    Return Date
+
+                </span>
+
+                <strong id="returnDate">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <div class="summary-row">
+
+                <span>
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    Travelers
+
+                </span>
+
+                <strong id="travelers">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <div class="summary-row">
+
+                <span>
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    Pickup City
+
+                </span>
+
+                <strong id="pickupCity">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRICE -->
+
+        <div class="price-section">
+
+            <div class="price-row">
+
+                <span>Package Amount</span>
+
+                <strong id="packageAmount">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="price-row">
+
+                <span>Taxes & Charges</span>
+
+                <strong>
+                    Included
+                </strong>
+
+            </div>
+
+
+            <div class="price-divider"></div>
+
+
+            <div class="total-row">
+
+                <span>Total Amount</span>
+
+                <strong id="paymentAmount">
+                    ₹0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TRUST -->
+
+        <div class="trust-box">
+
+            <div>
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+            <p>
+                Your transaction is protected with
+                industry-standard security.
+            </p>
+
+        </div>
+
+
+    </aside>
+
+
+</main>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/payment.js"></script>
+
+
+</body>
+
+</html>

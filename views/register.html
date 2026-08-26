@@ -1,247 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register Page</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
 
-<style>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    <title>
+        Register - Dream Destinations
+    </title>
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
-background-size:100% 100%;
+    <link
+        rel="stylesheet"
+        href="../css/auth.css">
 
-}
-
-@keyframes bg{
-
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-
-}
-
-.container{
-
-width:420px;
-padding:35px;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(18px);
-border-radius:20px;
-box-shadow:0 15px 40px rgba(0,0,0,.35);
-color:white;
-text-align:center;
-
-}
-
-.container h2{
-
-font-size:30px;
-margin-bottom:10px;
-
-}
-
-.container p{
-
-margin-bottom:25px;
-opacity:.9;
-
-}
-
-.input-box{
-
-margin-bottom:15px;
-position:relative;
-
-}
-
-.input-box input{
-
-width:100%;
-padding:14px;
-border:none;
-outline:none;
-border-radius:30px;
-background:rgba(255,255,255,.2);
-color:white;
-font-size:15px;
-
-}
-
-.input-box input::placeholder{
-
-color:white;
-
-}
-
-.eye{
-
-position:absolute;
-right:18px;
-top:15px;
-cursor:pointer;
-font-size:18px;
-
-}
-
-.otp-box{
-
-display:flex;
-gap:10px;
-
-}
-
-.otp-box input{
-
-flex:1;
-
-}
-
-.otp-box button{
-
-padding:12px 15px;
-border:none;
-border-radius:30px;
-cursor:pointer;
-background:#FFD700;
-font-weight:bold;
-
-}
-
-button.register{
-
-width:100%;
-padding:14px;
-border:none;
-border-radius:30px;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-margin-top:10px;
-background:white;
-color:#2575fc;
-transition:.3s;
-
-}
-
-button.register:hover{
-
-background:#2575fc;
-color:white;
-transform:translateY(-3px);
-
-}
-
-#message{
-
-margin-top:18px;
-font-weight:bold;
-
-}
-
-a{
-
-color:#FFD700;
-text-decoration:none;
-
-}
-
-</style>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
+
 <body>
 
-<div class="container">
 
-<h2>Create Account</h2>
+<div class="auth-page">
 
-<form id="registerForm" >
 
-<div class="input-box">
-<input type="text" id="name" placeholder="Full Name" required>
+    <!-- ======================================
+         LEFT SIDE
+    ======================================= -->
+
+    <div class="auth-banner">
+
+        <div class="banner-content">
+
+            <div class="banner-logo">
+
+                <i class="fa-solid fa-plane-departure"></i>
+
+                Dream Destinations
+
+            </div>
+
+
+            <h1>
+                Start Your
+                <span>Journey Today</span>
+            </h1>
+
+
+            <p>
+                Create your account and explore
+                beautiful destinations, exciting
+                packages and unforgettable journeys.
+            </p>
+
+
+            <div class="banner-features">
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Explore Amazing Destinations
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Easy & Secure Booking
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Manage Your Trips Easily
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================
+         REGISTER FORM
+    ======================================= -->
+
+    <div class="auth-container">
+
+
+        <div class="auth-card">
+
+
+            <div class="auth-header">
+
+                <div class="auth-icon">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                </div>
+
+
+                <h2>
+                    Create Account
+                </h2>
+
+
+                <p>
+                    Register to start your journey
+                </p>
+
+            </div>
+
+
+
+            <!-- REGISTER FORM -->
+
+            <form
+                id="registerForm"
+                autocomplete="off">
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="fullName">
+
+                        Full Name
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+
+                        Email Address
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MOBILE -->
+
+                <div class="form-group">
+
+                    <label for="mobile">
+
+                        Mobile Number
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-phone"></i>
+
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            name="mobile"
+                            placeholder="Enter mobile number"
+                            maxlength="10"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+
+                        Password
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            required>
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password', this)">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+
+                        Confirm Password
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Confirm your password"
+                            required>
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('confirmPassword', this)">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required>
+
+                        <span>
+                            I agree to the
+                            <a href="#">
+                                Terms & Conditions
+                            </a>
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="registerMessage"
+                    class="auth-message">
+                </div>
+
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-btn"
+                    id="registerBtn">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Create Account
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- LOGIN LINK -->
+
+            <div class="auth-footer">
+
+                <p>
+
+                    Already have an account?
+
+                    <a href="login.html">
+
+                        Login
+
+                    </a>
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
 </div>
 
-<div class="input-box">
-<input type="email" id="email" placeholder="Email Address" required>
-</div>
 
-<div class="input-box">
-<input type="phone" id="phone" placeholder="Mobile Number" required>
-</div>
-
-<div class="input-box">
-<input type="password" id="password" placeholder="Password" required>
-<span class="eye" onclick="togglePassword()">👁</span>
-</div>
-
-
-
-<button class="register" type="submit">
-Create 
-</button>
-
-</form>
-
-<div id="message"></div>
-
-<br>
-
-<p>Already have an account?
-<a href="l1.html">Login</a>
-</p>
-
-</div>
 
 <script>
-document.getElementById("registerForm").addEventListener("submit", function(e) {
 
-    e.preventDefault();
+function togglePassword(
+    inputId,
+    button
+) {
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const password = document.getElementById("password").value;
+    const input =
+        document.getElementById(inputId);
 
-    fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            phone: phone,
-            password: password
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
+    const icon =
+        button.querySelector("i");
 
-        if (data.success) {
-            window.location.href = "Dream.html";
-        }
-    })
-    .catch(error => {
-        console.error(error);
-    });
 
-});
+    if (
+        input.type === "password"
+    ) {
+
+        input.type = "text";
+
+        icon.classList.remove(
+            "fa-eye"
+        );
+
+        icon.classList.add(
+            "fa-eye-slash"
+        );
+
+    }
+
+    else {
+
+        input.type = "password";
+
+        icon.classList.remove(
+            "fa-eye-slash"
+        );
+
+        icon.classList.add(
+            "fa-eye"
+        );
+
+    }
+
+}
+
 </script>
 
+ <script src="../js/auth.js"></script>
 </body>
+
 </html>

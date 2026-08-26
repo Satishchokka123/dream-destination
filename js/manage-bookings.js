@@ -1,141 +1,293 @@
-// =============================
-// Dummy Booking Data
-// =============================
+// ==========================================
+// DREAM DESTINATIONS
+// manage-bookings.js
+// ==========================================
 
-let bookings = [
+let allBookings = [];
 
-    {
-        id: 1,
-        user: "Satish",
-        package: "Goa Beach Tour",
-        travelDate: "20-Aug-2026",
-        persons: 2,
-        totalPrice: "₹18,000",
-        status: "Pending"
-    },
+const API_URL = "http://localhost:3000";
 
-    {
-        id: 2,
-        user: "Ramesh",
-        package: "Kashmir Tour",
-        travelDate: "12-Sep-2026",
-        persons: 4,
-        totalPrice: "₹52,000",
-        status: "Confirmed"
-    },
 
-    {
-        id: 3,
-        user: "Suresh",
-        package: "Manali Package",
-        travelDate: "05-Oct-2026",
-        persons: 3,
-        totalPrice: "₹36,000",
-        status: "Cancelled"
-    }
+// ==========================================
+// LOAD BOOKINGS
+// ==========================================
 
-];
-
-// =============================
-// Load Table
-// =============================
-async function loadBookings(){
-
-    const response = await fetch("/api/bookings");
-
-    const bookings = await response.json();
-    
-    displayBookings(bookings);
+async function loadBookings() {
 
     const table = document.getElementById("bookingTable");
 
+    if (!table) return;
+
+    table.innerHTML = `
+        <tr>
+            <td colspan="8" class="loading">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Loading bookings...
+            </td>
+        </tr>
+    `;
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/api/bookings`
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to load bookings");
+        }
+
+        const data = await response.json();
+
+        console.log("Bookings received:", data);
+
+        allBookings = Array.isArray(data)
+            ? data
+            : [];
+
+        displayBookings(allBookings);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Booking Load Error:",
+            error
+        );
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="8" class="no-data">
+                    Unable to load bookings.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+// ==========================================
+// DISPLAY BOOKINGS
+// ==========================================
+
+function displayBookings(bookings) {
+
+    const table =
+        document.getElementById("bookingTable");
+
+    if (!table) return;
+
     table.innerHTML = "";
 
-    bookings.forEach(booking=>{
 
-        let badge="";
+    if (!bookings || bookings.length === 0) {
 
-        if(booking.status==="Pending"){
+        table.innerHTML = `
+            <tr>
+                <td colspan="8" class="no-data">
+                    No bookings found.
+                </td>
+            </tr>
+        `;
 
-            badge="pending";
+        return;
+    }
 
-        }else if(booking.status==="Confirmed"){
 
-            badge="confirmed";
+    bookings.forEach(booking => {
 
-        }else{
+        const status =
+            String(
+                booking.status || "Pending"
+            )
+            .trim();
 
-            badge="cancelled";
+
+        const statusLower =
+            status.toLowerCase();
+
+
+        const persons =
+            Number(booking.adults || 0) +
+            Number(booking.children || 0);
+
+
+        const price =
+            Number(
+                booking.total_price || 0
+            );
+
+
+        let statusClass = "pending";
+
+
+        if (statusLower === "confirmed") {
+
+            statusClass = "confirmed";
 
         }
 
+        else if (
+            statusLower === "cancelled"
+        ) {
+
+            statusClass = "cancelled";
+
+        }
+
+
         table.innerHTML += `
 
-        <tr>
+            <tr>
 
-            <td>${booking.id}</td>
+                <!-- ID -->
 
-            <td>${booking.full_name}</td>
+                <td>
+                    #${booking.id}
+                </td>
 
-            <td>${booking.package_name}</td>
 
-            <td>${booking.travel_date}</td>
+                <!-- USER -->
 
-            <td>${booking.adults + booking.children}</td>
+                <td>
 
-            <td>₹${booking.total_price}</td>
+                    <strong>
+                        ${escapeHTML(
+                            booking.full_name ||
+                            "Unknown User"
+                        )}
+                    </strong>
 
-            <td>
+                    <small>
+                        ${escapeHTML(
+                            booking.email ||
+                            ""
+                        )}
+                    </small>
 
-                <span class="status ${badge}">
+                </td>
 
-                    ${booking.status}
 
-                </span>
+                <!-- PACKAGE -->
 
-            </td>
+                <td>
 
-            <td>
+                    ${escapeHTML(
+                        booking.package_name ||
+                        "Unknown Package"
+                    )}
 
-                <button
-class="action-btn view-btn"
-onclick="viewBooking(${booking.id})">
+                </td>
 
-<i class="fa-solid fa-eye"></i>
 
-</button>
+                <!-- TRAVEL DATE -->
 
-            </td>
+                <td>
 
-<td>
+                    ${formatDate(
+                        booking.travel_date
+                    )}
 
-    <button
-    class="action-btn view-btn"
-    onclick="viewBooking(${booking.id})">
+                </td>
 
-        <i class="fa-solid fa-eye"></i>
 
-    </button>
+                <!-- PERSONS -->
 
-    <button
-    class="action-btn confirm-btn"
-    onclick="confirmBooking(${booking.id})">
+                <td>
+                    ${persons}
+                </td>
 
-        <i class="fa-solid fa-check"></i>
 
-    </button>
+                <!-- PRICE -->
 
-    <button
-    class="action-btn cancel-btn"
-    onclick="cancelBooking(${booking.id})">
+                <td>
 
-        <i class="fa-solid fa-xmark"></i>
+                    ₹${price.toLocaleString(
+                        "en-IN"
+                    )}
 
-    </button>
+                </td>
 
-</td>
 
-        </tr>
+                <!-- STATUS -->
+
+                <td>
+
+                    <span
+                        class="status ${statusClass}"
+                    >
+
+                        ${escapeHTML(status)}
+
+                    </span>
+
+                </td>
+
+
+                <!-- ACTIONS -->
+
+                <td>
+
+                    <div class="action-buttons">
+
+                        <!-- VIEW -->
+
+                        <button
+                            class="action-btn view-btn"
+                            onclick="viewBooking(${booking.id})"
+                            title="View Booking"
+                        >
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+
+                        ${
+                            statusLower === "pending"
+
+                            ? `
+
+                            <button
+                                class="action-btn confirm-btn"
+                                onclick="updateBookingStatus(
+                                    ${booking.id},
+                                    'Confirmed'
+                                )"
+                                title="Confirm Booking"
+                            >
+
+                                <i class="fa-solid fa-check"></i>
+
+                            </button>
+
+
+                            <button
+                                class="action-btn cancel-btn"
+                                onclick="updateBookingStatus(
+                                    ${booking.id},
+                                    'Cancelled'
+                                )"
+                                title="Cancel Booking"
+                            >
+
+                                <i class="fa-solid fa-xmark"></i>
+
+                            </button>
+
+                            `
+
+                            : ""
+                        }
+
+                    </div>
+
+                </td>
+
+            </tr>
 
         `;
 
@@ -143,309 +295,637 @@ onclick="viewBooking(${booking.id})">
 
 }
 
-loadBookings();
 
-// =============================
-// Search
-// =============================
+// ==========================================
+// SEARCH + FILTER
+// ==========================================
 
-document.getElementById("searchInput")
+function filterBookings() {
 
-.addEventListener("keyup", async function(){
+    const searchInput =
+        document.getElementById(
+            "searchInput"
+        );
 
-    const keyword = this.value.toLowerCase();
 
-    const response = await fetch("/api/bookings");
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        );
 
-    const bookings = await response.json();
 
-    const filtered = bookings.filter(booking =>
+    const search =
+        searchInput
+            ? searchInput.value
+                .toLowerCase()
+                .trim()
+            : "";
 
-        booking.full_name.toLowerCase().includes(keyword)
 
-        ||
+    const selectedStatus =
+        statusFilter
+            ? statusFilter.value
+                .toLowerCase()
+                .trim()
+            : "all";
 
-        booking.package_name.toLowerCase().includes(keyword)
 
-    );
+    const filtered =
+        allBookings.filter(
+            booking => {
+
+                const user =
+                    String(
+                        booking.full_name || ""
+                    )
+                    .toLowerCase();
+
+
+                const packageName =
+                    String(
+                        booking.package_name || ""
+                    )
+                    .toLowerCase();
+
+
+                const status =
+                    String(
+                        booking.status || ""
+                    )
+                    .toLowerCase()
+                    .trim();
+
+
+                const searchMatch =
+                    search === "" ||
+                    user.includes(search) ||
+                    packageName.includes(search);
+
+
+                const statusMatch =
+                    selectedStatus === "all" ||
+                    status === selectedStatus;
+
+
+                return (
+                    searchMatch &&
+                    statusMatch
+                );
+
+            }
+        );
+
 
     displayBookings(filtered);
 
-});
+}
 
 
-// =============================
-// Filter
-// =============================
+// ==========================================
+// UPDATE BOOKING STATUS
+// ==========================================
 
-document.getElementById("statusFilter")
+async function updateBookingStatus(
+    bookingId,
+    newStatus
+) {
 
-.addEventListener("change", async function(){
+    const message =
+        newStatus === "Confirmed"
 
-    const status = this.value;
+            ? "Confirm this booking?"
 
-    const response = await fetch("/api/bookings");
+            : "Cancel this booking?";
 
-    const bookings = await response.json();
 
-    if(status==="all"){
-
-        displayBookings(bookings);
-
+    if (!confirm(message)) {
         return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/bookings/${bookingId}/status`,
+                {
+
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        status: newStatus
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Unable to update booking"
+            );
+
+        }
+
+
+        alert(
+            result.message ||
+            "Booking status updated successfully."
+        );
+
+
+        // Reload fresh database data
+
+        await loadBookings();
+
+
+        // Re-apply current search/filter
+
+        filterBookings();
 
     }
 
-    const filtered = bookings.filter(
+    catch (error) {
 
-        booking=>booking.status===status
-
-    );
-
-    displayBookings(filtered);
-
-});
+        console.error(
+            "Status Update Error:",
+            error
+        );
 
 
-// =============================
-// Buttons
-// =============================
+        alert(
+            error.message ||
+            "Unable to update booking."
+        );
 
-function viewBooking(id){
-
-    alert("Booking ID : " + id);
+    }
 
 }
 
-function confirmBooking(id){
 
-    const booking = bookings.find(
+// ==========================================
+// VIEW BOOKING DETAILS
+// ==========================================
 
-        b => b.id === id
+async function viewBooking(bookingId) {
 
-    );
+    try {
 
-    booking.status = "Confirmed";
+        const response =
+            await fetch(
+                `${API_URL}/api/bookings/${bookingId}`
+            );
 
-    loadBookings();
 
-}
+        const result =
+            await response.json();
 
-function cancelBooking(id){
 
-    const booking = bookings.find(
+        if (!response.ok) {
 
-        b => b.id === id
-
-    );
-
-    booking.status = "Cancelled";
-
-    loadBookings();
-
-}
-
-const modal=document.getElementById("bookingModal");
-
-const bookingDetails=document.getElementById("bookingDetails");
-
-document.getElementById("closeModal")
-
-.onclick=()=>{
-
-modal.style.display="none";
-
-};
-
-async function viewBooking(id){
-
-const response=await fetch("/api/bookings/"+id);
-
-const booking=await response.json();
-
-bookingDetails.innerHTML=`
-
-<p><strong>Name :</strong> ${booking.full_name}</p>
-
-<p><strong>Email :</strong> ${booking.email}</p>
-
-<p><strong>Mobile :</strong> ${booking.mobile}</p>
-
-<p><strong>Package :</strong> ${booking.package_name}</p>
-
-<p><strong>From :</strong> ${booking.from_city}</p>
-
-<p><strong>Destination :</strong> ${booking.destination}</p>
-
-<p><strong>Travel Date :</strong> ${booking.travel_date}</p>
-
-<p><strong>Return Date :</strong> ${booking.return_date}</p>
-
-<p><strong>Adults :</strong> ${booking.adults}</p>
-
-<p><strong>Children :</strong> ${booking.children}</p>
-
-<p><strong>Transport :</strong> ${booking.transport}</p>
-
-<p><strong>Hotel :</strong> ${booking.hotel}</p>
-
-<p><strong>Total Price :</strong> ₹${booking.total_price}</p>
-
-<p><strong>Status :</strong> ${booking.status}</p>
-
-`;
-
-modal.style.display="flex";
-
-}
-
-async function confirmBooking(id){
-
-    const response = await fetch(
-
-        "/api/bookings/" + id + "/status",
-
-        {
-
-            method:"PUT",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                status:"Confirmed"
-
-            })
+            throw new Error(
+                result.message ||
+                "Booking not found"
+            );
 
         }
 
-    );
 
-    const data = await response.json();
-
-    alert(data.message);
-
-    loadBookings();
-
-}
+        const booking =
+            result.booking;
 
 
-async function cancelBooking(id){
+        const details =
+            document.getElementById(
+                "bookingDetails"
+            );
 
-    const response = await fetch(
 
-        "/api/bookings/" + id + "/status",
+        if (!details) return;
 
-        {
 
-            method:"PUT",
+        details.innerHTML = `
 
-            headers:{
-                "Content-Type":"application/json"
-            },
+            <div class="booking-detail-grid">
 
-            body:JSON.stringify({
+                <div>
+                    <strong>Booking ID</strong>
+                    <p>#${booking.id}</p>
+                </div>
 
-                status:"Cancelled"
 
-            })
+                <div>
+                    <strong>Customer</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.full_name ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Email</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.email ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Mobile</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.mobile ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Package</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.package_name ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Destination</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.destination ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>From City</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.from_city ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Travel Date</strong>
+                    <p>
+                        ${formatDate(
+                            booking.travel_date
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Return Date</strong>
+                    <p>
+                        ${formatDate(
+                            booking.return_date
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Adults</strong>
+                    <p>
+                        ${booking.adults || 0}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Children</strong>
+                    <p>
+                        ${booking.children || 0}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Transport</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.transport ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Hotel</strong>
+                    <p>
+                        ${escapeHTML(
+                            booking.hotel ||
+                            "-"
+                        )}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Total Price</strong>
+                    <p>
+                        ₹${Number(
+                            booking.total_price || 0
+                        ).toLocaleString("en-IN")}
+                    </p>
+                </div>
+
+
+                <div>
+                    <strong>Status</strong>
+                    <p>
+
+                        <span
+                            class="status ${getStatusClass(
+                                booking.status
+                            )}"
+                        >
+
+                            ${escapeHTML(
+                                booking.status ||
+                                "Pending"
+                            )}
+
+                        </span>
+
+                    </p>
+                </div>
+
+            </div>
+
+        `;
+
+
+        const modal =
+            document.getElementById(
+                "bookingModal"
+            );
+
+
+        if (modal) {
+
+            modal.style.display =
+                "flex";
 
         }
 
+    }
+
+    catch (error) {
+
+        console.error(
+            "View Booking Error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to load booking details."
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// STATUS CLASS
+// ==========================================
+
+function getStatusClass(status) {
+
+    const value =
+        String(status || "")
+            .toLowerCase()
+            .trim();
+
+
+    if (value === "confirmed") {
+        return "confirmed";
+    }
+
+
+    if (value === "cancelled") {
+        return "cancelled";
+    }
+
+
+    return "pending";
+
+}
+
+
+// ==========================================
+// CLOSE MODAL
+// ==========================================
+
+const closeModal =
+    document.getElementById(
+        "closeModal"
     );
 
-    const data = await response.json();
 
-    alert(data.message);
+if (closeModal) {
 
-    loadBookings();
+    closeModal.addEventListener(
+        "click",
+        function() {
 
-}
+            const modal =
+                document.getElementById(
+                    "bookingModal"
+                );
 
-function displayBookings(bookings){
 
-const table=document.getElementById("bookingTable");
+            if (modal) {
 
-table.innerHTML="";
+                modal.style.display =
+                    "none";
 
-bookings.forEach(booking=>{
+            }
 
-let badge="";
-
-if(booking.status==="Pending"){
-
-badge="pending";
-
-}else if(booking.status==="Confirmed"){
-
-badge="confirmed";
-
-}else{
-
-badge="cancelled";
+        }
+    );
 
 }
 
-table.innerHTML+=`
 
-<tr>
+// ==========================================
+// CLICK OUTSIDE MODAL
+// ==========================================
 
-<td>${booking.id}</td>
+window.addEventListener(
+    "click",
+    function(event) {
 
-<td>${booking.full_name}</td>
+        const modal =
+            document.getElementById(
+                "bookingModal"
+            );
 
-<td>${booking.package_name}</td>
 
-<td>${booking.travel_date}</td>
+        if (
+            modal &&
+            event.target === modal
+        ) {
 
-<td>${booking.adults + booking.children}</td>
+            modal.style.display =
+                "none";
 
-<td>₹${booking.total_price}</td>
+        }
 
-<td>
+    }
+);
 
-<span class="status ${badge}">
 
-${booking.status}
+// ==========================================
+// SEARCH
+// ==========================================
 
-</span>
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
 
-</td>
 
-<td>
+if (searchInput) {
 
-<button
-class="action-btn view-btn"
-onclick="viewBooking(${booking.id})">
-
-<i class="fa-solid fa-eye"></i>
-
-</button>
-
-<button
-class="action-btn confirm-btn"
-onclick="confirmBooking(${booking.id})">
-
-<i class="fa-solid fa-check"></i>
-
-</button>
-
-<button
-class="action-btn cancel-btn"
-onclick="cancelBooking(${booking.id})">
-
-<i class="fa-solid fa-xmark"></i>
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
+    searchInput.addEventListener(
+        "input",
+        filterBookings
+    );
 
 }
+
+
+// ==========================================
+// STATUS FILTER
+// ==========================================
+
+const statusFilter =
+    document.getElementById(
+        "statusFilter"
+    );
+
+
+if (statusFilter) {
+
+    statusFilter.addEventListener(
+        "change",
+        filterBookings
+    );
+
+}
+
+
+// ==========================================
+// DATE FORMAT
+// ==========================================
+
+function formatDate(date) {
+
+    if (!date) {
+        return "-";
+    }
+
+
+    const d =
+        new Date(date);
+
+
+    if (isNaN(d.getTime())) {
+        return date;
+    }
+
+
+    return d.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+// ==========================================
+// HTML SECURITY
+// ==========================================
+
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+// ==========================================
+// INITIALIZE
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadBookings();
+
+    }
+);
+
+
+console.log(
+    "✅ Manage Bookings Module Loaded"
+);

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Details - Dream Destinations</title>
+
+    <link rel="stylesheet"
+          href="../css/booking-details.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Dream Destinations
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="package.html">
+            Packages
+        </a>
+
+        <a href="dashboard1.html">
+            Dashboard
+        </a>
+
+        <a href="bookings.html"
+           class="active">
+            My Bookings
+        </a>
+
+        <a href="profile.html">
+            Profile
+        </a>
+
+    </nav>
+
+
+    <div class="user-menu">
+
+        <i class="fa-solid fa-circle-user"></i>
+
+        <span id="userName">
+            User
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main class="details-container">
+
+
+    <!-- BACK BUTTON -->
+
+    <a href="bookings.html"
+       class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to My Bookings
+
+    </a>
+
+
+
+    <!-- ==========================================
+         PAGE HEADER
+    =========================================== -->
+
+    <section class="details-header">
+
+        <div>
+
+            <p class="small-title">
+                BOOKING DETAILS
+            </p>
+
+            <h1 id="packageName">
+                Loading...
+            </h1>
+
+            <p id="destination">
+                <i class="fa-solid fa-location-dot"></i>
+                Loading...
+            </p>
+
+        </div>
+
+
+        <div class="header-status">
+
+            <span id="bookingStatus"
+                  class="booking-status pending">
+
+                Pending
+
+            </span>
+
+            <p>
+                Booking ID:
+                <strong id="bookingId">
+                    -
+                </strong>
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         PACKAGE DETAILS
+    =========================================== -->
+
+    <section class="details-grid">
+
+
+        <!-- PACKAGE CARD -->
+
+        <div class="details-card package-card">
+
+            <div class="package-image">
+
+                <img
+                    id="packageImage"
+                    src="images/default-package.jpg"
+                    alt="Package">
+
+            </div>
+
+
+            <div class="package-content">
+
+                <h2 id="packageTitle">
+                    Travel Package
+                </h2>
+
+                <p id="packageDescription">
+                    Package details loading...
+                </p>
+
+
+                <div class="package-meta">
+
+                    <div>
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong id="duration">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-tag"></i>
+
+                        <span>
+                            Category
+                        </span>
+
+                        <strong id="category">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ======================================
+             TRAVEL DETAILS
+        ======================================= -->
+
+        <div class="details-card">
+
+            <div class="card-title">
+
+                <i class="fa-solid fa-route"></i>
+
+                <h2>
+                    Journey Details
+                </h2>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-item">
+
+                    <label>
+                        From City
+                    </label>
+
+                    <strong id="fromCity">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Destination
+                    </label>
+
+                    <strong id="journeyDestination">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Travel Date
+                    </label>
+
+                    <strong id="travelDate">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Return Date
+                    </label>
+
+                    <strong id="returnDate">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ======================================
+             TRAVELERS
+        ======================================= -->
+
+        <div class="details-card">
+
+            <div class="card-title">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h2>
+                    Traveler Details
+                </h2>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-item">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <strong id="fullName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Mobile
+                    </label>
+
+                    <strong id="mobile">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Adults
+                    </label>
+
+                    <strong id="adults">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Children
+                    </label>
+
+                    <strong id="children">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ======================================
+             TRAVEL PREFERENCES
+        ======================================= -->
+
+        <div class="details-card">
+
+            <div class="card-title">
+
+                <i class="fa-solid fa-sliders"></i>
+
+                <h2>
+                    Travel Preferences
+                </h2>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-item">
+
+                    <label>
+                        Transport
+                    </label>
+
+                    <strong id="transport">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Hotel
+                    </label>
+
+                    <strong id="hotel">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Pickup City
+                    </label>
+
+                    <strong id="pickupCity">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <label>
+                        Extra Services
+                    </label>
+
+                    <strong id="extraServices">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==========================================
+         PRICE SUMMARY
+    =========================================== -->
+
+    <section class="details-card price-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-receipt"></i>
+
+            <h2>
+                Payment Summary
+            </h2>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Package Price
+            </span>
+
+            <strong>
+                ₹<span id="packagePrice">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Pickup Charge
+            </span>
+
+            <strong>
+                ₹<span id="pickupCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Transport Charge
+            </span>
+
+            <strong>
+                ₹<span id="transportCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Hotel Charge
+            </span>
+
+            <strong>
+                ₹<span id="hotelCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Extra Services
+            </span>
+
+            <strong>
+                ₹<span id="serviceCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="total-row">
+
+            <span>
+                Total Amount
+            </span>
+
+            <strong>
+                ₹<span id="totalPrice">0</span>
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         ACTIONS
+    =========================================== -->
+
+    <section class="details-actions">
+
+        <button
+            id="downloadInvoice"
+            class="primary-btn">
+
+            <i class="fa-solid fa-file-invoice"></i>
+
+            View Invoice
+
+        </button>
+
+
+        <button
+            id="cancelBooking"
+            class="danger-btn">
+
+            <i class="fa-solid fa-xmark"></i>
+
+            Cancel Booking
+
+        </button>
+
+    </section>
+
+
+</main>
+
+
+
+<script src="../js/booking-details.js"></script>
+
+</body>
+
+</html>

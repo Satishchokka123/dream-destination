@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>User Dashboard - Dream Destinations</title>
+
+    <link rel="stylesheet"
+          href="../css/dashboard1.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        Dream Destinations
+
+    </div>
+
+
+    <nav>
+
+        <a href="home.html">
+
+            Home
+
+        </a>
+
+        <a href="package.html">
+
+            Packages
+
+        </a>
+
+        <a href="bookings.html">
+
+            My Bookings
+
+        </a>
+
+        
+        <a href="contact.html">
+
+            Contact
+
+        </a>
+
+    </nav>
+
+
+    <div class="user-menu">
+
+        <i class="fa-solid fa-circle-user"></i>
+
+        <span id="userName" data-user-name>
+
+            User
+
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==========================================
+     DASHBOARD
+========================================== -->
+
+<main class="dashboard-container">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome-section">
+
+        <div>
+
+            <h1>
+
+                Welcome back,
+
+                <span id="welcomeName" data-user-name>
+
+                    User
+
+                </span>
+
+                👋
+
+            </h1>
+
+            <p>
+
+                Manage your trips and bookings from your dashboard.
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="package.html"
+            class="explore-btn">
+
+            <i class="fa-solid fa-compass"></i>
+
+            Explore Packages
+
+        </a>
+
+    </section>
+
+
+
+    <!-- ======================================
+         STATISTICS
+    ======================================= -->
+
+    <section class="stats-grid">
+
+
+        <!-- TOTAL BOOKINGS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-suitcase-rolling"></i>
+
+            </div>
+
+            <div>
+
+                <h3 id="totalBookings">
+
+                    0
+
+                </h3>
+
+                <p>
+
+                    Total Bookings
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- UPCOMING TRIPS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-plane-departure"></i>
+
+            </div>
+
+            <div>
+
+                <h3 id="upcomingTrips">
+
+                    0
+
+                </h3>
+
+                <p>
+
+                    Upcoming Trips
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COMPLETED TRIPS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div>
+
+                <h3 id="completedTrips">
+
+                    0
+
+                </h3>
+
+                <p>
+
+                    Completed Trips
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SAVED PACKAGES -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-heart"></i>
+
+            </div>
+
+            <div>
+
+                <h3 id="savedPackages">
+
+                    0
+
+                </h3>
+
+                <p>
+
+                    Saved Packages
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         MAIN DASHBOARD GRID
+    ======================================= -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- ==================================
+             RECENT BOOKINGS
+        =================================== -->
+
+        <div class="dashboard-card bookings-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+
+                        Recent Bookings
+
+                    </h2>
+
+                    <p>
+
+                        Your latest travel bookings
+
+                    </p>
+
+                </div>
+
+
+                <a href="bookings.html">
+
+                    View All
+
+                </a>
+
+            </div>
+
+
+            <div
+                id="recentBookings"
+                class="recent-bookings">
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    <p>
+
+                        No bookings found.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================
+             QUICK ACTIONS
+        =================================== -->
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+
+                        Quick Actions
+
+                    </h2>
+
+                    <p>
+
+                        Frequently used options
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <a
+                    href="package.html"
+                    class="action-item">
+
+                    <i class="fa-solid fa-map-location-dot"></i>
+
+                    <span>
+
+                        Browse Packages
+
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="bookings.html"
+                    class="action-item">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                    <span>
+
+                        My Bookings
+
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="profile.html"
+                    class="action-item">
+
+                    <i class="fa-solid fa-user-pen"></i>
+
+                    <span>
+
+                        Edit Profile
+
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="wishlist.html"
+                    class="action-item">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    <span>
+
+                        Wishlist
+
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         UPCOMING TRIP
+    ======================================= -->
+
+    <section class="dashboard-card upcoming-section">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+
+                    Upcoming Trip
+
+                </h2>
+
+                <p>
+
+                    Your next scheduled journey
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="upcomingTrip"
+            class="upcoming-trip">
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-plane"></i>
+
+                <p>
+
+                    No upcoming trips.
+
+                </p>
+
+                <a href="package.html">
+
+                    Book a Trip
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/common-user.js"></script>
+<script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

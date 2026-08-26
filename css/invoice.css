@@ -1,0 +1,559 @@
+/* ==========================================
+   DREAM DESTINATIONS
+   INVOICE CSS
+   Premium Light Blue / White Theme
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #eaf6fc;
+    color: #334e5c;
+    padding: 35px 15px;
+}
+
+
+/* ==========================================
+   MAIN INVOICE
+========================================== */
+
+.invoice-container {
+    width: 100%;
+    max-width: 950px;
+    margin: auto;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 12px 35px rgba(30, 100, 140, 0.10);
+
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.invoice-header {
+    background:
+        linear-gradient(
+            135deg,
+            #075985,
+            #0284c7
+        );
+
+    color: #ffffff;
+
+    padding: 30px 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.invoice-header h1 {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.invoice-header p {
+    color: #d8f2ff;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.invoice-title {
+    text-align: right;
+}
+
+.invoice-title h2 {
+    font-size: 27px;
+    letter-spacing: 2px;
+}
+
+.invoice-title p {
+    margin-top: 7px;
+}
+
+.invoice-title strong {
+    color: #ffffff;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.invoice-status {
+    margin: 20px 35px 0;
+
+    padding: 11px 15px;
+
+    background: #eff9fe;
+
+    border: 1px solid #d6edf8;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 12px;
+}
+
+.invoice-status span {
+    color: #78909c;
+}
+
+.invoice-status strong {
+    color: #0284c7;
+
+    padding: 4px 11px;
+
+    background: #dff4ff;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   SECTION
+========================================== */
+
+.invoice-section {
+    padding: 18px 35px 0;
+}
+
+.section-box {
+    background: #fbfdfe;
+
+    border: 1px solid #e1edf3;
+
+    border-radius: 10px;
+
+    padding: 18px;
+}
+
+.section-box.full {
+    width: 100%;
+}
+
+.section-box h3 {
+    color: #185878;
+
+    font-size: 14px;
+
+    padding-bottom: 10px;
+
+    margin-bottom: 12px;
+
+    border-bottom: 1px solid #e5eef3;
+}
+
+
+/* ==========================================
+   CUSTOMER / PACKAGE
+========================================== */
+
+.invoice-section:not(:has(.full)) {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.section-box p {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 7px 0;
+
+    border-bottom: 1px solid #edf3f6;
+
+    font-size: 11px;
+}
+
+.section-box p:last-child {
+    border-bottom: none;
+}
+
+.section-box p span {
+    color: #899ba5;
+}
+
+.section-box p strong {
+    color: #4c6572;
+
+    text-align: right;
+
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* ==========================================
+   JOURNEY GRID
+========================================== */
+
+.journey-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+.journey-grid > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.journey-grid span {
+    color: #92a3ac;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .3px;
+}
+
+.journey-grid strong {
+    color: #4c6572;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   PAYMENT SUMMARY
+========================================== */
+
+.price-section {
+    margin: 22px 35px 0;
+
+    padding: 20px;
+
+    background: #f3faff;
+
+    border: 1px solid #d9edf7;
+
+    border-radius: 11px;
+}
+
+.price-section h3 {
+    color: #185878;
+
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+.price-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 8px 0;
+
+    color: #788e99;
+
+    font-size: 12px;
+}
+
+.price-row strong {
+    color: #4c6572;
+
+    font-weight: 600;
+}
+
+.price-section hr {
+    border: none;
+
+    border-top: 1px dashed #cbdfe9;
+
+    margin: 8px 0;
+}
+
+.total-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 8px;
+}
+
+.total-row span {
+    color: #164e70;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+.total-row strong {
+    color: #0284c7;
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+.invoice-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 22px 35px;
+}
+
+.print-btn,
+.back-btn {
+    border-radius: 7px;
+
+    padding: 10px 17px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.print-btn {
+    border: none;
+
+    background: #0284c7;
+
+    color: #ffffff;
+}
+
+.print-btn:hover {
+    background: #075985;
+
+    transform: translateY(-2px);
+}
+
+.back-btn {
+    background: #ffffff;
+
+    color: #16709a;
+
+    border: 1px solid #c8e1ed;
+}
+
+.back-btn:hover {
+    background: #edf9ff;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.invoice-footer {
+    text-align: center;
+
+    padding: 17px;
+
+    background: #f6fbfd;
+
+    border-top: 1px solid #e4eef3;
+
+    color: #80939d;
+}
+
+.invoice-footer p {
+    font-size: 11px;
+
+    margin-bottom: 3px;
+}
+
+.invoice-footer small {
+    font-size: 9px;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 750px) {
+
+    .invoice-header {
+        padding: 25px;
+    }
+
+    .invoice-section {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .invoice-section:not(:has(.full)) {
+        grid-template-columns: 1fr;
+    }
+
+    .price-section {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    .invoice-actions {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 550px) {
+
+    body {
+        padding: 15px 8px;
+    }
+
+    .invoice-container {
+        border-radius: 10px;
+    }
+
+    .invoice-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .invoice-title {
+        text-align: left;
+    }
+
+    .invoice-title h2 {
+        font-size: 22px;
+    }
+
+    .invoice-status {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .invoice-section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .journey-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .price-section {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .invoice-actions {
+        padding-left: 15px;
+        padding-right: 15px;
+
+        flex-direction: column;
+    }
+
+    .print-btn,
+    .back-btn {
+        width: 100%;
+
+        text-align: center;
+    }
+
+}
+
+
+/* ==========================================
+   PRINT / SAVE PDF
+========================================== */
+
+@media print {
+
+    body {
+        background: #ffffff;
+
+        padding: 0;
+    }
+
+    .invoice-container {
+        max-width: none;
+
+        box-shadow: none;
+
+        border-radius: 0;
+    }
+
+    .invoice-actions {
+        display: none;
+    }
+
+    .invoice-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .invoice-status {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .price-section {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .invoice-footer {
+        margin-top: 10px;
+    }
+}

@@ -1,354 +1,1030 @@
-// ======================================
-// Dream Destinations
-// Manage Users
-// ======================================
+// ==========================================
+// DREAM DESTINATIONS
+// manage-users.js
+// MANAGE USERS
+// ==========================================
 
-const tableBody = document.getElementById("usersTable");
-
-const searchInput = document.getElementById("searchInput");
-
-const modal = document.getElementById("userModal");
-
-const closeModal = document.getElementById("closeModal");
+let allUsers = [];
 
 
-// Statistics
-
-const totalUsers = document.getElementById("totalUsers");
-
-const activeUsers = document.getElementById("activeUsers");
-
-const blockedUsers = document.getElementById("blockedUsers");
-
-const todayUsers = document.getElementById("todayUsers");
-
-
-// ======================================
+// ==========================================
 // LOAD USERS
-// ======================================
+// ==========================================
 
-function loadUsers() {
+async function loadUsers() {
 
-    fetch("http://localhost:3000/api/users")
+    const table =
+        document.getElementById("userTable");
 
-    .then(res => res.json())
+    if (!table) return;
 
-    .then(users => {
 
-        tableBody.innerHTML = "";
+    table.innerHTML = `
+        <tr>
+            <td colspan="7" class="loading">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Loading users...
+            </td>
+        </tr>
+    `;
 
-        let total = users.length;
 
-        let active = 0;
+    try {
 
-        let blocked = 0;
+        const response =
+            await fetch(
+                "http://localhost:3000/api/users"
+            );
 
-        let today = 0;
 
-        users.forEach(user => {
+        if (!response.ok) {
 
-            if (user.status === "Blocked") {
+            throw new Error(
+                "Unable to load users"
+            );
 
-                blocked++;
+        }
 
-            } else {
 
-                active++;
+        const data =
+            await response.json();
 
-            }
-    
-            const todayDate = new Date().toDateString();
-            let today = 0;
 
-             
-            if(user.created_at){
+        console.log(
+            "Users received:",
+            data
+        );
 
-    const created = new Date(user.created_at).toDateString();
 
-    if(created === todayDate){
+        allUsers =
+            Array.isArray(data)
+                ? data
+                : [];
 
-        today++;
+
+        updateStatistics();
+
+        displayUsers(allUsers);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "User Load Error:",
+            error
+        );
+
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="7"
+                    class="no-data"
+                >
+                    Unable to load users.
+                </td>
+            </tr>
+        `;
 
     }
 
 }
-            const row = document.createElement("tr");
 
-            row.innerHTML = `
-            
-                <td>${user.id}</td>
 
-                <td>${user.name ?? ""}</td>
+// ==========================================
+// UPDATE STATISTICS
+// ==========================================
 
-                <td>${user.email}</td>
+function updateStatistics() {
 
-                <td>${user.phone ?? ""}</td>
+    const totalUsers =
+        allUsers.length;
+
+
+    const activeUsers =
+        allUsers.filter(
+            user =>
+                String(
+                    user.status || ""
+                ).toLowerCase() === "active"
+        ).length;
+
+
+    const blockedUsers =
+        allUsers.filter(
+            user =>
+                String(
+                    user.status || ""
+                ).toLowerCase() === "blocked"
+        ).length;
+
+
+    const today =
+        new Date();
+
+
+    const todayDate =
+        today.toDateString();
+
+
+    const newUsers =
+        allUsers.filter(user => {
+
+            if (!user.created_at) {
+                return false;
+            }
+
+
+            const created =
+                new Date(
+                    user.created_at
+                );
+
+
+            return (
+                created.toDateString()
+                ===
+                todayDate
+            );
+
+        }).length;
+
+
+    setText(
+        "totalUsers",
+        totalUsers
+    );
+
+
+    setText(
+        "activeUsers",
+        activeUsers
+    );
+
+
+    setText(
+        "blockedUsers",
+        blockedUsers
+    );
+
+
+    setText(
+        "newUsers",
+        newUsers
+    );
+
+}
+
+
+// ==========================================
+// DISPLAY USERS
+// ==========================================
+
+function displayUsers(users) {
+
+    const table =
+        document.getElementById(
+            "userTable"
+        );
+
+
+    if (!table) return;
+
+
+    table.innerHTML = "";
+
+
+    if (
+        !users ||
+        users.length === 0
+    ) {
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="7"
+                    class="no-data"
+                >
+                    No users found.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    users.forEach(user => {
+
+        const status =
+            String(
+                user.status || "Active"
+            ).trim();
+
+
+        const statusClass =
+            status.toLowerCase()
+            === "active"
+                ? "active"
+                : "blocked";
+
+
+        table.innerHTML += `
+
+            <tr>
+
+                <!-- ID -->
 
                 <td>
 
-                    <span class="status ${user.status === "Blocked" ? "blocked" : "active"}">
+                    #${user.id}
 
-                        ${user.status || "Active"}
+                </td>
+
+
+                <!-- USER -->
+
+                <td>
+
+                    <div class="user-info">
+
+                        <div class="user-avatar">
+
+                            ${
+                                getInitial(
+                                    user.name
+                                )
+                            }
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+
+                                ${escapeHTML(
+                                    user.name ||
+                                    "Unknown User"
+                                )}
+
+                            </strong>
+
+                            
+                        </div>
+
+                    </div>
+
+                </td>
+
+               
+<td>
+
+    ${escapeHTML(
+        user.email || "-"
+    )}
+
+</td>
+
+
+                <!-- PHONE -->
+
+                <td>
+
+                    ${escapeHTML(
+                        user.phone ||
+                        "-"
+                    )}
+
+                </td>
+
+
+                <!-- STATUS -->
+
+                <td>
+
+                    <span
+                        class="
+                            user-status
+                            ${statusClass}
+                        "
+                    >
+
+                        ${escapeHTML(
+                            status
+                        )}
 
                     </span>
 
                 </td>
 
-                <td>
 
-                    ${user.created_at
-                        ? new Date(user.created_at).toLocaleDateString()
-                        : "-"}
-
-                </td>
+                <!-- CREATED -->
 
                 <td>
 
-                    <button class="view-btn"
-
-                    onclick="viewUser(${user.id})">
-
-                    View
-
-                    </button>
-
-                    <button class="block-btn"
-
-                    onclick="toggleStatus(${user.id},'${user.status || "Active"}')">
-
-                    ${user.status === "Blocked" ? "Unblock" : "Block"}
-
-                    </button>
-
-                    <button class="delete-btn"
-
-                    onclick="deleteUser(${user.id})">
-
-                    Delete
-
-                    </button>
+                    ${formatDate(
+                        user.created_at
+                    )}
 
                 </td>
 
-            `;
 
-            tableBody.appendChild(row);
+                <!-- ACTIONS -->
+
+                <td>
+
+                    <div class="action-buttons">
+
+
+                        <!-- VIEW -->
+
+                        <button
+                            class="view-btn"
+                            onclick="
+                                viewUser(
+                                    ${user.id}
+                                )
+                            "
+                            title="View User"
+                        >
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-eye
+                                "
+                            ></i>
+
+                        </button>
+
+
+                        <!-- BLOCK / UNBLOCK -->
+
+                        ${
+                            status
+                                .toLowerCase()
+                            ===
+                            "active"
+
+                            ? `
+
+                            <button
+                                class="block-btn"
+                                onclick="
+                                    updateUserStatus(
+                                        ${user.id},
+                                        'Blocked'
+                                    )
+                                "
+                                title="Block User"
+                            >
+
+                                <i
+                                    class="
+                                        fa-solid
+                                        fa-ban
+                                    "
+                                ></i>
+
+                            </button>
+
+                            `
+
+                            :
+
+                            `
+
+                            <button
+                                class="activate-btn"
+                                onclick="
+                                    updateUserStatus(
+                                        ${user.id},
+                                        'Active'
+                                    )
+                                "
+                                title="Activate User"
+                            >
+
+                                <i
+                                    class="
+                                        fa-solid
+                                        fa-check
+                                    "
+                                ></i>
+
+                            </button>
+
+                            `
+                        }
+
+
+                        <!-- DELETE -->
+
+                        <button
+                            class="delete-btn"
+                            onclick="
+                                deleteUser(
+                                    ${user.id}
+                                )
+                            "
+                            title="Delete User"
+                        >
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-trash
+                                "
+                            ></i>
+
+                        </button>
+
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+// ==========================================
+// SEARCH
+// ==========================================
+
+function filterUsers() {
+
+    const searchInput =
+        document.getElementById(
+            "searchInput"
+        );
+
+
+    const search =
+        searchInput
+            ? searchInput.value
+                .toLowerCase()
+                .trim()
+            : "";
+
+
+    const filtered =
+        allUsers.filter(user => {
+
+            const name =
+                String(
+                    user.name || ""
+                ).toLowerCase();
+
+
+            const email =
+                String(
+                    user.email || ""
+                ).toLowerCase();
+
+
+            const phone =
+                String(
+                    user.phone || ""
+                ).toLowerCase();
+
+
+            return (
+                name.includes(search) ||
+                email.includes(search) ||
+                phone.includes(search)
+            );
 
         });
 
-        totalUsers.innerText = total;
 
-        activeUsers.innerText = active;
-
-        blockedUsers.innerText = blocked;
-
-        todayUsers.innerText = today;
-
-    })
-
-    .catch(err => {
-
-        console.log(err);
-
-        alert("Unable to load users.");
-
-    });
+    displayUsers(filtered);
 
 }
 
-loadUsers();
 
-// ======================================
-// SEARCH USERS
-// ======================================
-
-searchInput.addEventListener("keyup", function () {
-
-    const value = this.value.toLowerCase();
-
-    const rows = tableBody.querySelectorAll("tr");
-
-    rows.forEach(row => {
-
-        const text = row.innerText.toLowerCase();
-
-        row.style.display = text.includes(value) ? "" : "none";
-
-    });
-
-});
-
-// ======================================
+// ==========================================
 // VIEW USER
-// ======================================
+// ==========================================
 
-function viewUser(id){
+async function viewUser(userId) {
 
-    fetch(`http://localhost:3000/api/users/${id}`)
+    try {
 
-    .then(res => res.json())
+        const response =
+            await fetch(
+                `http://localhost:3000/api/users/${userId}`
+            );
 
-    .then(user => {
 
-        document.getElementById("viewName").innerText =
-            user.name || "-";
+        const user =
+            await response.json();
 
-        document.getElementById("viewEmail").innerText =
-            user.email || "-";
 
-        document.getElementById("viewMobile").innerText =
-            user.phone || "-";
+        if (!response.ok) {
 
-        document.getElementById("viewAddress").innerText =
-            user.address || "-";
+            throw new Error(
+                user.message ||
+                "Unable to load user"
+            );
 
-        document.getElementById("viewDate").innerText =
-            user.created_at
-            ? new Date(user.created_at).toLocaleDateString()
-            : "-";
+        }
 
-        document.getElementById("viewStatus").innerText =
-            user.status || "Active";
 
-        document.getElementById("viewBookings").innerText = "0";
+        const details =
+            document.getElementById(
+                "userDetails"
+            );
 
-        modal.style.display = "flex";
 
-    })
+        if (!details) {
 
-    .catch(err => {
+            alert(
+                `
+                Name: ${user.name}
+                Email: ${user.email}
+                Phone: ${user.phone || "-"}
+                Status: ${user.status || "-"}
+                Address: ${user.address || "-"}
+                `
+            );
 
-        console.log(err);
+            return;
 
-        alert("Unable to load user.");
+        }
 
-    });
 
-}
+        details.innerHTML = `
 
-// ======================================
-// CLOSE MODAL
-// ======================================
+            <div class="user-detail">
 
-closeModal.onclick = function(){
+                <h3>
+                    ${escapeHTML(
+                        user.name ||
+                        "Unknown User"
+                    )}
+                </h3>
 
-    modal.style.display = "none";
+                <p>
+                    <strong>Email:</strong>
+                    ${escapeHTML(
+                        user.email ||
+                        "-"
+                    )}
+                </p>
 
-};
+                <p>
+                    <strong>Phone:</strong>
+                    ${escapeHTML(
+                        user.phone ||
+                        "-"
+                    )}
+                </p>
 
-window.onclick = function(e){
+                <p>
+                    <strong>Status:</strong>
+                    ${escapeHTML(
+                        user.status ||
+                        "-"
+                    )}
+                </p>
 
-    if(e.target==modal){
+                <p>
+                    <strong>Address:</strong>
+                    ${escapeHTML(
+                        user.address ||
+                        "-"
+                    )}
+                </p>
 
-        modal.style.display="none";
+                <p>
+                    <strong>Joined:</strong>
+                    ${formatDate(
+                        user.created_at
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+
+        const modal =
+            document.getElementById(
+                "userModal"
+            );
+
+
+        if (modal) {
+
+            modal.style.display =
+                "flex";
+
+        }
 
     }
 
-};
+    catch (error) {
 
-// ======================================
-// BLOCK / UNBLOCK USER
-// ======================================
+        console.error(
+            "View User Error:",
+            error
+        );
 
-function toggleStatus(id, currentStatus){
 
-    const newStatus =
-        currentStatus === "Blocked"
-        ? "Active"
-        : "Blocked";
+        alert(
+            error.message ||
+            "Unable to load user"
+        );
 
-    if(!confirm(`Are you sure you want to ${newStatus.toLowerCase()} this user?`)){
+    }
+
+}
+
+
+// ==========================================
+// UPDATE STATUS
+// ==========================================
+
+async function updateUserStatus(
+    userId,
+    newStatus
+) {
+
+    const message =
+        newStatus === "Blocked"
+
+            ? "Block this user?"
+
+            : "Activate this user?";
+
+
+    if (!confirm(message)) {
 
         return;
 
     }
 
-    fetch(`http://localhost:3000/api/users/${id}/status`,{
 
-        method:"PUT",
+    try {
 
-        headers:{
+        const response =
+            await fetch(
 
-            "Content-Type":"application/json"
+                `http://localhost:3000/api/users/${userId}/status`,
 
-        },
+                {
 
-        body:JSON.stringify({
+                    method: "PUT",
 
-            status:newStatus
+                    headers: {
 
-        })
+                        "Content-Type":
+                            "application/json"
 
-    })
+                    },
 
-    .then(res=>res.json())
+                    body:
+                        JSON.stringify({
 
-    .then(data=>{
+                            status:
+                                newStatus
 
-        alert(data.message);
+                        })
 
-        loadUsers();
+                }
 
-    })
+            );
 
-    .catch(err=>{
 
-        console.log(err);
+        const result =
+            await response.json();
 
-        alert("Unable to update user status.");
 
-    });
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Unable to update user status"
+            );
+
+        }
+
+
+        alert(
+            result.message ||
+            "User status updated successfully"
+        );
+
+
+        await loadUsers();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Status Update Error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to update user status"
+        );
+
+    }
 
 }
 
 
-
-// ======================================
+// ==========================================
 // DELETE USER
-// ======================================
+// ==========================================
 
-function deleteUser(id){
+async function deleteUser(userId) {
 
-    if(!confirm("Are you sure you want to delete this user?")){
+    if (
+        !confirm(
+            "Are you sure you want to delete this user?"
+        )
+    ) {
 
         return;
 
     }
 
-    fetch(`http://localhost:3000/api/users/${id}`,{
 
-        method:"DELETE"
+    try {
 
-    })
+        const response =
+            await fetch(
 
-    .then(res=>res.json())
+                `http://localhost:3000/api/users/${userId}`,
 
-    .then(data=>{
+                {
 
-        alert(data.message);
+                    method: "DELETE"
 
-        loadUsers();
+                }
 
-    })
+            );
 
-    .catch(err=>{
 
-        console.log(err);
+        const result =
+            await response.json();
 
-        alert("Unable to delete user.");
 
-    });
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                "Unable to delete user"
+            );
+
+        }
+
+
+        alert(
+            result.message ||
+            "User deleted successfully"
+        );
+
+
+        await loadUsers();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Delete User Error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to delete user"
+        );
+
+    }
 
 }
 
 
+// ==========================================
+// CLOSE USER MODAL
+// ==========================================
 
-// ======================================
-// AUTO REFRESH
-// ======================================
+const closeUserModal =
+    document.getElementById(
+        "closeUserModal"
+    );
 
-setInterval(()=>{
 
-    loadUsers();
+if (closeUserModal) {
 
-},30000);
+    closeUserModal.addEventListener(
+        "click",
+        function () {
+
+            const modal =
+                document.getElementById(
+                    "userModal"
+                );
+
+
+            if (modal) {
+
+                modal.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// CLICK OUTSIDE MODAL
+// ==========================================
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "userModal"
+            );
+
+
+        if (
+            modal &&
+            event.target === modal
+        ) {
+
+            modal.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+// ==========================================
+// SEARCH EVENT
+// ==========================================
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        filterUsers
+    );
+
+}
+
+
+// ==========================================
+// HELPERS
+// ==========================================
+
+function setText(
+    elementId,
+    value
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if (element) {
+
+        element.textContent =
+            value;
+
+    }
+
+}
+
+
+function getInitial(name) {
+
+    if (!name) {
+
+        return "U";
+
+    }
+
+
+    return String(name)
+        .trim()
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+function formatDate(date) {
+
+    if (!date) {
+
+        return "-";
+
+    }
+
+
+    const d =
+        new Date(date);
+
+
+    if (
+        isNaN(
+            d.getTime()
+        )
+    ) {
+
+        return "-";
+
+    }
+
+
+    return d.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+function escapeHTML(value) {
+
+    return String(
+        value || ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+// ==========================================
+// INITIALIZE
+// ==========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadUsers();
+
+    }
+);
+
+
+console.log(
+    "✅ Manage Users Module Loaded"
+);

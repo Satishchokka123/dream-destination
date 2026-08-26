@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        My Account - Dream Destinations
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/account.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<header class="account-header">
+
+    <div class="account-logo">
+
+        <i class="fa-solid fa-plane-departure"></i>
+
+        <span>
+            Dream Destinations
+        </span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
+        </a>
+
+
+        <a href="package.html">
+
+            <i class="fa-solid fa-suitcase-rolling"></i>
+
+            Packages
+
+        </a>
+
+
+        <a href="dashboard1.html">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Dashboard
+
+        </a>
+
+
+        <a href="bookings.html">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            My Bookings
+
+        </a>
+
+
+        <a
+            href="account.html"
+            class="active">
+
+            <i class="fa-solid fa-user"></i>
+
+            Account
+
+        </a>
+
+    </nav>
+
+
+    <button
+        class="logout-top"
+        onclick="logoutUser()">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Logout
+
+    </button>
+
+</header>
+
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main class="account-container">
+
+
+    <!-- ======================================
+         PROFILE HERO
+    ======================================= -->
+
+    <section class="profile-hero">
+
+
+        <div class="profile-info">
+
+
+            <div class="profile-photo-wrapper">
+
+                <img
+                    id="profilePhoto"
+                    src="https://placehold.co/150x150/e0f5ff/0369a1?text=User"
+                    alt="Profile Photo">
+
+
+                <button
+                    class="photo-edit-btn"
+                    onclick="document.getElementById('photoInput').click()">
+
+                    <i class="fa-solid fa-camera"></i>
+
+                </button>
+
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*"
+                    hidden>
+
+            </div>
+
+
+            <div class="profile-details">
+
+                <span class="profile-label">
+
+                    MY ACCOUNT
+
+                </span>
+
+
+                <h1 id="accountUserName">
+
+                    User
+
+                </h1>
+
+
+                <p id="accountUserEmail">
+
+                    Loading...
+
+                </p>
+
+
+                <p id="accountUserMobile">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    Loading...
+
+                </p>
+
+
+                <div class="member-badge">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                    Travel Member
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="edit-profile-btn"
+            onclick="openEditProfile()">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Edit Profile
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- ==========================================
+         ACCOUNT STATISTICS
+    =========================================== -->
+
+    <section class="account-stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Total Bookings
+                </span>
+
+                <strong id="totalBookings">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon pink">
+
+                <i class="fa-solid fa-heart"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Wishlist
+                </span>
+
+                <strong id="wishlistCount">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Completed
+                </span>
+
+                <strong id="completedBookings">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon orange">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Pending
+                </span>
+
+                <strong id="pendingBookings">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==========================================
+         ACCOUNT CONTENT
+    =========================================== -->
+
+    <section class="account-grid">
+
+
+        <!-- ======================================
+             LEFT
+        ======================================= -->
+
+        <div class="account-main">
+
+
+            <!-- UPCOMING TRIP -->
+
+            <div class="account-section">
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <span>
+                            TRAVEL
+                        </span>
+
+                        <h2>
+                            Upcoming Trip
+                        </h2>
+
+                    </div>
+
+
+                    <a href="bookings.html">
+
+                        View All
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="upcomingTrip"
+                    class="upcoming-trip">
+
+                    <div class="account-loading">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        Loading trip...
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- BOOKING HISTORY -->
+
+            <div class="account-section">
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <span>
+                            HISTORY
+                        </span>
+
+                        <h2>
+                            Recent Bookings
+                        </h2>
+
+                    </div>
+
+
+                    <a href="bookings.html">
+
+                        Booking History
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="bookingHistory"
+                    class="booking-history">
+
+                    <div class="account-loading">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        Loading bookings...
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- WISHLIST -->
+
+            <div class="account-section">
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <span>
+                            SAVED
+                        </span>
+
+                        <h2>
+                            My Wishlist
+                        </h2>
+
+                    </div>
+
+
+                    <a href="package.html">
+
+                        Explore Packages
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="wishlistContainer"
+                    class="wishlist-container">
+
+                    <div class="wishlist-empty">
+
+                        <i class="fa-regular fa-heart"></i>
+
+                        <h3>
+                            Your Wishlist is Empty
+                        </h3>
+
+                        <p>
+                            Save your favourite packages
+                            for your next trip.
+                        </p>
+
+
+                        <a href="package.html">
+
+                            Explore Packages
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ======================================
+             RIGHT SIDEBAR
+        ======================================= -->
+
+        <aside class="account-sidebar">
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="sidebar-card">
+
+
+                <h3>
+                    Quick Actions
+                </h3>
+
+
+                <a href="package.html">
+
+                    <span>
+
+                        <i class="fa-solid fa-compass"></i>
+
+                        Explore Packages
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+                <a href="bookings.html">
+
+                    <span>
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        Booking History
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+                <button onclick="openEditProfile()">
+
+                    <span>
+
+                        <i class="fa-solid fa-user-pen"></i>
+
+                        Edit Profile
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+
+                <button onclick="openPasswordModal()">
+
+                    <span>
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Change Password
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ACCOUNT SECURITY -->
+
+            <div class="sidebar-card security-card">
+
+
+                <div class="security-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+
+                <h3>
+                    Account Security
+                </h3>
+
+
+                <p>
+                    Your account information is
+                    securely protected.
+                </p>
+
+
+                <span class="secure-status">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Account Secure
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- LOGOUT -->
+
+            <button
+                class="logout-card"
+                onclick="logoutUser()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout from Account
+
+            </button>
+
+
+        </aside>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ==========================================
+     EDIT PROFILE MODAL
+========================================== -->
+
+<div
+    id="editProfileModal"
+    class="modal-overlay">
+
+
+    <div class="modal-card">
+
+
+        <button
+            class="modal-close"
+            onclick="closeEditProfile()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="modal-header">
+
+            <div class="modal-icon">
+
+                <i class="fa-solid fa-user-pen"></i>
+
+            </div>
+
+
+            <h2>
+                Edit Profile
+            </h2>
+
+            <p>
+                Update your account information.
+            </p>
+
+        </div>
+
+
+        <form id="editProfileForm">
+
+
+            <div class="modal-form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="editFullName"
+                    required>
+
+            </div>
+
+
+            <div class="modal-form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="editMobile"
+                    maxlength="10"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="modal-save-btn">
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Changes
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/account.js"></script>
+
+
+</body>
+
+</html>

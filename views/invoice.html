@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Invoice - Dream Destinations</title>
+
+    <link rel="stylesheet"
+          href="../css/invoice.css">
+
+</head>
+
+<body>
+
+<div class="invoice-container">
+
+    <!-- HEADER -->
+
+    <div class="invoice-header">
+
+        <div>
+
+            <h1>
+                Dream Destinations
+            </h1>
+
+            <p>
+                Travel & Tour Management
+            </p>
+
+        </div>
+
+        <div class="invoice-title">
+
+            <h2>
+                INVOICE
+            </h2>
+
+            <p>
+                Booking ID:
+                <strong id="bookingId">-</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOOKING STATUS -->
+
+    <div class="invoice-status">
+
+        <span>
+            Booking Status
+        </span>
+
+        <strong id="bookingStatus">
+            Pending
+        </strong>
+
+    </div>
+
+
+    <!-- CUSTOMER + PACKAGE -->
+
+    <div class="invoice-section">
+
+        <div class="section-box">
+
+            <h3>
+                Customer Details
+            </h3>
+
+            <p>
+                <span>Name</span>
+                <strong id="fullName">-</strong>
+            </p>
+
+            <p>
+                <span>Email</span>
+                <strong id="email">-</strong>
+            </p>
+
+            <p>
+                <span>Mobile</span>
+                <strong id="mobile">-</strong>
+            </p>
+
+            <p>
+                <span>Address</span>
+                <strong id="address">-</strong>
+            </p>
+
+        </div>
+
+
+        <div class="section-box">
+
+            <h3>
+                Package Details
+            </h3>
+
+            <p>
+                <span>Package</span>
+                <strong id="packageName">-</strong>
+            </p>
+
+            <p>
+                <span>Destination</span>
+                <strong id="destination">-</strong>
+            </p>
+
+            <p>
+                <span>Category</span>
+                <strong id="category">-</strong>
+            </p>
+
+            <p>
+                <span>Duration</span>
+                <strong id="duration">-</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- JOURNEY -->
+
+    <div class="invoice-section">
+
+        <div class="section-box full">
+
+            <h3>
+                Journey Details
+            </h3>
+
+            <div class="journey-grid">
+
+                <div>
+                    <span>From City</span>
+                    <strong id="fromCity">-</strong>
+                </div>
+
+                <div>
+                    <span>Destination</span>
+                    <strong id="journeyDestination">-</strong>
+                </div>
+
+                <div>
+                    <span>Travel Date</span>
+                    <strong id="travelDate">-</strong>
+                </div>
+
+                <div>
+                    <span>Return Date</span>
+                    <strong id="returnDate">-</strong>
+                </div>
+
+                <div>
+                    <span>Adults</span>
+                    <strong id="adults">-</strong>
+                </div>
+
+                <div>
+                    <span>Children</span>
+                    <strong id="children">-</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRAVEL PREFERENCES -->
+
+    <div class="invoice-section">
+
+        <div class="section-box full">
+
+            <h3>
+                Travel Preferences
+            </h3>
+
+            <div class="journey-grid">
+
+                <div>
+                    <span>Transport</span>
+                    <strong id="transport">-</strong>
+                </div>
+
+                <div>
+                    <span>Hotel</span>
+                    <strong id="hotel">-</strong>
+                </div>
+
+                <div>
+                    <span>Pickup City</span>
+                    <strong id="pickupCity">-</strong>
+                </div>
+
+                <div>
+                    <span>Extra Services</span>
+                    <strong id="extraServices">
+                        No Extra Services
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRICE -->
+
+    <div class="price-section">
+
+        <h3>
+            Payment Summary
+        </h3>
+
+
+        <div class="price-row">
+
+            <span>
+                Package Price
+            </span>
+
+            <strong>
+                ₹<span id="packagePrice">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Pickup Charge
+            </span>
+
+            <strong>
+                ₹<span id="pickupCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Transport Charge
+            </span>
+
+            <strong>
+                ₹<span id="transportCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Hotel Charge
+            </span>
+
+            <strong>
+                ₹<span id="hotelCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <div class="price-row">
+
+            <span>
+                Extra Services
+            </span>
+
+            <strong>
+                ₹<span id="serviceCharge">0</span>
+            </strong>
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="total-row">
+
+            <span>
+                Total Amount
+            </span>
+
+            <strong>
+                ₹<span id="totalPrice">0</span>
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="invoice-actions">
+
+        <button
+            onclick="window.print()"
+            class="print-btn">
+
+            Print / Save PDF
+
+        </button>
+
+
+        <a
+            href="bookings.html"
+            class="back-btn">
+
+            Back to My Bookings
+
+        </a>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="invoice-footer">
+
+        <p>
+            Thank you for choosing Dream Destinations.
+        </p>
+
+        <small>
+            This is a computer-generated invoice.
+        </small>
+
+    </div>
+
+</div>
+
+
+<script src="../js/invoice.js"></script>
+
+</body>
+
+</html>

@@ -1,381 +1,1057 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
+/* ==========================================
+   DREAM DESTINATIONS
+   PROFILE / ACCOUNT PAGE
+   Premium Pale Blue + Blue Theme
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f4f9fd;
+    color: #17324d;
+    line-height: 1.6;
+}
 
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
 
-background:linear-gradient(-45deg,#00b4db,#0083b0,#2193b0,#6dd5ed);
-background-size:400% 400%;
-animation:bg 12s infinite;
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar {
+    width: 100%;
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e2edf5;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow: 0 4px 18px rgba(21, 78, 121, 0.05);
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 800;
+    color: #075985;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+
+    list-style: none;
+}
+
+.nav-links li a {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    height: 82px;
+
+    text-decoration: none;
+
+    color: #53677a;
+
+    font-size: 17px;
+    font-weight: 500;
+
+    transition: 0.25s ease;
+}
+
+.nav-links li a:hover {
+    color: #0788cf;
+}
+
+
+/* Active underline */
+
+.nav-links li a.active {
+    color: #0788cf;
+}
+
+.nav-links li a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: 6px;
+
+    height: 3px;
+
+    background: #0788cf;
+
+    border-radius: 5px;
+}
+
+
+/* ==========================================
+   USER PROFILE NAV
+========================================== */
+
+.user-profile-nav a {
+    height: auto !important;
+
+    padding: 7px 15px;
+
+    display: flex !important;
+    align-items: center;
+
+    gap: 9px;
+
+    background: #f0f8ff;
+
+    border: 1px solid #d7ebf8;
+
+    border-radius: 30px;
+
+    color: #075985 !important;
+
+    font-weight: 600 !important;
+}
+
+.user-profile-nav a::after {
+    display: none !important;
+}
+
+.user-profile-nav a:hover {
+    background: #e5f4ff;
+}
+
+#navProfilePhoto {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid #35a9df;
+
+    background: #dff3ff;
+}
+
+#navUserName {
+    max-width: 130px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.account-container {
+    width: 92%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 45px 0 70px;
+}
+
+
+/* ==========================================
+   ACCOUNT HEADER
+========================================== */
+
+.account-header {
+    margin-bottom: 30px;
+
+    padding: 35px 40px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf7ff,
+            #f8fcff
+        );
+
+    border: 1px solid #d9edf9;
+
+    box-shadow:
+        0 10px 30px rgba(29, 104, 153, 0.06);
+}
+
+.small-title {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #0788cf;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.account-header h1 {
+    font-size: 34px;
+    color: #123f60;
+
+    margin-bottom: 7px;
+}
+
+#headerUserName {
+    color: #0788cf;
+}
+
+.account-header p {
+    color: #6c8294;
+    font-size: 15px;
+}
+
+
+/* ==========================================
+   PROFILE CARD
+========================================== */
+
+.profile-card {
+    background: #ffffff;
+
+    border: 1px solid #e1edf5;
+
+    border-radius: 22px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 12px 35px rgba(25, 88, 126, 0.07);
+
+    margin-bottom: 35px;
+}
+
+
+/* ==========================================
+   PROFILE TOP
+========================================== */
+
+.profile-top {
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+
+    padding-bottom: 32px;
+
+    border-bottom: 1px solid #edf3f7;
+}
+
+.profile-photo-section {
+    flex-shrink: 0;
+}
+
+.profile-photo-wrapper {
+    width: 125px;
+    height: 125px;
+
+    position: relative;
+}
+
+#profilePhoto {
+    width: 125px;
+    height: 125px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 5px solid #e8f6ff;
+
+    box-shadow:
+        0 5px 20px rgba(7, 136, 207, 0.15);
+}
+
+
+/* Camera button */
+
+.photo-edit {
+    position: absolute;
+
+    right: 3px;
+    bottom: 5px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0788cf;
+
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    border: 4px solid #ffffff;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.photo-edit:hover {
+    background: #056ea8;
+
+    transform: scale(1.08);
+}
+
+
+/* ==========================================
+   PROFILE BASIC
+========================================== */
+
+.profile-basic h2 {
+    color: #123f60;
+
+    font-size: 27px;
+
+    margin-bottom: 3px;
+}
+
+.profile-basic p {
+    color: #6b8193;
+
+    font-size: 15px;
+
+    margin-bottom: 10px;
+}
+
+.account-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    background: #eaf9f1;
+
+    color: #18834b;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.account-status i {
+    font-size: 8px;
+}
+
+
+/* ==========================================
+   SECTION TITLE
+========================================== */
+
+.section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 32px 0 25px;
+}
+
+.section-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #e9f7ff;
+
+    color: #0788cf;
+
+    font-size: 20px;
+}
+
+.section-title h2 {
+    font-size: 21px;
+
+    color: #163f5d;
+}
+
+.section-title p {
+    color: #8094a4;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   PROFILE FORM
+========================================== */
+
+.profile-form {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #425c70;
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box i {
+    position: absolute;
+
+    left: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #69a8c9;
+
+    font-size: 15px;
+}
+
+.input-box textarea + i {
+    top: 20px;
+}
+
+.input-box input,
+.input-box textarea {
+    width: 100%;
+
+    border: 1px solid #dceaf2;
+
+    background: #f9fcfe;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: #183c56;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition: 0.25s ease;
+}
+
+.input-box input {
+    height: 50px;
+
+    padding: 0 16px 0 45px;
+}
+
+.input-box textarea {
+    min-height: 105px;
+
+    padding: 15px 16px 15px 45px;
+
+    resize: vertical;
+}
+
+.input-box input:focus,
+.input-box textarea:focus {
+    background: #ffffff;
+
+    border-color: #54b4e5;
+
+    box-shadow:
+        0 0 0 4px rgba(8, 136, 207, 0.08);
+}
+
+.input-box input:disabled {
+    background: #eef5f8;
+
+    color: #718696;
+
+    cursor: not-allowed;
+}
+
+
+/* ==========================================
+   SAVE BUTTON
+========================================== */
+
+.profile-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 25px;
+}
+
+#saveProfileBtn {
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0788cf,
+            #086ca8
+        );
+
+    color: #ffffff;
+
+    padding: 13px 24px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 8px 18px rgba(7, 136, 207, 0.20);
+
+    transition: 0.25s ease;
+}
+
+#saveProfileBtn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 24px rgba(7, 136, 207, 0.25);
+}
+
+.profile-message {
+    text-align: right;
+
+    margin-top: 12px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   ACCOUNT SECTIONS
+========================================== */
+
+.account-section {
+    background: #ffffff;
+
+    border: 1px solid #e1edf5;
+
+    border-radius: 22px;
+
+    padding: 32px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 12px 35px rgba(25, 88, 126, 0.06);
+}
+
+.section-heading {
+    margin-bottom: 25px;
+}
+
+.section-heading span {
+    color: #0790d2;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+    margin-top: 4px;
+
+    font-size: 25px;
+
+    color: #143f5c;
+}
+
+.section-heading p {
+    color: #7a8f9e;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   WISHLIST
+========================================== */
+
+.wishlist-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.wishlist-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e1edf5;
+
+    border-radius: 17px;
+
+    transition: 0.3s ease;
+}
+
+.wishlist-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 28px rgba(17, 91, 133, 0.12);
+}
+
+.wishlist-image {
+    width: 100%;
+    height: 175px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.wishlist-content {
+    padding: 16px;
+}
+
+.wishlist-content h3 {
+    color: #173f5b;
+
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
+.wishlist-content p {
+    color: #718695;
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+.wishlist-price {
+    color: #0788cf;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.remove-wishlist {
+    float: right;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #fff0f2;
+
+    color: #e53950;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   BOOKING HISTORY
+========================================== */
+
+.booking-history {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.booking-card {
+    display: grid;
+
+    grid-template-columns:
+        1.3fr
+        1fr
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    background: #f9fcfe;
+
+    border: 1px solid #e0edf5;
+
+    border-radius: 15px;
+
+    transition: 0.25s ease;
+}
+
+.booking-card:hover {
+    border-color: #b9ddf0;
+
+    background: #f5fbff;
+}
+
+.booking-info h3 {
+    color: #17425f;
+
+    font-size: 17px;
+
+    margin-bottom: 3px;
+}
+
+.booking-info p {
+    color: #7b8e9d;
+
+    font-size: 13px;
+}
+
+.booking-detail span {
+    display: block;
+
+    color: #8a9aa7;
+
+    font-size: 12px;
+
+    margin-bottom: 3px;
+}
+
+.booking-detail strong {
+    color: #234b65;
+
+    font-size: 14px;
+}
+
+
+/* Status */
+
+.booking-status {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.booking-status.paid,
+.booking-status.confirmed {
+    background: #e9f9f0;
+
+    color: #18834b;
+}
+
+.booking-status.pending {
+    background: #fff8e6;
+
+    color: #a66a00;
+}
+
+.booking-status.cancelled {
+    background: #fff0f1;
+
+    color: #d13d4c;
+}
+
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.empty-state {
+    text-align: center;
+
+    padding: 45px 20px;
+
+    border: 1px dashed #c9dfeb;
+
+    border-radius: 17px;
+
+    background: #f9fcfe;
+}
+
+.empty-state i {
+    font-size: 38px;
+
+    color: #82bdd8;
+
+    margin-bottom: 12px;
+}
+
+.empty-state h3 {
+    color: #31556d;
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+.empty-state p {
+    color: #8093a1;
+
+    font-size: 14px;
+
+    margin-bottom: 17px;
+}
+
+.empty-state a {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #0788cf;
+
+    color: #ffffff;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    text-align: center;
+
+    padding: 30px 20px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e3edf4;
+
+    color: #688093;
+}
+
+footer h3 {
+    color: #075985;
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+footer p {
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .wishlist-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .booking-card {
+        grid-template-columns:
+            1fr 1fr;
+    }
 
 }
 
-@keyframes bg{
 
-0%{background-position:0 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0 50%;}
+/* ==========================================
+   MOBILE
+========================================== */
 
-}
+@media (max-width: 700px) {
 
-.container{
+    .navbar {
+        flex-direction: column;
 
-width:100%;
-display:flex;
-justify-content:center;
+        gap: 12px;
 
-}
+        padding: 17px 20px;
+    }
 
-.profile-card{
+    .nav-links {
+        width: 100%;
 
-width:420px;
-background:white;
-border-radius:25px;
-overflow:hidden;
-box-shadow:0 15px 35px rgba(0,0,0,.3);
-text-align:center;
-transition:.4s;
+        justify-content: center;
 
-}
+        flex-wrap: wrap;
 
-.profile-card:hover{
+        gap: 12px;
+    }
 
-transform:translateY(-8px);
+    .nav-links li a {
+        height: 38px;
 
-}
+        font-size: 14px;
+    }
 
-.cover{
+    .account-container {
+        width: 94%;
 
-height:150px;
+        padding-top: 25px;
+    }
 
-background:linear-gradient(45deg,#ff512f,#dd2476);
+    .account-header {
+        padding: 25px;
+    }
 
-}
+    .account-header h1 {
+        font-size: 27px;
+    }
 
-.profile-image{
+    .profile-card,
+    .account-section {
+        padding: 22px;
+    }
 
-margin-top:-60px;
+    .profile-top {
+        flex-direction: column;
 
-}
+        text-align: center;
+    }
 
-.profile-image img{
+    .profile-form {
+        grid-template-columns: 1fr;
+    }
 
-width:120px;
-height:120px;
+    .form-group.full-width {
+        grid-column: auto;
+    }
 
-border-radius:50%;
+    .profile-actions {
+        justify-content: stretch;
+    }
 
-border:6px solid white;
+    #saveProfileBtn {
+        width: 100%;
 
-}
+        justify-content: center;
+    }
 
-h2{
+    .wishlist-grid {
+        grid-template-columns: 1fr;
+    }
 
-margin-top:10px;
+    .booking-card {
+        grid-template-columns: 1fr;
 
-}
-
-.title{
-
-color:gray;
-
-margin-bottom:20px;
-
-}
-
-.info{
-
-padding:20px;
-
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-
-}
-
-.box{
-
-background:#f8f8f8;
-padding:15px;
-border-radius:12px;
-transition:.3s;
+        gap: 12px;
+    }
 
 }
 
-.box:hover{
 
-background:#00b4db;
-color:white;
+/* ==========================================
+   SMALL MOBILE
+========================================== */
 
-}
+@media (max-width: 450px) {
 
-.stats{
+    .logo {
+        font-size: 22px;
+    }
 
-display:flex;
-justify-content:space-around;
-padding:20px;
-background:#f2f2f2;
+    .nav-links {
+        gap: 8px;
+    }
 
-}
+    .nav-links li a {
+        font-size: 13px;
+    }
 
-.stats h2{
+    #navUserName {
+        max-width: 80px;
+    }
 
-color:#0083b0;
-
-}
-
-.buttons{
-
-padding:25px;
-
-display:grid;
-gap:15px;
-
-}
-
-button{
-
-padding:14px;
-border:none;
-border-radius:30px;
-font-size:16px;
-font-weight:600;
-cursor:pointer;
-background:#0083b0;
-color:white;
-transition:.3s;
-
-}
-
-button:hover{
-
-transform:scale(1.05);
-
-background:#005f73;
-
-}
-
-.logout{
-
-background:#ff3d3d;
-
-}
-
-.logout:hover{
-
-background:#d90429;
-
-}
-
-@media(max-width:500px){
-
-.profile-card{
-
-width:95%;
-
-}
-
-.info{
-
-grid-template-columns:1fr;
-
-}
-
-}
-/* ===========================
-Packages Page
-=========================== */
-
-.packages-section{
-
-    padding:40px 5%;
-
-    background:#f5fff7;
-
-}
-
-.section-header{
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-}
-
-.section-header h1{
-
-    color:#1b5e20;
-
-    font-size:38px;
-
-    margin-bottom:10px;
-
-}
-
-.section-header p{
-
-    color:#555;
-
-}
-
-.top-bar{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:35px;
-
-    flex-wrap:wrap;
-
-}
-
-.top-bar input,
-.top-bar select{
-
-    padding:12px 15px;
-
-    border:1px solid #ccc;
-
-    border-radius:8px;
-
-    font-size:16px;
-
-}
-
-.top-bar input{
-
-    flex:1;
-
-}
-
-.packages-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-
-    gap:25px;
-
-}
-
-.package-card{
-
-    background:#fff;
-
-    border-radius:15px;
-
-    overflow:hidden;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-
-    transition:.3s;
-
-}
-
-.package-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.package-card img{
-
-    width:100%;
-
-    height:220px;
-
-    object-fit:cover;
-
-}
-
-.package-content{
-
-    padding:20px;
-
-}
-
-.package-content h3{
-
-    color:#1b5e20;
-
-    margin-bottom:10px;
-
-}
-
-.package-content p{
-
-    color:#666;
-
-    margin-bottom:15px;
-
-}
-
-.package-content h2{
-
-    color:#ff9800;
-
-    margin-bottom:20px;
-
-}
-
-.btn-group{
-
-    display:flex;
-
-    gap:10px;
-
-}
-
-.details-btn,
-.book-btn{
-
-    flex:1;
-
-    text-align:center;
-
-    text-decoration:none;
-
-    padding:10px;
-
-    border-radius:8px;
-
-    color:#fff;
-
-    transition:.3s;
-
-}
-
-.details-btn{
-
-    background:#2e7d32;
-
-}
-
-.book-btn{
-
-    background:#ff9800;
-
-}
-
-.details-btn:hover{
-
-    background:#1b5e20;
-
-}
-
-.book-btn:hover{
-
-    background:#ef6c00;
+    .profile-photo-wrapper,
+    #profilePhoto {
+        width: 110px;
+        height: 110px;
+    }
 
 }

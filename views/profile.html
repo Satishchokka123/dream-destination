@@ -2,169 +2,497 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Profile | Dream Destinations</title>
+    <meta charset="UTF-8">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/profile.css">
+    <title>My Account | Dream Destinations</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/profile.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
-
 <body>
 
-<div class="container">
 
-<div class="profile-card">
+<!-- =========================================
+     NAVBAR
+========================================= -->
 
+<nav class="navbar">
 
-<div class="cover"></div>
+    <div class="logo">
+        🌍 Dream Destinations
+    </div>
 
+    <ul class="nav-links">
 
-<div class="profile-image">
+        <li>
+            <a href="Dream.html">
+                Home
+            </a>
+        </li>
 
-<img src="https://i.imgur.com/2DhmtJ4.png">
+        <li>
+            <a href="packs.html">
+                Packages
+            </a>
+        </li>
 
-</div>
+        <li>
+            <a href="Booking.html">
+                My Bookings
+            </a>
+        </li>
 
+        <li>
+            <a href="Contact.html">
+                Contact
+            </a>
+        </li>
 
-<h2 id="name">User Name</h2>
+        <li class="user-profile-nav">
 
-<p class="title">
-Travel Explorer ✈️
-</p>
+            <a
+                href="profile.html"
+                class="active">
 
+                <img
+                    id="navProfilePhoto"
+                    src="../images/default-profile.png"
+                    alt="Profile">
 
+                <span id="navUserName">
+                    User
+                </span>
 
-<div class="info">
+            </a>
 
+        </li>
 
-<div class="box">
+    </ul>
 
-<h3>Email</h3>
+</nav>
 
-<p id="email">user@gmail.com</p>
 
-</div>
 
+<!-- =========================================
+     MAIN ACCOUNT
+========================================= -->
 
+<main class="account-container">
 
-<div class="box">
 
-<h3>Phone</h3>
+    <!-- =====================================
+         PAGE HEADER
+    ====================================== -->
 
-<p id="phone">0000000000</p>
+    <section class="account-header">
 
-</div>
+        <div>
 
+            <span class="small-title">
+                MY ACCOUNT
+            </span>
 
+            <h1>
+                Welcome,
+                <span id="headerUserName">
+                    User
+                </span>
+            </h1>
 
-<div class="box">
+            <p>
+                Manage your profile, wishlist and bookings
+                from one place.
+            </p>
 
-<h3>Location</h3>
+        </div>
 
-<p id="location">
-Andhra Pradesh, India
-</p>
+    </section>
 
-</div>
 
 
+    <!-- =====================================
+         PROFILE CARD
+    ====================================== -->
 
-<div class="box">
+    <section class="profile-card">
 
-<h3>Date of Birth</h3>
 
-<p id="dob">
-Not Updated
-</p>
+        <div class="profile-top">
 
-</div>
 
+            <!-- PROFILE PHOTO -->
 
-</div>
+            <div class="profile-photo-section">
 
+                <div class="profile-photo-wrapper">
 
+                    <img
+                        id="profilePhoto"
+                        src="../images/default-profile.png"
+                        alt="Profile Photo">
 
+                    <label
+                        for="photoInput"
+                        class="photo-edit">
 
-<div class="stats">
+                        <i class="fa-solid fa-camera"></i>
 
+                    </label>
 
-<div>
+                    <input
+                        type="file"
+                        id="photoInput"
+                        accept="image/*"
+                        hidden>
 
-<h2>15</h2>
+                </div>
 
-<span>Bookings</span>
+            </div>
 
-</div>
 
 
+            <!-- PROFILE BASIC INFO -->
 
-<div>
+            <div class="profile-basic">
 
-<h2>28</h2>
+                <h2 id="profileName">
+                    User Name
+                </h2>
 
-<span>Wishlist</span>
+                <p id="profileEmail">
+                    example@gmail.com
+                </p>
 
-</div>
+                <span class="account-status">
 
+                    <i class="fa-solid fa-circle"></i>
 
+                    Active Account
 
-<div>
+                </span>
 
-<h2>41</h2>
+            </div>
 
-<span>Reviews</span>
 
-</div>
+        </div>
 
 
-</div>
 
+        <!-- =================================
+             PERSONAL INFORMATION
+        ================================== -->
 
+        <div class="section-title">
 
+            <div class="section-icon">
 
-<div class="buttons">
+                <i class="fa-solid fa-user"></i>
 
+            </div>
 
-<button onclick="editProfile()">
-Edit Profile
-</button>
+            <div>
 
+                <h2>
+                    Personal Information
+                </h2>
 
+                <p>
+                    Update your account information
+                </p>
 
-<button onclick="viewBookings()">
-My Bookings
-</button>
+            </div>
 
+        </div>
 
 
-<button onclick="wishlist()">
-Wishlist
-</button>
 
+        <div class="profile-form">
 
 
-<button class="logout" onclick="logout()">
-Logout
-</button>
+            <!-- NAME -->
 
+            <div class="form-group">
 
-</div>
+                <label>
+                    Full Name
+                </label>
 
+                <div class="input-box">
 
+                    <i class="fa-solid fa-user"></i>
 
-</div>
+                    <input
+                        type="text"
+                        id="nameInput"
+                        placeholder="Enter your name">
 
-</div>
+                </div>
 
+            </div>
 
 
-<script src="../css/profile.js"></script>
 
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="emailInput"
+                        placeholder="Enter your email"
+                        disabled>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <input
+                        type="text"
+                        id="phoneInput"
+                        placeholder="Enter mobile number">
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ADDRESS -->
+
+            <div class="form-group full-width">
+
+                <label>
+                    Address
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <textarea
+                        id="addressInput"
+                        placeholder="Enter your address"></textarea>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SAVE BUTTON -->
+
+        <div class="profile-actions">
+
+            <button
+                type="button"
+                id="saveProfileBtn">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+
+        <p
+            id="profileMessage"
+            class="profile-message">
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         WISHLIST
+    ====================================== -->
+
+    <section class="account-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>
+                    YOUR FAVOURITES
+                </span>
+
+                <h2>
+                    ❤️ My Wishlist
+                </h2>
+
+                <p>
+                    Packages you have saved for your next journey.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="wishlist-grid"
+            id="wishlistContainer">
+
+            <!-- Wishlist packages load here -->
+
+        </div>
+
+
+        <div
+            class="empty-state"
+            id="emptyWishlist"
+            style="display:none;">
+
+            <i class="fa-regular fa-heart"></i>
+
+            <h3>
+                Your wishlist is empty
+            </h3>
+
+            <p>
+                Like a package to save it here.
+            </p>
+
+            <a href="packs.html">
+                Explore Packages
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         BOOKING HISTORY
+    ====================================== -->
+
+    <section class="account-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>
+                    YOUR JOURNEYS
+                </span>
+
+                <h2>
+                    🎫 Booking History
+                </h2>
+
+                <p>
+                    View all your previous and upcoming trips.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="booking-history"
+            id="bookingHistory">
+
+            <!-- Booking history loads here -->
+
+        </div>
+
+
+
+        <div
+            class="empty-state"
+            id="emptyBookings"
+            style="display:none;">
+
+            <i class="fa-solid fa-ticket"></i>
+
+            <h3>
+                No bookings yet
+            </h3>
+
+            <p>
+                Your confirmed trips will appear here.
+            </p>
+
+            <a href="packs.html">
+                Explore Packages
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <h3>
+        Dream Destinations © 2026
+    </h3>
+
+    <p>
+        Your Journey Begins Here ✈
+    </p>
+
+</footer>
+
+
+
+<script src="../js/profile.js"></script>
 
 </body>
 

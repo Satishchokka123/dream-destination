@@ -8,26 +8,24 @@ const path = require("path");
 const app = express();
 const session = require("express-session");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
 
 const checkLogin = require("./middleware/auth");
 
 app.use(
- session({
-   secret:"dreamdestination123",
-   resave:false,
-   saveUninitialized:false
- })
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false
+    })
 );
 
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
-app.use(express.json());
-
-app.use(express.urlencoded({ extended: true }));
 
 // Static folders
 
@@ -46,25 +44,33 @@ app.use("/payment", express.static(path.join(__dirname, "payment")));
 
 // HTML files folder
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "Dream.html"));
+    res.sendFile(path.join(__dirname, "views", "home.html"));
 });
 
 
 
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "dream destination"
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error("Database connection failed:", err);
-  } else {
-    console.log("Connected to MySQL");
-  }
+
+connection.connect((err) => {
+    if (err) {
+        console.error("Database connection failed:", err);
+    } else {
+        console.log("Connected to MySQL");
+    }
+});
+
+
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
 // ======================================
@@ -120,7 +126,11 @@ app.get("/api/admin/dashboard", (req, res) => {
 
                 dashboard.totalBookings = bookings[0].totalBookings;
 
-                db.query("SELECT IFNULL(SUM(total_price),0) AS totalRevenue FROM bookings", (err, revenue) => {
+                db.query(
+    `SELECT IFNULL(SUM(total_price), 0) AS totalRevenue
+     FROM bookings
+     WHERE status = 'Confirmed'`,
+    (err, revenue) => {
 
                     if(err) return res.status(500).json(err);
 
@@ -138,6 +148,291 @@ app.get("/api/admin/dashboard", (req, res) => {
 
 });
 
+
+// ==========================================
+// RAZORPAY - CREATE PAYMENT ORDER
+// ==========================================
+
+app.post("/api/payment/create-order", async (req, res) => {
+
+    const { bookingId } = req.body;
+
+    if (!bookingId) {
+        return res.status(400).json({
+            success: false,
+            message: "Booking ID is required"
+        });
+    }
+
+    try {
+
+        // Get booking amount from database
+        const sql = `
+            SELECT
+                id,
+                total_price,
+                status
+            FROM bookings
+            WHERE id = ?
+        `;
+
+        db.query(sql, [bookingId], async (err, result) => {
+
+            if (err) {
+
+                console.error(
+                    "Payment Booking Error:",
+                    err
+                );
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Database Error"
+                });
+            }
+
+            if (result.length === 0) {
+
+                return res.status(404).json({
+                    success: false,
+                    message: "Booking not found"
+                });
+            }
+
+            const booking = result[0];
+
+            // Don't allow payment for cancelled booking
+            if (
+                String(booking.status)
+                    .toLowerCase() === "cancelled"
+            ) {
+
+                return res.status(400).json({
+                    success: false,
+                    message:
+                        "Cancelled booking cannot be paid"
+                });
+            }
+
+            const amount = Number(
+                booking.total_price
+            );
+
+            if (!amount || amount <= 0) {
+
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid booking amount"
+                });
+            }
+
+            // Razorpay amount is in paise
+            const options = {
+
+                amount: Math.round(
+                    amount * 100
+                ),
+
+                currency: "INR",
+
+                receipt:
+                    `booking_${bookingId}`
+
+            };
+
+            const order =
+                await razorpay.orders.create(
+                    options
+                );
+
+            res.json({
+
+                success: true,
+
+                orderId:
+                    order.id,
+
+                amount:
+                    order.amount,
+
+                currency:
+                    order.currency,
+
+                bookingId:
+                    bookingId
+
+            });
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Razorpay Order Error:",
+            error
+        );
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Unable to create payment order"
+
+        });
+
+    }
+
+});
+
+// ==========================================
+// RAZORPAY - VERIFY PAYMENT
+// ==========================================
+
+app.post("/api/payment/verify", (req, res) => {
+
+    const {
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+        bookingId
+    } = req.body;
+
+    if (
+        !razorpay_order_id ||
+        !razorpay_payment_id ||
+        !razorpay_signature ||
+        !bookingId
+    ) {
+        return res.status(400).json({
+            success: false,
+            message: "Payment details are required"
+        });
+    }
+
+    try {
+
+        const generatedSignature =
+            crypto
+                .createHmac(
+                    "sha256",
+                    process.env.RAZORPAY_KEY_SECRET
+                )
+                .update(
+                    razorpay_order_id +
+                    "|" +
+                    razorpay_payment_id
+                )
+                .digest("hex");
+
+
+        if (
+            generatedSignature !==
+            razorpay_signature
+        ) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Payment verification failed"
+            });
+
+        }
+
+
+        // ==================================
+        // PAYMENT VERIFIED
+        // ==================================
+
+        const sql = `
+            UPDATE bookings
+            SET
+                payment_status = ?,
+                payment_id = ?,
+                razorpay_order_id = ?,
+                status = ?
+            WHERE id = ?
+        `;
+
+
+        db.query(
+            sql,
+            [
+                "Paid",
+                razorpay_payment_id,
+                razorpay_order_id,
+                "Confirmed",
+                bookingId
+            ],
+            (err, result) => {
+
+                if (err) {
+
+                    console.error(
+                        "Payment Database Error:",
+                        err
+                    );
+
+                    return res.status(500).json({
+                        success: false,
+                        message: "Database Error"
+                    });
+
+                }
+
+
+                if (
+                    result.affectedRows === 0
+                ) {
+
+                    return res.status(404).json({
+                        success: false,
+                        message: "Booking not found"
+                    });
+
+                }
+
+
+                res.json({
+
+                    success: true,
+
+                    message:
+                        "Payment successful",
+
+                    paymentId:
+                        razorpay_payment_id,
+
+                    bookingId:
+                        bookingId
+
+                });
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Payment Verification Error:",
+            error
+        );
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Payment verification error"
+
+        });
+
+    }
+
+});
 // ======================================
 // Recent Bookings
 // ======================================
@@ -183,88 +478,1222 @@ app.get("/api/admin/recent-bookings", (req, res) => {
 
 // ================= REGISTER API =================
 
-app.post("/api/register", async(req,res)=>{
+// ==========================================
+// REGISTER USER
+// ==========================================
 
-const {name,email,password}=req.body;
+// ==========================================
+// REGISTER USER
+// ==========================================
+
+// ==========================================
+// REGISTER USER
+// ==========================================
+
+app.post("/api/register", async (req, res) => {
+
+    try {
+
+        const {
+            name,
+            email,
+            phone,
+            password,
+            address
+        } = req.body;
 
 
-const hashPassword = await bcrypt.hash(password,10);
+        if (
+            !name ||
+            !email ||
+            !phone ||
+            !password
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "All required fields are required"
+
+            });
+
+        }
 
 
-db.query(
-"INSERT INTO users(name,email,password) VALUES(?,?,?)",
-[name,email,hashPassword],
+        // CHECK EXISTING EMAIL
 
-(err,result)=>{
+        const checkSql = `
 
-if(err){
-return res.json({
-message:"Email already exists"
+            SELECT id
+
+            FROM users
+
+            WHERE email = ?
+
+        `;
+
+
+        db.query(
+            checkSql,
+            [email],
+            async (err, result) => {
+
+                if (err) {
+
+                    console.log(
+                        "Check User Error:",
+                        err
+                    );
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            "Database Error"
+
+                    });
+
+                }
+
+
+                if (result.length > 0) {
+
+                    return res.status(409).json({
+
+                        success: false,
+
+                        message:
+                            "Email already registered"
+
+                    });
+
+                }
+
+
+                // HASH PASSWORD
+
+                const hashedPassword =
+                    await bcrypt.hash(
+                        password,
+                        10
+                    );
+
+
+                // INSERT USER
+
+                const insertSql = `
+
+                    INSERT INTO users
+                    (
+                        email,
+                        password,
+                        name,
+                        phone,
+                        status,
+                        address
+                    )
+
+                    VALUES (?, ?, ?, ?, ?, ?)
+
+                `;
+
+
+                db.query(
+                    insertSql,
+                    [
+                        email,
+                        hashedPassword,
+                        name,
+                        phone,
+                        "Active",
+                        address || null
+                    ],
+                    (err, result) => {
+
+                        if (err) {
+
+                            console.log(
+                                "Register Insert Error:",
+                                err
+                            );
+
+                            return res.status(500).json({
+
+                                success: false,
+
+                                message:
+                                    "Unable to register user"
+
+                            });
+
+                        }
+
+
+                        res.status(201).json({
+
+                            success: true,
+
+                            message:
+                                "Registration successful",
+
+                            user: {
+
+                                id:
+                                    result.insertId,
+
+                                name:
+                                    name,
+
+                                email:
+                                    email,
+
+                                phone:
+                                    phone
+
+                            }
+
+                        });
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Register Error:",
+            error
+        );
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Server Error"
+
+        });
+
+    }
+
 });
-}
 
+// ==========================================
+// LOGIN USER
+// ==========================================
+// ==========================================
+// LOGIN USER
+// ==========================================
 
-res.json({
-message:"Registration successful"
-});
-
-
-});
-
-
-});
-
-// Login API
+// ==========================================
+// LOGIN USER
+// ==========================================
 
 app.post("/api/login", (req, res) => {
 
-    const { email, password } = req.body;
+    const {
+        email,
+        password
+    } = req.body;
+
+    if (!email || !password) {
+
+        return res.status(400).json({
+            success: false,
+            message: "Email and password are required"
+        });
+
+    }
+
+    const sql = `
+        SELECT
+            id,
+            email,
+            password,
+            name,
+            phone,
+            status,
+            address,
+            profile_photo
+        FROM users
+        WHERE email = ?
+        LIMIT 1
+    `;
 
     db.query(
-        "SELECT * FROM users WHERE email=?",
+        sql,
         [email],
         async (err, result) => {
 
             if (err) {
-                console.log(err);
+
+                console.log(
+                    "Login Database Error:",
+                    err
+                );
+
                 return res.status(500).json({
+                    success: false,
                     message: "Database Error"
                 });
+
             }
 
             if (result.length === 0) {
+
                 return res.status(401).json({
-                    message: "User not found"
+                    success: false,
+                    message: "Invalid email or password"
                 });
+
             }
 
             const user = result[0];
 
-            const match = await bcrypt.compare(password, user.password);
+            // CHECK ACCOUNT STATUS
 
-            if (match) {
+            if (
+                user.status &&
+                user.status.toLowerCase() !== "active"
+            ) {
 
-                req.session.user = {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email
-                };
-
-                return res.json({
-                    message: "Login success",
-                    user: req.session.user
+                return res.status(403).json({
+                    success: false,
+                    message: "Your account is not active"
                 });
 
-            } else {
+            }
+
+            // CHECK PASSWORD
+
+            const passwordMatch =
+                await bcrypt.compare(
+                    password,
+                    user.password
+                );
+
+            if (!passwordMatch) {
 
                 return res.status(401).json({
-                    message: "Wrong password"
+                    success: false,
+                    message: "Invalid email or password"
                 });
+
             }
+
+            // SUCCESS
+
+            res.json({
+
+                success: true,
+
+                message: "Login successful",
+
+                user: {
+
+                    id: user.id,
+
+                    name: user.name,
+
+                    email: user.email,
+
+                    phone: user.phone,
+
+                    address: user.address,
+
+                    profilePhoto:
+                        user.profile_photo
+
+                }
+
+            });
+
         }
     );
+
 });
 
+// ==========================================
+// GET USER BOOKINGS
+// ==========================================
+
+app.get("/api/users/:id/bookings", (req, res) => {
+
+    const userId = req.params.id;
+
+    const sql = `
+
+        SELECT
+
+            bookings.*,
+
+            packages.package_name,
+            packages.destination
+
+        FROM bookings
+
+        INNER JOIN packages
+
+        ON bookings.package_id = packages.id
+
+        WHERE bookings.user_id = ?
+
+        ORDER BY bookings.id DESC
+
+    `;
+
+
+    db.query(
+        sql,
+        [userId],
+        (err, result) => {
+
+            if (err) {
+
+                console.log(
+                    "User Bookings Error:",
+                    err
+                );
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Database Error"
+
+                });
+
+            }
+
+
+            res.json(result);
+
+        }
+    );
+
+});
+// ==========================================
+// UPDATE USER PROFILE
+// ==========================================
+
+// ==========================================
+// UPDATE USER PROFILE
+// ==========================================
+
+app.put("/api/users/:id", (req, res) => {
+
+    const userId = req.params.id;
+
+    const {
+        name,
+        phone,
+        address
+    } = req.body;
+
+
+    if (!name || !phone) {
+
+        return res.status(400).json({
+
+            success: false,
+
+            message:
+                "Name and phone are required"
+
+        });
+
+    }
+
+
+    const sql = `
+        UPDATE users
+        SET
+            name = ?,
+            phone = ?,
+            address = ?
+        WHERE id = ?
+    `;
+
+
+    db.query(
+        sql,
+        [
+            name,
+            phone,
+            address || null,
+            userId
+        ],
+        (err, result) => {
+
+            if (err) {
+
+                console.log(
+                    "Update Profile Error:",
+                    err
+                );
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Database Error"
+
+                });
+
+            }
+
+
+            if (
+                result.affectedRows === 0
+            ) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "User not found"
+
+                });
+
+            }
+
+
+            res.json({
+
+                success: true,
+
+                message:
+                    "Profile updated successfully"
+
+            });
+
+        }
+    );
+
+});
+
+// ==========================================
+// MANAGE USERS APIs
+// ==========================================
+
+
+// ==========================================
+// GET ALL USERS
+// ==========================================
+
+app.get("/api/users", (req, res) => {
+
+    const sql = `
+        SELECT
+            id,
+            name,
+            email,
+            phone,
+            status,
+            address,
+            created_at
+        FROM users
+        ORDER BY id DESC
+    `;
+
+    db.query(sql, (err, result) => {
+
+        if (err) {
+
+            console.log("Get Users Error:", err);
+
+            return res.status(500).json({
+                success: false,
+                message: "Database Error"
+            });
+
+        }
+
+        res.json(result);
+
+    });
+
+});
+
+
+// ==========================================
+// GET SINGLE USER
+// ==========================================
+
+app.get("/api/users/:id", (req, res) => {
+
+    const userId = req.params.id;
+
+    const sql = `
+        SELECT
+            id,
+            name,
+            email,
+            phone,
+            status,
+            address,
+            created_at
+        FROM users
+        WHERE id = ?
+        LIMIT 1
+    `;
+
+    db.query(
+        sql,
+        [userId],
+        (err, result) => {
+
+            if (err) {
+
+                console.log(
+                    "Get User Error:",
+                    err
+                );
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Database Error"
+                });
+
+            }
+
+            if (result.length === 0) {
+
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found"
+                });
+
+            }
+
+            res.json(result[0]);
+
+        }
+    );
+
+});
+
+
+// ==========================================
+// UPDATE USER STATUS
+// ==========================================
+
+app.put("/api/users/:id/status", (req, res) => {
+
+    const userId = req.params.id;
+
+    const { status } = req.body;
+
+
+    if (
+        status !== "Active" &&
+        status !== "Blocked"
+    ) {
+
+        return res.status(400).json({
+
+            success: false,
+
+            message:
+                "Invalid user status"
+
+        });
+
+    }
+
+
+    const sql = `
+        UPDATE users
+        SET status = ?
+        WHERE id = ?
+    `;
+
+
+    db.query(
+        sql,
+        [
+            status,
+            userId
+        ],
+        (err, result) => {
+
+            if (err) {
+
+                console.log(
+                    "Update User Status Error:",
+                    err
+                );
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Database Error"
+
+                });
+
+            }
+
+
+            if (
+                result.affectedRows === 0
+            ) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "User not found"
+
+                });
+
+            }
+
+
+            res.json({
+
+                success: true,
+
+                message:
+                    `User ${status === "Blocked"
+                        ? "blocked"
+                        : "activated"
+                    } successfully`
+
+            });
+
+        }
+    );
+
+});
+
+app.put("/api/profile/update", (req, res) => {
+
+    const {
+        userId,
+        name,
+        phone,
+        address
+    } = req.body;
+
+
+    // ======================================
+    // VALIDATION
+    // ======================================
+
+    if (!userId) {
+
+        return res.status(400).json({
+
+            success: false,
+
+            message:
+                "User ID is required"
+
+        });
+
+    }
+
+
+    if (!name || !name.trim()) {
+
+        return res.status(400).json({
+
+            success: false,
+
+            message:
+                "Name is required"
+
+        });
+
+    }
+
+
+    if (!phone || !phone.trim()) {
+
+        return res.status(400).json({
+
+            success: false,
+
+            message:
+                "Phone number is required"
+
+        });
+
+    }
+
+
+    // ======================================
+    // UPDATE USER
+    // ======================================
+
+    const sql = `
+
+        UPDATE users
+
+        SET
+            name = ?,
+            phone = ?,
+            address = ?
+
+        WHERE id = ?
+
+    `;
+
+
+    db.query(
+
+        sql,
+
+        [
+            name.trim(),
+            phone.trim(),
+            address ? address.trim() : "",
+            userId
+        ],
+
+        (err, result) => {
+
+            if (err) {
+
+                console.error(
+                    "Profile Update Error:",
+                    err
+                );
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Database Error"
+
+                });
+
+            }
+
+
+            if (
+                result.affectedRows === 0
+            ) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "User not found"
+
+                });
+
+            }
+
+
+            // ==================================
+            // SUCCESS
+            // ==================================
+
+            res.json({
+
+                success: true,
+
+                message:
+                    "Profile updated successfully"
+
+            });
+
+        }
+
+    );
+
+});
+
+
+
+// ==========================================
+// DELETE USER
+// ==========================================
+
+app.delete("/api/users/:id", (req, res) => {
+
+    const userId = req.params.id;
+
+
+    const sql = `
+        DELETE FROM users
+        WHERE id = ?
+    `;
+
+
+    db.query(
+        sql,
+        [userId],
+        (err, result) => {
+
+            if (err) {
+
+                console.log(
+                    "Delete User Error:",
+                    err
+                );
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Database Error"
+
+                });
+
+            }
+
+
+            if (
+                result.affectedRows === 0
+            ) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "User not found"
+
+                });
+
+            }
+
+
+            res.json({
+
+                success: true,
+
+                message:
+                    "User deleted successfully"
+
+            });
+
+        }
+    );
+
+});
+
+// ==========================================
+// GET USER PROFILE
+// ==========================================
+
+app.get("/api/profile/:userId", (req, res) => {
+
+    const userId = req.params.userId;
+
+    if (!userId) {
+        return res.status(400).json({
+            success: false,
+            message: "User ID is required"
+        });
+    }
+
+    const sql = `
+        SELECT
+            id,
+            name,
+            email,
+            phone,
+            address,
+            profile_photo,
+            status
+        FROM users
+        WHERE id = ?
+        LIMIT 1
+    `;
+
+    db.query(
+        sql,
+        [userId],
+        (err, result) => {
+
+            if (err) {
+
+                console.error(
+                    "Get Profile Error:",
+                    err
+                );
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Database Error"
+                });
+
+            }
+
+            if (result.length === 0) {
+
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found"
+                });
+
+            }
+
+            const user = result[0];
+
+            res.json({
+
+                success: true,
+
+                user: {
+
+                    id: user.id,
+
+                    name: user.name,
+
+                    email: user.email,
+
+                    phone: user.phone,
+
+                    address: user.address,
+
+                    profilePhoto:
+                        user.profile_photo,
+
+                    status:
+                        user.status
+
+                }
+
+            });
+
+        }
+    );
+
+});
+
+// ==========================================
+// WISHLIST - ADD
+// ==========================================
+
+app.post("/api/wishlist/add", (req, res) => {
+
+    const {
+        userId,
+        packageId
+    } = req.body;
+
+    if (!userId || !packageId) {
+
+        return res.status(400).json({
+            success: false,
+            message: "User ID and Package ID are required"
+        });
+
+    }
+
+    const sql = `
+        INSERT INTO wishlist
+        (
+            user_id,
+            package_id
+        )
+        VALUES (?, ?)
+    `;
+
+    db.query(
+        sql,
+        [
+            userId,
+            packageId
+        ],
+        (err, result) => {
+
+            if (err) {
+
+                // Already liked
+                if (err.code === "ER_DUP_ENTRY") {
+
+                    return res.json({
+                        success: true,
+                        message: "Already in wishlist"
+                    });
+
+                }
+
+                console.error(
+                    "Wishlist Add Error:",
+                    err
+                );
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Database Error"
+                });
+
+            }
+
+            res.json({
+                success: true,
+                message: "Added to wishlist"
+            });
+
+        }
+    );
+
+});
+
+
+// ==========================================
+// WISHLIST - REMOVE
+// ==========================================
+
+app.delete("/api/wishlist/remove", (req, res) => {
+
+    const {
+        userId,
+        packageId
+    } = req.body;
+
+    if (!userId || !packageId) {
+
+        return res.status(400).json({
+            success: false,
+            message: "User ID and Package ID are required"
+        });
+
+    }
+
+    const sql = `
+        DELETE FROM wishlist
+        WHERE user_id = ?
+        AND package_id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            userId,
+            packageId
+        ],
+        (err, result) => {
+
+            if (err) {
+
+                console.error(
+                    "Wishlist Remove Error:",
+                    err
+                );
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Database Error"
+                });
+
+            }
+
+            res.json({
+                success: true,
+                message: "Removed from wishlist"
+            });
+
+        }
+    );
+
+});
+
+
+// ==========================================
+// GET USER WISHLIST
+// ==========================================
+
+app.get(
+    "/api/wishlist/:userId",
+    (req, res) => {
+
+        const userId =
+            req.params.userId;
+
+        if (!userId) {
+
+            return res.status(400).json({
+                success: false,
+                message: "User ID is required"
+            });
+
+        }
+
+        const sql = `
+
+            SELECT
+
+                w.id AS wishlist_id,
+
+                p.id AS package_id,
+
+                p.package_name,
+
+                p.destination,
+
+                p.category,
+
+                p.base_price,
+
+                p.image
+
+            FROM wishlist w
+
+            INNER JOIN packages p
+                ON w.package_id = p.id
+
+            WHERE w.user_id = ?
+
+            ORDER BY w.created_at DESC
+
+        `;
+
+        db.query(
+            sql,
+            [userId],
+            (err, result) => {
+
+                if (err) {
+
+                    console.error(
+                        "Get Wishlist Error:",
+                        err
+                    );
+
+                    return res.status(500).json({
+                        success: false,
+                        message: "Database Error"
+                    });
+
+                }
+
+                res.json({
+
+                    success: true,
+
+                    wishlist:
+                        result
+
+                });
+
+            }
+        );
+
+    }
+);
 
 // route-charge
 app.get("/api/route-price", (req, res) => {
@@ -332,6 +1761,10 @@ app.get("/api/packages", (req, res) => {
 // get package
 // ========================================
 
+// ======================================
+// GET SINGLE PACKAGE
+// ======================================
+
 app.get("/api/packages/:id", (req, res) => {
 
     const id = req.params.id;
@@ -342,13 +1775,23 @@ app.get("/api/packages/:id", (req, res) => {
         (err, result) => {
 
             if (err) {
-                return res.status(500).json(err);
+
+                console.log(err);
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Database Error"
+                });
+
             }
 
             if (result.length === 0) {
+
                 return res.status(404).json({
+                    success: false,
                     message: "Package not found"
                 });
+
             }
 
             res.json(result[0]);
@@ -357,7 +1800,6 @@ app.get("/api/packages/:id", (req, res) => {
     );
 
 });
-
 // ======================================
 // Update Package
 // ======================================
@@ -600,130 +2042,195 @@ app.get("/api/extra-price", (req, res) => {
 // Save Booking
 // ==========================================
 
+// ==========================================
+// CREATE BOOKING
+// ==========================================
+
 app.post("/api/bookings", (req, res) => {
 
-    const booking = req.body;
+    const {
 
-    const sql = `
-    INSERT INTO bookings (
+        user_id,
+
         package_id,
+
         full_name,
         email,
         mobile,
         gender,
         address,
+
         from_city,
         destination,
+
         travel_date,
         return_date,
+
         adults,
         children,
+
         transport,
         hotel,
-        breakfast,
-        pickup,
-        sightseeing,
-        insurance,
+
         total_price
-    )
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-    `;
 
-    db.query(sql, [
+    } = req.body;
 
-        booking.package_id,
-        booking.full_name,
-        booking.email,
-        booking.mobile,
-        booking.gender,
-        booking.address,
-        booking.from_city,
-        booking.destination,
-        booking.travel_date,
-        booking.return_date,
-        booking.adults,
-        booking.children,
-        booking.transport,
-        booking.hotel,
-        booking.breakfast,
-        booking.pickup,
-        booking.sightseeing,
-        booking.insurance,
-        booking.total_price
 
-    ], (err, result) => {
+    // Check user
 
-        if (err) {
-            console.log(err);
-            return res.status(500).json({
-                message: "Booking Failed"
-            });
-        }
+    if (!user_id) {
 
-        res.json({
+        return res.status(401).json({
 
-            success: true,
+            success: false,
 
-            bookingId: result.insertId
+            message: "User login required"
 
         });
 
-    });
+    }
 
-});
 
-// ==========================================
-// Get Booking By ID
-// ==========================================
+    // Check package
 
-app.get("/api/bookings/:id",(req,res)=>{
+    if (!package_id) {
 
-    const id=req.params.id;
+        return res.status(400).json({
 
-    const sql=`
+            success: false,
 
-    SELECT
+            message: "Package ID is required"
 
-    bookings.*,
+        });
 
-    packages.package_name
+    }
 
-    FROM bookings
 
-    INNER JOIN packages
+    const sql = `
 
-    ON bookings.package_id=packages.id
+        INSERT INTO bookings (
 
-    WHERE bookings.id=?
+            user_id,
+
+            package_id,
+
+            full_name,
+            email,
+            mobile,
+            gender,
+            address,
+
+            from_city,
+            destination,
+
+            travel_date,
+            return_date,
+
+            adults,
+            children,
+
+            transport,
+            hotel,
+
+            total_price,
+
+            status
+
+        )
+
+        VALUES (
+
+            ?, ?, ?, ?, ?, ?, ?,
+            ?, ?,
+            ?, ?,
+            ?, ?,
+            ?, ?,
+            ?,
+            ?
+
+        )
 
     `;
 
-    db.query(sql,[id],(err,result)=>{
 
-        if(err){
+    const values = [
 
-            return res.status(500).json(err);
+        user_id,
 
-        }
+        package_id,
 
-        if(result.length===0){
+        full_name,
+        email,
+        mobile,
+        gender,
+        address,
 
-            return res.status(404).json({
+        from_city,
+        destination,
 
-                message:"Booking Not Found"
+        travel_date,
+        return_date,
+
+        adults,
+        children,
+
+        transport,
+        hotel,
+
+        total_price,
+
+        "Pending"
+
+    ];
+
+
+    db.query(
+        sql,
+        values,
+        (err, result) => {
+
+            if (err) {
+
+                console.log(
+                    "Booking Insert Error:",
+                    err
+                );
+
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Database Error"
+
+                });
+
+            }
+
+
+            res.json({
+
+                success: true,
+
+                message:
+                    "Booking created successfully",
+
+                bookingId:
+                    result.insertId
 
             });
 
         }
-
-        res.json(result[0]);
-
-    });
+    );
 
 });
 
+// ==========================================
+// GET ALL BOOKINGS
+// ==========================================
 
-//GET BOOKINGS
 app.get("/api/bookings", (req, res) => {
 
     const sql = `
@@ -732,10 +2239,17 @@ app.get("/api/bookings", (req, res) => {
 
             bookings.id,
             bookings.full_name,
+
             packages.package_name,
+            packages.destination,
+            packages.image,
+
             bookings.travel_date,
+            bookings.return_date,
+
             bookings.adults,
             bookings.children,
+
             bookings.total_price,
             bookings.status
 
@@ -749,23 +2263,118 @@ app.get("/api/bookings", (req, res) => {
 
     `;
 
+
     db.query(sql, (err, result) => {
 
         if (err) {
 
-            console.log(err);
+            console.log(
+                "Get Bookings Error:",
+                err
+            );
 
             return res.status(500).json({
-                message: "Database Error"
+
+                success: false,
+
+                message:
+                    "Database Error"
+
             });
 
         }
+
 
         res.json(result);
 
     });
 
 });
+
+// ==========================================
+// GET SINGLE BOOKING DETAILS
+// ==========================================
+
+app.get("/api/bookings/:id", (req, res) => {
+
+    const id = req.params.id;
+
+    const sql = `
+
+        SELECT
+
+            bookings.*,
+
+            packages.package_name,
+            packages.destination,
+            packages.category,
+            packages.base_price,
+            packages.image,
+            packages.description,
+            packages.duration
+
+        FROM bookings
+
+        INNER JOIN packages
+
+        ON bookings.package_id = packages.id
+
+        WHERE bookings.id = ?
+
+    `;
+
+
+    db.query(
+        sql,
+        [id],
+        (err, result) => {
+
+            if (err) {
+
+                console.log(
+                    "Booking Details Error:",
+                    err
+                );
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    message:
+                        "Database Error"
+
+                });
+
+            }
+
+
+            if (result.length === 0) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "Booking Not Found"
+
+                });
+
+            }
+
+
+            res.json({
+
+                success: true,
+
+                booking: result[0]
+
+            });
+
+        }
+    );
+
+});
+
 
 //PUT Bookings
 
@@ -802,6 +2411,81 @@ app.put("/api/bookings/:id/status", (req, res) => {
 
 });
 
+// ==========================================
+// CANCEL BOOKING
+// ==========================================
+
+app.put(
+    "/api/bookings/:id/cancel",
+    (req, res) => {
+
+        const bookingId =
+            req.params.id;
+
+
+        const sql = `
+            UPDATE bookings
+
+            SET status = 'Cancelled'
+
+            WHERE id = ?
+        `;
+
+
+        db.query(
+            sql,
+            [bookingId],
+            (err, result) => {
+
+                if (err) {
+
+                    console.log(
+                        "Cancel Booking Error:",
+                        err
+                    );
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            "Database Error"
+
+                    });
+
+                }
+
+
+                if (
+                    result.affectedRows === 0
+                ) {
+
+                    return res.status(404).json({
+
+                        success: false,
+
+                        message:
+                            "Booking not found"
+
+                    });
+
+                }
+
+
+                res.json({
+
+                    success: true,
+
+                    message:
+                        "Booking cancelled successfully"
+
+                });
+
+            }
+        );
+
+    }
+);
 
 // ======================================
 // Admin Login API
@@ -1996,6 +3680,254 @@ app.delete("/api/hotel-charges/:id",(req,res)=>{
                 success:true,
 
                 message:"Hotel Deleted Successfully"
+
+            });
+
+        }
+
+    );
+
+});
+
+// ======================================
+// GET ALL EXTRA SERVICES
+// ======================================
+
+app.get("/api/extra-services", (req, res) => {
+
+    db.query(
+        "SELECT * FROM extra_services ORDER BY service_name ASC",
+        (err, result) => {
+
+            if (err) {
+                return res.status(500).json({
+                    success: false,
+                    message: "Unable to fetch extra services",
+                    error: err.message
+                });
+            }
+
+            res.json(result);
+
+        }
+    );
+
+});
+
+
+// ======================================
+// GET ACTIVE EXTRA SERVICES
+// ======================================
+
+app.get("/api/extra-services/active", (req, res) => {
+
+    db.query(
+        "SELECT * FROM extra_services WHERE status='Active' ORDER BY service_name ASC",
+        (err, result) => {
+
+            if (err) {
+                return res.status(500).json({
+                    success: false,
+                    message: "Unable to fetch active services",
+                    error: err.message
+                });
+            }
+
+            res.json(result);
+
+        }
+    );
+
+});
+
+
+// ======================================
+// ADD EXTRA SERVICE
+// ======================================
+
+app.post("/api/extra-services", (req, res) => {
+
+    const {
+        service_name,
+        charge,
+        charge_type,
+        status
+    } = req.body;
+
+    if (!service_name || charge === undefined || !charge_type) {
+
+        return res.status(400).json({
+            success: false,
+            message: "Please provide all required fields"
+        });
+
+    }
+
+    db.query(
+
+        `
+        INSERT INTO extra_services
+        (service_name, charge, charge_type, status)
+        VALUES (?, ?, ?, ?)
+        `,
+
+        [
+            service_name,
+            charge,
+            charge_type,
+            status || "Active"
+        ],
+
+        (err, result) => {
+
+            if (err) {
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Unable to add service",
+                    error: err.message
+                });
+
+            }
+
+            res.json({
+
+                success: true,
+
+                message: "Extra Service Added Successfully",
+
+                serviceId: result.insertId
+
+            });
+
+        }
+
+    );
+
+});
+
+// ======================================
+// UPDATE EXTRA SERVICE
+// ======================================
+
+app.put("/api/extra-services/:id", (req, res) => {
+
+    const id = req.params.id;
+
+    const {
+        service_name,
+        charge,
+        charge_type,
+        status
+    } = req.body;
+
+    if (!service_name || charge === undefined || !charge_type) {
+
+        return res.status(400).json({
+            success: false,
+            message: "Please provide all required fields"
+        });
+
+    }
+
+    db.query(
+
+        `
+        UPDATE extra_services
+
+        SET
+            service_name = ?,
+            charge = ?,
+            charge_type = ?,
+            status = ?
+
+        WHERE id = ?
+        `,
+
+        [
+            service_name,
+            charge,
+            charge_type,
+            status || "Active",
+            id
+        ],
+
+        (err, result) => {
+
+            if (err) {
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Unable to update service",
+                    error: err.message
+                });
+
+            }
+
+            if (result.affectedRows === 0) {
+
+                return res.status(404).json({
+                    success: false,
+                    message: "Extra Service not found"
+                });
+
+            }
+
+            res.json({
+
+                success: true,
+
+                message: "Extra Service Updated Successfully"
+
+            });
+
+        }
+
+    );
+
+});
+
+
+// ======================================
+// DELETE EXTRA SERVICE
+// ======================================
+
+app.delete("/api/extra-services/:id", (req, res) => {
+
+    const id = req.params.id;
+
+    db.query(
+
+        "DELETE FROM extra_services WHERE id = ?",
+
+        [id],
+
+        (err, result) => {
+
+            if (err) {
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Unable to delete service",
+                    error: err.message
+                });
+
+            }
+
+            if (result.affectedRows === 0) {
+
+                return res.status(404).json({
+                    success: false,
+                    message: "Extra Service not found"
+                });
+
+            }
+
+            res.json({
+
+                success: true,
+
+                message: "Extra Service Deleted Successfully"
 
             });
 
