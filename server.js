@@ -58,6 +58,7 @@ const connection = mysql.createConnection({
     port: process.env.DB_PORT
 });
 
+const db = connection;
 
 connection.connect((err) => {
     if (err) {
@@ -2676,7 +2677,7 @@ package_name,
 destination,
 category,
 base_price,
-imageName,
+image,
 description,
 duration
 ],
