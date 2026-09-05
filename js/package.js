@@ -16,8 +16,8 @@ async function loadPackages() {
 
     try {
 
-        const response = await fetch("/api/packages")
-        );
+        const response = await fetch("/api/packages");
+        
 
         if (!response.ok) {
             throw new Error("Unable to load packages.");
