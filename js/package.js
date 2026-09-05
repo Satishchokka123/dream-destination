@@ -16,8 +16,7 @@ async function loadPackages() {
 
     try {
 
-        const response = await fetch(
-            "http://localhost:3000/api/packages"
+        const response = await fetch("/api/packages")
         );
 
         if (!response.ok) {
@@ -104,7 +103,7 @@ function displayPackages(packages) {
             <div class="package-image-wrapper">
 
                 <img
-                    src="http://localhost:3000/images/packages/${pkg.image}"
+                    src="/images/packages/${pkg.image}"
                     alt="${pkg.package_name}"
                     onerror="this.src='https://placehold.co/400x250?text=No+Image'"
                 >
