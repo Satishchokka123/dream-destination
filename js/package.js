@@ -193,14 +193,11 @@ function displayPackages(packages) {
                     </a>
 
 
-                    <a
-                        href="../views/booking.html?id=${pkg.id}"
-                        class="book-btn">
-
-                        Book Now
-
-                    </a>
-
+                   <a
+    href="/booking.html?id=${pkg.id}"
+    class="book-btn">
+    Book Now
+</a>
 
                 </div>
 
