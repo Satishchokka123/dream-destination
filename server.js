@@ -47,8 +47,9 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "home.html"));
 });
 
-
-
+app.get("/booking.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "booking.html"));
+});
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
